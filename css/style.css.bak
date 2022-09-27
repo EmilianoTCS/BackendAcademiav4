@@ -1,0 +1,1054 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto+Slab:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  flex-wrap: wrap;
+}
+body {
+  background-image: url(https://www.tsoftglobal.com/wp-content/uploads/2021/06/BACKGROUNDS-Nosotros-2.jpg);
+  background-size: cover;
+}
+/*------------------------- HEADER -------------------------*/
+#header {
+  margin: 100px;
+}
+
+#logoTsoft {
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 150px;
+  height: auto;
+  max-width: 150;
+  vertical-align: middle;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+}
+#titulo_pagina {
+  margin-top: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  font-weight: bold;
+  color: #e10b1c;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-family: "Roboto Slab", serif;
+  margin-left: 60px;
+}
+
+/*------------------------- SIDEBAR -------------------------*/
+#sidebar {
+  background-color: rgb(26, 25, 25);
+  margin-top: 4px;
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  left: -200px;
+  transition: all 300ms linear;
+  border-radius: 0% 10px 20% 0%;
+}
+#User_logo {
+  border-radius: 50%;
+  width: 60px;
+}
+ul h4 {
+  font-size: 14pt;
+  color: white;
+  font-family: "Roboto Slab", serif;
+  text-align: center;
+  padding: 10px 0px;
+}
+#toggle-btn {
+  width: 30px;
+  padding: 0px 30px 0 0px;
+  margin-left: 73px;
+  margin-top: 0;
+  cursor: pointer;
+}
+#toggle-btn span {
+  cursor: pointer;
+  display: block;
+  width: 30px;
+  text-align: center;
+  font-size: 2 0px;
+  border: 2px solid #000;
+  border-radius: 4px;
+}
+#toggle-btn span:hover {
+  transform: scale(1.2);
+  background-color: #e10b1c;
+  color: white;
+  transition: all 300ms ease;
+  border: 2px solid white;
+}
+#sidebar.active {
+  left: 0px;
+}
+#sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+#sidebar ul li {
+  color: rgba(230, 230, 230, 0.9);
+  list-style: none;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+  text-align: center;
+  font-family: "Roboto Slab", serif;
+}
+
+#sidebar ul li a {
+  color: rgba(230, 230, 230, 0.9);
+  text-decoration: none;
+}
+
+#sidebar ul li ul li:hover {
+  background-color: rgba(230, 230, 230, 0.9);
+  text-decoration: none;
+  transition: all 200ms linear;
+  font-size: 14pt;
+  transform: scale(1.25);
+}
+#sidebar ul li ul li:hover a {
+  color: black;
+  font-weight: 900;
+}
+
+#logout {
+  font-family: "Roboto Slab", serif;
+  position: relative;
+  margin-left: 25%;
+  top: 150px;
+  font-size: 13pt;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  border: solid white 1px;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+#logout:hover {
+  color: black;
+  font-weight: 700;
+  background-color: #d1cdcd;
+  transition: all 300ms ease;
+}
+
+#li_Academia {
+  cursor: pointer;
+}
+
+#COE_Academia {
+  display: none;
+}
+#COE_Academia.active {
+  display: block;
+  transition: all 300ms linear;
+}
+
+/*------------------------- MODULOS -------------------------*/
+#form_academia {
+  position: relative;
+  left: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 30%;
+  height: 40%;
+  border-radius: 10px;
+  padding: 10px 10px;
+  background-color: rgba(212, 203, 203, 0.6);
+  padding: 20px;
+}
+#form_academia h2 {
+  background-color: #e10b1c;
+  width: 300px;
+  white-space: nowrap;
+  border-radius: 5px;
+  background-size: 100% 100%;
+  font-size: 20pt;
+  font-family: "Roboto Slab", serif bold;
+  text-align: center;
+  font-style: bold;
+  color: white;
+}
+#form_academia div ul > li {
+  list-style: none;
+  padding: 10px;
+  text-align: justify;
+  font-weight: 500;
+}
+#form_academia div ul > li a {
+  text-decoration: none;
+  color: black;
+  font-size: 15pt;
+}
+/*------------------------- MODULOS COLABORADORES -------------------------*/
+#container_modulos_colaboradores {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  writing-mode: calc(100% - 200px);
+  margin-left: 200px;
+}
+#modulo1_colaboradores,
+#modulo2_colaboradores,
+#modulo3_colaboradores {
+  border-radius: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  background: #aaa;
+}
+#modulo1_colaboradores h3,
+#modulo2_colaboradores h3,
+#modulo3_colaboradores h3 {
+  justify-content: center;
+  text-align: center;
+}
+#modulo1_colaboradores ul,
+#modulo2_colaboradores ul,
+#modulo3_colaboradores ul {
+  list-style: none;
+}
+/*------------------------- BUSCADOR -------------------------*/
+.form_search {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: none;
+  top: 4px;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+#busqueda {
+  position: relative;
+  align-items: flex-end;
+  width: 500px;
+}
+.form_search .btn_search {
+  background-color: #e10b1c;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+  right: 200px;
+}
+/*------------------------- LOGIN -------------------------*/
+#background {
+  height: 100%;
+  flex-wrap: 200px;
+  background-image: url(https://www.tsoftglobal.com/wp-content/uploads/2021/06/BACKGROUNDS-Nosotros-2.jpg);
+  width: 100%;
+  height: 100vh;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#background #form_login {
+  position: relative;
+  margin-top: -100px;
+  flex-wrap: 200px;
+  border: solid 1px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgb(238, 238, 238);
+  width: 500px;
+  padding: 10px;
+  height: auto;
+  left: 0px;
+}
+#background #form_login h3 {
+  text-transform: uppercase;
+  font-family: "Roboto Slab", serif;
+  padding: 10px 0px;
+  background-color: #e6e6e6de;
+  background: border-box rgba(172, 172, 172, 0.219);
+  color: black;
+  font-weight: 700;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+}
+#background #form_login div {
+  padding: 10px 0;
+}
+#background #form_login div h4 {
+  margin: 10px;
+  position: relative;
+  left: -100px;
+  font-size: 15pt;
+  font-family: "Roboto Slab", serif;
+  text-align: left;
+  display: block;
+}
+#background #form_login div input {
+  display: block;
+  position: relative;
+  left: -100px;
+  width: 200%;
+  padding: 5px;
+  margin-top: 0px;
+}
+#btn_acceder {
+  position: relative;
+  display: block;
+  background-color: #e10b1c;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+  width: 100%;
+  left: -10px;
+  text-align: center;
+  font-family: "Roboto Slab", serif;
+  font-size: 12pt;
+  font-weight: 800;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+#forgot_password {
+  font-family: "Roboto Slab", serif;
+  color: rgb(87, 87, 87);
+  text-decoration: none;
+  position: relative;
+  right: -150px;
+  top: 15px;
+}
+
+/*------------------------- CARDS COE -------------------------*/
+#container_cards {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#coe_carta {
+  margin: 40px 5px 0px 5px;
+  text-transform: uppercase;
+  height: 160px;
+  width: 180px;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgb(46, 45, 45);
+}
+.card-header {
+  font-size: 13pt;
+}
+#coe_carta .card-title {
+  font-family: "Roboto Slab", serif;
+  font-size: 40pt;
+  width: 1000;
+}
+#coe_carta .card-text {
+  font-family: "Roboto Slab", serif;
+  font-weight: 500;
+  font-size: 12pt;
+}
+/*------------------------- CANVAS COE -------------------------*/
+
+#containers_canvas {
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  margin-top: 17px;
+  border-style: inset;
+  justify-content: space-around;
+  border-style: groove;
+}
+
+#containers_canvas #canvas {
+  box-sizing: content-box;
+  margin: 5%;
+  width: auto;
+  height: auto;
+}
+#containers_canvas #canvas2 {
+  box-sizing: content-box;
+  margin: 5%;
+  width: auto;
+  height: auto;
+}
+
+/*------------------------- TABLAS COE -------------------------*/
+#btn_delete,
+#btn_delete_cursos,
+#btn_edit,
+#btn_delete_relator,
+#btn_delete_colaborador,
+#btn_edit_cuenta,
+#btn_edit_colaborador,
+#btn_edit_relator {
+  border: none;
+  background: none;
+}
+
+#container_tabla {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 200px);
+  margin-left: 200px;
+  overflow-x: auto;
+  padding: 10px;
+}
+#tabla_cuenta,
+#tabla_curso,
+#tabla_orador,
+#tabla_asistencias {
+  margin-top: 40px;
+  width: 100px;
+  border-collapse: collapse;
+  font-size: 13pt;
+  font-family: "Raleway", sans-serif;
+}
+#list_theadCuentas,
+#list_theadCursos,
+#list_theadOrador,
+#list_theadAsistencias {
+  white-space: nowrap;
+  justify-content: center;
+  font-size: 11pt;
+  background: #d1cdcd;
+  color: black;
+  text-align: center;
+  padding: 0px 10px 0px 10px;
+}
+#list_theadAsistencias th {
+  padding: 0px 5px 0px 5px;
+}
+#list_tbodyAsistencias tr td {
+  white-space: nowrap;
+  text-align: center;
+  justify-content: center;
+  padding: 0px 10px 0px 10px;
+}
+
+#list_tbodyCuentas tr td {
+  white-space: nowrap;
+  text-align: left;
+  padding: 0px 7px 0px 7px;
+}
+#tabla_cuenta tr td a {
+  color: black;
+}
+#list_tbodyCursos tr td {
+  white-space: nowrap;
+  text-align: left;
+  padding: 0px 7px 0px 7px;
+}
+#tabla_curso tr td a {
+  color: black;
+}
+#list_tbodyOrador tr td {
+  white-space: nowrap;
+  text-align: left;
+  padding: 0px 7px 0px 7px;
+}
+#tabla_orador tr td a {
+  color: black;
+}
+tr:nth-child(even) {
+  background-color: #ebebeb;
+}
+
+/*------------------------- BUSCADORES -------------------------*/
+#search_cuenta {
+  position: absolute;
+  right: 400px;
+}
+
+/*------------------------- Colaboradores -------------------------*/
+#action_href_colaboradores {
+  background-color: #e10b1c;
+  border-radius: 5px;
+  width: auto;
+  text-align: center;
+  position: absolute;
+  left: 330px;
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto Slab", serif;
+  white-space: nowrap;
+  border: none;
+  padding: 3px 10px 3px 10px;
+}
+
+/*------------------------- ASISTENCIAS -------------------------*/
+#href_asistencias,
+#btn_registrar {
+  background-color: #e10b1c;
+  border-radius: 5px;
+  width: auto;
+  text-align: center;
+  position: absolute;
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto Slab", serif;
+  white-space: nowrap;
+  border: none;
+  padding: 3px 10px 3px 10px;
+}
+#btn_registrar:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+#href_asistencias:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+#action_href_colaboradores:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+#insert_orador:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+#btn_submit_selecciones:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+
+#form_submit_curso {
+  padding: 0 5px 0 5px;
+  border-radius: 4px;
+  background-size: 100px auto;
+  background-color: #d1cdcd;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+}
+#selector_Curso_Asist {
+  padding: 0px 20px 0px 0px;
+  border-radius: 5px;
+}
+#btn_submit_selecciones {
+  padding: 0px 20px 0px 20px;
+  font-size: 11pt;
+  margin-left: 10px;
+  background-color: #e10b1c;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+}
+
+/*------------------------- REGISTRAR RAMO -------------------------*/
+#form_registrarRamo {
+  width: 500px;
+  height: auto;
+  background-color: #e7e7e7;
+  position: absolute;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  transition: all 300ms ease;
+}
+#form_registrarRamo.active {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: all 300ms ease;
+}
+
+#form_registrarRamo .btn_close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #e10b1c;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 12px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+#actualizar,
+#registrar {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+}
+#registrar.hide {
+  display: none;
+}
+#form_registrarRamo form div {
+  padding: 1px;
+}
+#form_registrarRamo form div input[type="text"],
+#form_registrarRamo form div select {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+#form_registrarRamo #button_container {
+  display: flex;
+  flex-direction: row;
+}
+#btn_sig {
+  width: 20%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #e10b1c;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 80%;
+  position: relative;
+  top: 10px;
+  padding: 5px;
+}
+#btn_sig:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background-color: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+#btn_sig.hide {
+  display: none;
+}
+#btn_registrarRamo {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #e10b1c;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  padding: 5px;
+}
+#btn_registrarRamo.actives {
+  visibility: visible;
+  opacity: 1;
+}
+/*------------------------- REGISTRAR CURSO -------------------------*/
+#form_registrarCurso {
+  width: 500px;
+  background-color: #e7e7e7;
+  position: absolute;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  transition: all 300ms ease;
+}
+#form_registrarCurso.active {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: all 300ms ease;
+}
+
+#form_registrarCurso .btn_close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #e10b1c;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 12px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+#form_registrarCurso h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+}
+#form_registrarCurso form div {
+  padding: 1px;
+}
+#form_registrarCurso form div input[type="text"],
+#form_registrarCurso form div select {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+#form_registrarCurso .btn_registrar {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #e10b1c;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  padding: 5px;
+}
+.btn_registrar:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+/*------------------------- REGISTRAR ORADOR -------------------------*/
+#insert_orador {
+  background-color: #e10b1c;
+  border-radius: 5px;
+  width: auto;
+  text-align: center;
+  position: absolute;
+  left: 470px;
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto Slab", serif;
+  white-space: nowrap;
+  border: none;
+  padding: 3px 10px 3px 10px;
+}
+#insert_orador.hide {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+#form_registrarOrador {
+  width: 500px;
+  background-color: #e7e7e7;
+  position: absolute;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  transition: all 300ms ease;
+}
+#form_registrarOrador.active {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: all 300ms ease;
+}
+
+#form_registrarOrador .btn_close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #e10b1c;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 12px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.btn_close:hover {
+  transform: scale(1.2);
+  transition: all 300ms ease;
+  /* background-color: white; */
+  color: #e10b1c;
+}
+#form_registrarOrador h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+}
+#form_registrarOrador form div {
+  padding: 1px;
+}
+#form_registrarOrador form div input[type="text"],
+#form_registrarOrador form div select {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+#form_registrarOrador #btn_registrar {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #e10b1c;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  padding: 5px;
+}
+#btn_registrar:hover {
+  transform: scale(1.1);
+  transition: all 300ms ease;
+  font-weight: 800;
+}
+/*------------------------- REGISTRAR COLABORADOR -------------------------*/
+#insert_colaborador {
+  background-color: #e10b1c;
+  border-radius: 5px;
+  width: auto;
+  text-align: center;
+  position: absolute;
+  left: 470px;
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto Slab", serif;
+  white-space: nowrap;
+  border: none;
+  padding: 3px 10px 3px 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms ease;
+}
+#insert_colaborador:hover {
+  transform: scale(1.1);
+  color: #e10b1c;
+  font-weight: 600;
+  background: rgb(255, 255, 255);
+  transition: all 300ms ease;
+  border: solid #e10b1c 1px;
+}
+#insert_colaborador.active {
+  opacity: 1;
+  visibility: visible;
+}
+#icon_info {
+  position: absolute;
+  margin-left: 75%;
+}
+#triangulo_der {
+  visibility: hidden;
+  opacity: 0;
+  display: inline-block;
+  width: 0px;
+  height: 0px;
+  border-top: 8px solid transparent;
+  border-right: 15px solid black;
+  border-bottom: 8px solid transparent;
+  transition: all 200ms ease;
+}
+
+#container_info {
+  opacity: 0;
+  visibility: hidden;
+  display: inline-block;
+  background-color: #000;
+  border-radius: 0% 10% 10% 10%;
+  position: absolute;
+  width: 150px;
+  transition: all 200ms ease;
+}
+.info_idColaborador {
+  display: flex;
+  color: rgb(212, 212, 212);
+  text-align: center;
+  justify-content: center;
+  font-style: oblique;
+}
+#icon_info:hover #container_info {
+  visibility: visible;
+  opacity: 1;
+}
+#icon_info:hover #triangulo_der {
+  visibility: visible;
+  opacity: 1;
+}
+
+#form_registrarColaborador {
+  width: 500px;
+  background-color: #e7e7e7;
+  position: absolute;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  transition: all 300ms ease;
+}
+#form_registrarColaborador.active {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: all 300ms ease;
+}
+
+#form_registrarColaborador .btn_close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #e10b1c;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 12px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+#form_registrarColaborador h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+}
+#form_registrarColaborador form div {
+  padding: 1px;
+}
+#form_registrarColaborador form div input[type="text"],
+#form_registrarColaborador form div select {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+#form_registrarColaborador #btn_registrar {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #e10b1c;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  padding: 5px;
+}
+
+#container_idUsuario.hide {
+  display: none;
+}
+#container_idUsuario.active {
+  display: block;
+}
+
+/*------------------------- PAGINADOR -------------------------*/
+
+#container_paginador #paginador {
+  display: flex;
+  width: calc(100% - 200px);
+  margin-left: 200px;
+  overflow-x: auto;
+  padding: 10px;
+}
+#paginador {
+  flex-direction: row;
+  list-style: none;
+  justify-content: flex-start;
+}
+#paginador button {
+  margin: 2px;
+}
+#paginador a {
+  display: flex;
+  width: 4ch;
+  height: 4ch;
+  align-items: center;
+  justify-content: center;
+  font-family: Monospace;
+  font-size: 15px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 300ms ease;
+  background: #d1cdcd;
+  color: black;
+  font-weight: 600;
+}
+#paginador a.actual {
+  transition: all 300ms ease;
+  background: #e10b1c;
+  color: white;
+}
+#paginador a:hover {
+  transition: all 300ms ease;
+  background: white;
+  color: #e10b1c;
+  border: solid #e10b1c 1px;
+  transform: scale(1.1);
+}

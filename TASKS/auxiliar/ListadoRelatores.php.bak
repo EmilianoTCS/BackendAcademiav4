@@ -1,0 +1,30 @@
+<?php
+
+include("../../model/conexion.php");
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: access");
+header("Access-Control-Allow-Methods: GET,POST");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+if(isset($_GET['listadoRelatores'])) {
+    $query = "SELECT rel.ID, rel.idArea, rel.nombre, ar.nombreArea from relator rel INNER JOIN area ar WHERE isActive = true AND rel.idArea = ar.ID ";
+    $result = mysqli_query($conection, $query);
+    if (!$result) {
+        die('Query Failed' . mysqli_error($conection));
+    }
+
+    $json = array();
+    while ($row = mysqli_fetch_array($result)) {
+        $json[] = array(
+			'nombre' => $row['nombre'],
+			'nombreArea' => $row['nombreArea'],
+			'ID' => $row['ID']
+        );
+    }
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
+} else {
+    echo json_encode("error");
+}
