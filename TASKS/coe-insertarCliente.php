@@ -8,15 +8,15 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if(isset($_GET['insertarCliente'])) {
-	$data= json_decode(file_get_contents("php://input"));
+if (isset($_GET['insertarCliente'])) {
+    $data = json_decode(file_get_contents("php://input"));
     $tipo_cliente = $data->tipo_cliente;
     $nombreCliente = $data->nombreCliente;
     $referente = $data->referente;
     $correoReferente = $data->correoReferente;
     $telefonoReferente = $data->telefonoReferente;
     $cargoReferente = $data->cargoReferente;
-	$isActive = $data->isActive;
+    $isActive = true;
 
     $query = "INSERT INTO clientes (tipo_cliente, nombreCliente, referente, correoReferente, telefonoReferente, cargoReferente, isActive) VALUES ('$tipo_cliente','$nombreCliente','$referente','$correoReferente','$telefonoReferente','$cargoReferente', '$isActive');";
     $result = mysqli_query($conection, $query);
@@ -27,8 +27,8 @@ if(isset($_GET['insertarCliente'])) {
         $log = new Log("../security/reports/log.txt");
         $log->writeLine("I", "[usuario] ha agregado un colaborador con los datos [$tipo_cliente, $nombreCliente, $referente, $correoReferente, $telefonoReferente, $cargoReferente]");
         $log->close();
-		echo json_encode("success");
-    }	
+        echo json_encode("successCreated");
+    }
 } else {
-    echo json_encode("error");
+    echo json_encode("Error");
 }

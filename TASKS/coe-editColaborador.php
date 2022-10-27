@@ -10,8 +10,8 @@ include('../model/conexion.php');
 include("../security/logBuilder.php");
 
 if (isset($_GET['editarColaborador'])) {
-    $data= json_decode(file_get_contents("php://input"));
-	$ID = $data->ID;
+    $data = json_decode(file_get_contents("php://input"));
+    $ID = $data->ID;
     $usuario = $data->usuario;
     $codigoCuenta = $data->codigoCuenta;
     $nombre_completo = $data->nombre_completo;
@@ -27,11 +27,11 @@ if (isset($_GET['editarColaborador'])) {
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
     }
-	echo json_encode("success");
+    echo json_encode("successEdited");
     // $usuario = $_SESSION['idCuenta'];
     $log = new Log("../security/reports/log.txt");
     $log->writeLine("I", "[usuario] ha editado los datos: [$codigoCuenta, $usuario, $nombre_completo,$area,$subgerencia,$correo]");
     $log->close();
 } else {
-    echo json_encode("error");
+    echo json_encode("Error");
 }

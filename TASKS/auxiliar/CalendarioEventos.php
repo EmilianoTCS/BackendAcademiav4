@@ -8,10 +8,9 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if(isset($_GET['ID'])) {
-	$ID = $_GET['ID'];
+if (isset($_GET['Eventos'])) {
 
-    $query = "SELECT req.*, cur.codigoRamo FROM requisitos_curso req INNER JOIN cursos cur WHERE req.idCurso = '$ID'  AND req.pre_requisito = cur.ID";
+    $query = "SELECT * FROM eventos WHERE isActive = true";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -20,11 +19,13 @@ if(isset($_GET['ID'])) {
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
-			'pre_requisito' => $row['pre_requisito'],
-			'codigoRamo' => $row['codigoRamo'],
-			'fechaActualizacion' => $row['fechaActualizacion'],
-			'isActive' => $row['isActive'],
+            'ID' => $row['ID'],
+            'titulo' => $row['titulo'],
+            'descripcion' => $row['descripcion'],
+            'fechaInicio' => $row['fechaInicio'],
+            'fechaFin' => $row['fechaFin'],
+            'hora_inicio' => $row['hora_inicio'],
+            'hora_fin' => $row['hora_fin'],
         );
     }
     $jsonstring = json_encode($json);

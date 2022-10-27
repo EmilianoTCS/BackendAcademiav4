@@ -9,20 +9,20 @@ include('../model/conexion.php');
 include("../security/logBuilder.php");
 
 if (isset($_GET['editarRelatores'])) {
-    $data= json_decode(file_get_contents("php://input"));
-	$ID = $data->IDEdit;
+    $data = json_decode(file_get_contents("php://input"));
+    $ID = $data->IDEdit;
     $nombre = $data->nombreEdit;
-	
+
     $query = "update relator set nombre = '$nombre' WHERE ID = '$ID'";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('query failed' . mysqli_error($conection));
     }
-		echo json_encode("success");
+    echo json_encode("successEdited");
     // $usuario = $_session['idcuenta'];
     $log = new log("../security/reports/log.txt");
     $log->writeline("i", "[] ha editado los datos: [$nombre]");
     $log->close();
 } else {
-    echo json_encode("error");
+    echo json_encode("Error");
 }

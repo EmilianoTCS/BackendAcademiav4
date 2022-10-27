@@ -1,114 +1,146 @@
-[I][27-09-2022 16:12:12]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:30:04]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:30:34]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:31:05]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:31:17]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:54:07]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:54:15]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:54:18]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 16:59:57]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 17:16:43]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 17:27:48]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 17:30:25]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 17:31:10]: [academia] Ha iniciado sesión en ******
-[I][27-09-2022 19:49:21]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 10:53:06]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 10:58:40]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:06:35]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:06:49]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:07:43]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:08:03]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:15:38]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:16:23]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:17:03]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:17:26]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:17:56]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:18:20]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:18:35]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:18:51]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:20:54]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:21:04]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:21:08]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:24:43]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 14:26:26]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:04:21]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:09:37]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:10:04]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:10:27]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:10:44]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:12:09]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:12:12]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:12:47]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:12:50]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:15:11]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:20:17]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:20:31]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:21:38]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:22:37]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:23:33]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:25:53]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:29:09]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:29:40]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:30:53]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:31:07]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:31:19]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:31:36]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:31:58]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:32:11]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:32:25]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 16:33:03]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:12:19]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:13:17]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:14:08]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:14:59]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:15:10]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:16:29]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:17:40]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:18:03]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:22:07]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:22:27]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:22:52]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:24:31]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:24:42]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:25:33]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 17:25:44]: [academia] Ha iniciado sesión en ******
-[I][28-09-2022 18:01:45]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:35:27]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:36:04]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:38:41]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:41:17]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:41:46]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:44:35]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:53:55]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:57:10]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:57:41]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:57:55]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:58:14]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:58:45]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:59:25]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:59:38]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 11:59:56]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:00:08]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:00:15]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:00:24]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:00:34]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:00:49]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:01:40]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:02:33]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:02:51]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:09:20]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:12:21]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:12:57]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:13:06]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:15:31]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:15:42]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:17:50]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:18:07]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:18:45]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:18:48]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:18:59]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:19:24]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:20:11]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:22:48]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 12:23:54]: [academia] Ha iniciado sesión en ******
-[I][29-09-2022 13:30:03]: [academia] Ha iniciado sesión en ******
+[I][05-10-2022 13:07:25]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:07:29]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:07:29]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:07:30]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:07:31]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:07:31]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:07:31]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:07:32]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:24]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:25]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:46]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:46]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:49]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:49]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:51]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:51]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:52]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:53]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:54]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:10:55]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:30]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:31]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:32]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:33]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:39]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:39]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:40]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:40]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:42]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:17:42]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:18:00]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:18:01]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:18:07]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:18:08]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:18:09]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:18:56]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:18:57]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:34]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:36]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:37]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:37]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:42]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:43]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:54]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:22:55]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:23:20]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:23:22]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:23:23]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:23:23]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:25:28]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:25:29]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:25:29]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:26:27]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:26:27]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:26:28]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 13:26:28]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 16:52:36]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 16:52:36]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 16:52:54]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 16:52:54]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 16:52:58]: [] ha cambiado el estado del curso: [ de ]
+[I][05-10-2022 16:53:01]: [] ha cambiado el estado del curso: [ de ]
+[I][06-10-2022 12:56:20]: [academia] Ha iniciado sesión en ******
+[I][06-10-2022 12:56:31]: [] ha cambiado el estado del curso: [ de ]
+[I][06-10-2022 16:35:06]: [academia] Ha iniciado sesión en ******
+[I][06-10-2022 16:37:59]: [academia] Ha iniciado sesión en ******
+[I][07-10-2022 10:13:59]: [academia] Ha iniciado sesión en ******
+[I][11-10-2022 09:40:29]: [academia] Ha iniciado sesión en ******
+[I][11-10-2022 09:40:37]: [academia] Ha iniciado sesión en ******
+[I][11-10-2022 09:40:48]: [academia] Ha iniciado sesión en ******
+[I][11-10-2022 09:41:32]: [academia] Ha iniciado sesión en ******
+[I][12-10-2022 11:27:00]: [academia] Ha iniciado sesión en ******
+[I][12-10-2022 13:38:34]: [academia] Ha iniciado sesión en ******
+[I][14-10-2022 13:51:56]: [academia] Ha iniciado sesión en ******
+[I][17-10-2022 13:48:46]: [academia] Ha iniciado sesión en ******
+[I][18-10-2022 12:10:50]: [academia] Ha iniciado sesión en ******
+[I][18-10-2022 12:52:51]:  ha agregado el curso con los datos: [3, BDD202210181000, BDD, 2022-10-18, 2022-10-25, 10:00, 11:30]
+[I][18-10-2022 16:47:45]:  ha agregado el curso con los datos: [4, ADM202210181500, ADM, 2022-10-18, 2022-10-18, 15:00, 17:30]
+[I][19-10-2022 11:34:13]: [academia] Ha iniciado sesión en ******
+[I][19-10-2022 14:20:59]:  ha agregado el curso con los datos: [4, ADM202210181500, ADM, 2022-10-18, 2022-10-18, 15:00, 17:03]
+[I][19-10-2022 15:49:27]:  ha agregado el curso con los datos: [4, APP202210181600, APP, 2022-10-18, 2022-10-18, 16:00, 17:03]
+[I][19-10-2022 15:49:41]:  ha agregado el curso con los datos: [4, APP202210181600, APP, 2022-10-18, 2022-10-18, 16:00, 17:03]
+[I][19-10-2022 15:52:34]:  ha agregado el curso con los datos: [4, ADM202210181500, ADM, 2022-10-18, 2022-10-18, 15:00, 17:03]
+[I][19-10-2022 15:52:48]:  ha agregado el curso con los datos: [4, ADM202210181500, ADM, 2022-10-18, 2022-10-18, 15:00, 17:03]
+[I][19-10-2022 16:03:45]:  ha agregado el curso con los datos: [4, ADM202210181500, ADM, 2022-10-18, 2022-10-18, 15:00, 17:03]
+[I][19-10-2022 16:14:54]:  ha agregado el curso con los datos: [4, BDD202210181500, BDD, 2022-10-18, 2022-10-18, 15:00, 17:03]
+[I][19-10-2022 16:22:01]:  ha agregado el curso con los datos: [4, ADM202210191000, ADM, 2022-10-19, 2022-10-19, 10:00, 00:00]
+[I][19-10-2022 16:24:25]: [] ha editado los datos: [, , , , , ]
+[I][19-10-2022 16:31:01]: [] ha editado los datos: [, , , , , ]
+[I][19-10-2022 16:32:03]: [] ha editado los datos: [fondo_esperanza, ADM, 2022-01-18, 2022-01-18, 10:30, 13:30]
+[I][19-10-2022 16:32:57]: [] ha editado los datos: [fondo_esperanza, ADM, 2022-10-19, 2022-10-19, 10:00:00, 12:00:00]
+[I][19-10-2022 16:36:09]:  ha agregado el curso con los datos: [4, ADM202210192235, ADM, 2022-10-19, 2022-10-19, 22:35, 12:36]
+[I][19-10-2022 16:36:54]:  ha agregado el curso con los datos: [4, ADM202210191036, ADM, 2022-10-19, 2022-10-19, 10:36, 00:36]
+[I][19-10-2022 16:36:59]:  ha agregado el curso con los datos: [4, ADM202210191036, ADM, 2022-10-19, 2022-10-19, 10:36, 12:36]
+[I][19-10-2022 16:37:11]:  ha agregado el curso con los datos: [4, ADM202210191136, ADM, 2022-10-19, 2022-10-19, 11:36, 12:36]
+[I][19-10-2022 16:37:52]:  ha agregado el curso con los datos: [4, ADM202210191000, ADM, 2022-10-19, 2022-10-19, 10:00, 00:00]
+[I][19-10-2022 16:38:01]:  ha agregado el curso con los datos: [4, ADM202210191000, ADM, 2022-10-19, 2022-10-19, 10:00, 12:00]
+[I][19-10-2022 16:39:31]:  ha agregado el curso con los datos: [4, BDD202210191000, BDD, 2022-10-19, 2022-10-19, 10:00, 00:09]
+[I][19-10-2022 16:39:48]:  ha agregado el curso con los datos: [4, BDD202210191000, BDD, 2022-10-19, 2022-10-19, 10:00, 12:09]
+[I][19-10-2022 16:40:11]:  ha agregado el curso con los datos: [4, ADM202210191000, ADM, 2022-10-19, 2022-10-19, 10:00, 12:09]
+[I][19-10-2022 16:45:16]:  ha agregado el curso con los datos: [4, JAV202210191000, JAV, 2022-10-19, 2022-10-19, 10:00, 12:00]
+[I][19-10-2022 16:45:46]:  ha agregado el curso con los datos: [4, LIN202210191000, LIN, 2022-10-19, 2022-10-19, 10:00, 12:00]
+[I][20-10-2022 12:27:02]: [academia] Ha iniciado sesión en ******
+[I][20-10-2022 16:35:18]: [] ha editado los datos: [APP, APPIUM ANDROID, 10]
+[I][20-10-2022 16:35:47]: [] ha editado los datos: [APP, APPIUM ANDROID, 10]
+[I][20-10-2022 16:37:57]: [] ha editado los datos: [fondo_esperanza, ADM, 2022-01-13, 2022-01-18, 16:30:00, 18:30:00]
+[I][20-10-2022 16:38:48]: [] ha editado los datos: [fondo_esperanza, ADM, 2022-01-13, 2022-01-18, 16:30:00, 18:30:00]
+[I][20-10-2022 16:46:52]:  ha agregado el curso con los datos: [4, JAV202210201700, JAV, 2022-10-20, 2022-10-20, 17:00, 19:00]
+[I][20-10-2022 16:49:27]:  ha agregado el curso con los datos: [5, APP202210211700, APP, 2022-10-21, 2022-10-21, 17:00, 19:00]
+[I][20-10-2022 17:03:31]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:03:31]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:04:52]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:04:52]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:04:55]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:04:56]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:05:43]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:05:44]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:05:45]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:05:46]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:05]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:06]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:06]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:07]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:07]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:08]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:08]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:09]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:09]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:09]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:10]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:06:11]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:07:51]: [] ha cambiado el estado del curso: [ de ]
+[I][20-10-2022 17:07:52]: [] ha cambiado el estado del curso: [ de ]
+[I][21-10-2022 11:16:04]: [academia] Ha iniciado sesión en ******
+[I][24-10-2022 11:30:25]: [academia] Ha iniciado sesión en ******
+[I][24-10-2022 11:31:08]: [] ha cambiado el estado del curso: [ de ]
+[I][24-10-2022 11:31:08]: [] ha cambiado el estado del curso: [ de ]
+[I][24-10-2022 11:31:10]: [] ha cambiado el estado del curso: [ de ]
+[I][24-10-2022 11:31:10]: [] ha cambiado el estado del curso: [ de ]
+[I][24-10-2022 12:29:17]: [usuario] ha agregado un colaborador con los datos [, , , , , ]
+[I][24-10-2022 13:01:00]: [usuario] ha editado los datos: []
+[I][24-10-2022 14:46:52]: [] ha cambiado el estado del curso: [ de ]
+[I][24-10-2022 14:46:52]: [] ha cambiado el estado del curso: [ de ]
+[I][24-10-2022 15:12:26]: [usuario] ha agregado un colaborador con los datos [, , , , , ]
+[I][25-10-2022 11:21:33]: [academia] Ha iniciado sesión en ******
+[I][25-10-2022 13:06:07]: [academia] Ha iniciado sesión en ******

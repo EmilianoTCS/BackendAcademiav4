@@ -7,8 +7,9 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if(isset($_GET['ID'])) {
-  $ID = $_GET['ID'];
+if (isset($_GET['ID'])) {
+    $data = json_decode(file_get_contents("php://input"));
+    $ID = $data->ID;
     $query = "SELECT ram.*, rel.nombre FROM ramos ram INNER JOIN relator rel, relator_ramo rel_ram WHERE ram.ID = '$ID' AND rel_ram.idRelator = rel.ID AND rel_ram.idRamo = ram.ID";
     $result = mysqli_query($conection, $query);
 
@@ -22,8 +23,8 @@ if(isset($_GET['ID'])) {
             'codigoRamo' => $row['codigoRamo'],
             'nombreRamo' => $row['nombreRamo'],
             'nombre' => $row['nombre'],
-			'pre_requisitos' => $row['pre_requisito'],
-			'hh_academicas' => $row['hh_academicas']
+            'pre_requisitos' => $row['pre_requisito'],
+            'hh_academicas' => $row['hh_academicas']
         );
     }
     $jsonstring = json_encode($json);

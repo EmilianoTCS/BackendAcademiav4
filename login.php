@@ -47,7 +47,7 @@ if (isset($_GET['login'])) {
             $log->close();
 
             $json[] = array(
-                'conectado' => true,
+                'statusConected' => true,
                 'token' => $token,
                 'username' => $row['idCuenta']
             );

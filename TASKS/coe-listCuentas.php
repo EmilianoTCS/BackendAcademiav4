@@ -9,15 +9,14 @@ include("../model/conexion.php");
 
 
 if (isset($_GET['pagina'])) {
-	
-	$data= json_decode(file_get_contents("php://input"));
+
+    $data = json_decode(file_get_contents("php://input"));
     $num_boton = $data->num_boton;
     $cantidad_por_pagina = 6;
-    $inicio = ( $num_boton - 1 ) * $cantidad_por_pagina = 6;
-    ;
+    $inicio = ($num_boton - 1) * $cantidad_por_pagina;
     $query = "SELECT ram.*, cur.*,
           IF(fin < date(CURRENT_DATE), 'Finalizado', IF(inicio < date(CURRENT_DATE) and CURRENT_DATE < fin, 'En curso', IF(CURRENT_DATE < inicio, 'Pendiente', ''))) as estado
-          FROM cursos cur INNER JOIN ramos ram ON ram.ID = cur.idRamo AND cur.idCuenta = ram.idCuenta WHERE cur.isActive = true LIMIT $inicio,$cantidad_por_pagina";
+          FROM cursos cur INNER JOIN ramos ram ON ram.ID = cur.idRamo AND cur.idCuenta = ram.idCuenta WHERE cur.isActive = true AND ram.isActive = true LIMIT $inicio,$cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -25,7 +24,7 @@ if (isset($_GET['pagina'])) {
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
+            'ID' => $row['ID'],
             'codigoCuenta' => $row['codigoCuenta'],
             'codigoCurso' => $row['codigoCurso'],
             'nombreRamo' => $row['nombreRamo'],
@@ -41,7 +40,7 @@ if (isset($_GET['pagina'])) {
     $cantidad_por_pagina = 6;
     $query = "SELECT ram.*, cur.*,
           IF(fin < date(CURRENT_DATE), 'Finalizado', IF(inicio < date(CURRENT_DATE) and CURRENT_DATE < fin, 'En curso', IF(CURRENT_DATE < inicio, 'Pendiente', ''))) as estado
-          FROM cursos cur INNER JOIN ramos ram ON ram.ID = cur.idRamo AND cur.idCuenta = ram.idCuenta WHERE cur.isActive = true LIMIT $num_boton, $cantidad_por_pagina";
+          FROM cursos cur INNER JOIN ramos ram ON ram.ID = cur.idRamo AND cur.idCuenta = ram.idCuenta WHERE cur.isActive = true AND ram.isActive = true LIMIT $num_boton, $cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -49,7 +48,7 @@ if (isset($_GET['pagina'])) {
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
+            'ID' => $row['ID'],
             'codigoCuenta' => $row['codigoCuenta'],
             'codigoCurso' => $row['codigoCurso'],
             'nombreRamo' => $row['nombreRamo'],

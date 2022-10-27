@@ -9,14 +9,14 @@ include('../model/conexion.php');
 include("../security/logBuilder.php");
 
 if (isset($_GET['editarCurso'])) {
-    $data= json_decode(file_get_contents("php://input"));
-	$ID = $data->ID;
-    $idCuenta = $data->codigoCuentaEdit ;
-    $codigoRamo = $data->codigoRamoEdit;
-    $fechaInicio = $data->fechaInicioEdit;
-    $fechaFin = $data->fechaFinEdit;
-    $horaInicio = $data->horaInicioEdit;
-    $horaFin = $data->horaFinEdit;
+    $data = json_decode(file_get_contents("php://input"));
+    $ID = $data->ID;
+    $idCuenta = $data->codigoCuenta;
+    $codigoRamo = $data->codigoRamo;
+    $fechaInicio = $data->fechaInicio;
+    $fechaFin = $data->fechaFin;
+    $horaInicio = $data->horaInicio;
+    $horaFin = $data->horaFin;
 
     $dateformat_inicio = date("Y-m-d", strtotime($fechaInicio));
     $dateformat_fin = date("Y-m-d", strtotime($fechaFin));
@@ -34,11 +34,11 @@ if (isset($_GET['editarCurso'])) {
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
     }
-	echo json_encode("success");
+    echo json_encode("successEdited");
     // $usuario = $_SESSION['idCuenta'];
     $log = new Log("../security/reports/log.txt");
     $log->writeLine("I", "[] ha editado los datos: [$idCuenta, $codigoRamo, $fechaInicio, $fechaFin, $horaInicio, $horaFin]");
     // $log->close();
 } else {
-    echo json_encode("error");
+    echo json_encode("Error");
 }

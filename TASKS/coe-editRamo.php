@@ -9,7 +9,7 @@ include('../model/conexion.php');
 include("../security/logBuilder.php");
 
 if (isset($_GET['editarRamo'])) {
-    $data= json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
     $codigoRamo = $data->codigoRamo;
     $nombreRamo = $data->nombreRamo;
@@ -22,11 +22,11 @@ if (isset($_GET['editarRamo'])) {
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
     }
-	echo json_encode("success");
+    echo json_encode("successEdited");
     // $usuario = $_SESSION['idCuenta'];
     $log = new Log("../security/reports/log.txt");
     $log->writeLine("I", "[] ha editado los datos: [$codigoRamo, $nombreRamo, $hh_academicas]");
     $log->close();
 } else {
-    echo json_encode("error");
+    echo json_encode("Error");
 }
