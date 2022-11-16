@@ -244,3 +244,26 @@
 [I][10-11-2022 13:23:38]: [] ha cambiado el estado del curso: [ de ]
 [I][10-11-2022 13:23:39]: [] ha cambiado el estado del curso: [ de ]
 [I][10-11-2022 13:23:39]: [] ha cambiado el estado del curso: [ de ]
+[I][11-11-2022 15:43:59]: [academia] Ha iniciado sesión en ******
+[I][14-11-2022 10:32:27]: [academia] Ha iniciado sesión en ******
+[I][14-11-2022 15:51:56]: [asagredo] Ha iniciado sesión en ******
+[I][14-11-2022 15:57:40]: [rcifuentes] Ha iniciado sesión en ******
+[I][14-11-2022 16:03:03]: [asagredo] Ha iniciado sesión en ******
+[I][14-11-2022 16:07:46]: [rcifuentes] Ha iniciado sesión en ******
+[I][14-11-2022 16:08:03]: [academia] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:03]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:05]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:13]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:14]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:14]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:14]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:14]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:27]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:47:52]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:48:11]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 11:48:46]: [academia] Ha iniciado sesión en ******
+[I][15-11-2022 11:48:58]: [asagredo] Ha iniciado sesión en ******
+[I][15-11-2022 17:27:55]: [academia] Ha iniciado sesión en ******
+[I][16-11-2022 09:52:28]: [academia] Ha iniciado sesión en ******
+[I][16-11-2022 09:54:53]: [asagredo] Ha iniciado sesión en ******
+[I][16-11-2022 16:36:45]:  ha agregado el curso con los datos: [4, JIR202211171030, JIR, 2022-11-17, 2022-11-20, 10:30, 12:30]
