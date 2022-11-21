@@ -12,8 +12,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
+    $fecha = $data->fecha;
 
-    $query = "SELECT ID, usuario, atributo, valor from asistencias WHERE idCurso = '$ID'";
+    $query = "SELECT ID, usuario, valor from asistencias WHERE idCurso = '$ID' AND atributo = '$fecha' group by usuario";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {
@@ -26,7 +27,6 @@ if (isset($_GET['ID'])) {
             'ID' => $row['ID'],
             'usuario' => $row['usuario'],
             'valor' => $row['valor'],
-            'atributo' => $row['atributo']
         );
     }
     $jsonstring = json_encode($json);
