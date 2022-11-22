@@ -29,9 +29,9 @@ if (isset($_GET['editarColaborador'])) {
     }
     echo json_encode("successEdited");
     // $usuario = $_SESSION['idCuenta'];
-    $log = new Log("../security/reports/log.txt");
-    $log->writeLine("I", "[usuario] ha editado los datos: [$codigoCuenta, $usuario, $nombre_completo,$area,$subgerencia,$correo]");
-    $log->close();
+    // $log = new Log("../security/reports/log.txt");
+    // $log->writeLine("I", "[usuario] ha editado los datos: [$codigoCuenta, $usuario, $nombre_completo,$area,$subgerencia,$correo]");
+    // $log->close();
 } else {
     echo json_encode("Error");
 }

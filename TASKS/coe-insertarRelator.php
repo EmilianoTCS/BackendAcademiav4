@@ -22,9 +22,9 @@ if (isset($_GET['insertarRelator'])) {
     } else {
         echo json_encode("successCreated");
         // $usuario = $_SESSION['idCuenta'];
-        $log = new Log("../security/reports/log.txt");
-        $log->writeLine("I", "[] ha agregado el orador con los datos: [$area, $nombre]");
-        $log->close();
+        // $log = new Log("../security/reports/log.txt");
+        // $log->writeLine("I", "[] ha agregado el orador con los datos: [$area, $nombre]");
+        // $log->close();
     }
 } else {
     echo json_encode("Error");

@@ -40,9 +40,9 @@ if (isset($_GET['insertarCurso'])) {
         } else {
             echo json_encode("successCreated");
             // $usuario = $_SESSION['codigoCuenta'];
-            $log = new Log("../security/reports/log.txt");
-            $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
-            $log->close();
+            // $log = new Log("../security/reports/log.txt");
+            // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
+            // $log->close();
         }
     }
 } else {

@@ -10,7 +10,7 @@ include("security/logBuilder.php");
 if (isset($_GET['logout'])) {
 
 	// $usuario = $_SESSION['idCuenta'];
-	$log = new Log("security/reports/log.txt");
+	// $log = new Log("security/reports/log.txt");
 	// $log->writeLine("I", "[$usuario] Ha cerrado sesión");
 	$log->close();
 	echo json_encode([
