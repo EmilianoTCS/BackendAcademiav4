@@ -5,7 +5,7 @@ function pageCounter()
     $Cantidad_por_pagina = 6;
     include("model/conexion.php");
     // CONTADOR PARA CUENTAS
-    $queryCounter1 = "SELECT COUNT(ID) as total_registros_cuenta from cursos WHERE isActive = true ";
+    $queryCounter1 = "SELECT count(ID) as total_registros_cuenta FROM `cursos` WHERE isActive= true ";
     $resultCounter1 = mysqli_query($conection, $queryCounter1);
     if (!$resultCounter1) {
         die('Query Failed' . mysqli_error($conection));
@@ -82,8 +82,8 @@ function pageCounter()
             $cantidad_paginas_infoRelator = ceil($totalRegistros_nombreRamo / 2);
         }
     }
-	// CONTADOR PARA CLIENTES
-   $queryCounter8 = "SELECT COUNT(ID) as total_clientes from CLIENTES WHERE isActive = true";
+    // CONTADOR PARA CLIENTES
+    $queryCounter8 = "SELECT COUNT(ID) as total_clientes from CLIENTES WHERE isActive = true";
     $resultCounter8 = mysqli_query($conection, $queryCounter8);
     if (!$resultCounter8) {
         die('Query Failed' . mysqli_error($conection));
@@ -93,9 +93,9 @@ function pageCounter()
             $cantidad_paginas_clientes = ceil($totalRegistros_clientes / $Cantidad_por_pagina);
         }
     }
-	
-		// CONTADOR PARA INFO CURSOS
-$queryCounter9 = "SELECT DISTINCT(COUNT(per.usuario)) as total_usuarios FROM personas per INNER JOIN aprobacion ap WHERE per.isActive = true AND per.usuario = ap.usuario AND ap.codigoCurso = 'JAV202107261630' ";
+
+    // CONTADOR PARA INFO CURSOS
+    $queryCounter9 = "SELECT DISTINCT(COUNT(per.usuario)) as total_usuarios FROM personas per INNER JOIN aprobacion ap WHERE per.isActive = true AND per.usuario = ap.usuario AND ap.codigoCurso = 'JAV202107261630' ";
     $resultCounter9 = mysqli_query($conection, $queryCounter9);
     if (!$resultCounter9) {
         die('Query Failed' . mysqli_error($conection));
@@ -105,24 +105,24 @@ $queryCounter9 = "SELECT DISTINCT(COUNT(per.usuario)) as total_usuarios FROM per
             $cantidad_paginas_infoCursos = ceil($totalRegistros_infoCursos / $Cantidad_por_pagina);
         }
     }
-	    // CONTADOR PARA NOTAS---------------------------
-			// SIN FILTROS
-		$queryCounter10 = "SELECT COUNT(ID) as total_evaluacionesNoFilter FROM evaluaciones";
-		$resultCounter10 = mysqli_query($conection, $queryCounter10);
-		if (!$resultCounter10) {
-			die('Query Failed' . mysqli_error($conection));
-		} else {
-			while ($rowCounter10 = mysqli_fetch_array($resultCounter10)) {
-				$totalRegistros_evaluaciones = $rowCounter10['total_evaluacionesNoFilter'];
-				$cantidad_paginas_evaluaciones = ceil($totalRegistros_evaluaciones / $Cantidad_por_pagina);
-			}
-		}
-	
-	
+    // CONTADOR PARA NOTAS---------------------------
+    // SIN FILTROS
+    $queryCounter10 = "SELECT COUNT(ID) as total_evaluacionesNoFilter FROM evaluaciones";
+    $resultCounter10 = mysqli_query($conection, $queryCounter10);
+    if (!$resultCounter10) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter10 = mysqli_fetch_array($resultCounter10)) {
+            $totalRegistros_evaluaciones = $rowCounter10['total_evaluacionesNoFilter'];
+            $cantidad_paginas_evaluaciones = ceil($totalRegistros_evaluaciones / $Cantidad_por_pagina);
+        }
+    }
+
+
 
     return [
-		'cantidad_paginas_infoCursos' => $cantidad_paginas_infoCursos,
-		'cantidad_paginas_clientes' => $cantidad_paginas_clientes,
+        'cantidad_paginas_infoCursos' => $cantidad_paginas_infoCursos,
+        'cantidad_paginas_clientes' => $cantidad_paginas_clientes,
         'cantidad_paginas_infoRelator' => $cantidad_paginas_infoRelator,
         'cantidad_paginas_cursos' => $cantidad_paginas_cursos,
         'cantidad_paginas_idcuenta' => $cantidad_paginas_idcuentas,
@@ -130,6 +130,6 @@ $queryCounter9 = "SELECT DISTINCT(COUNT(per.usuario)) as total_usuarios FROM per
         'cantidad_paginas_ramos' => $cantidad_paginas_ramos,
         'cantidad_paginas_relator' => $cantidad_paginas_relator,
         'cantidad_paginas_usuarios' => $cantidad_paginas_usuarios,
-		'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones
+        'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones
     ];
 }
