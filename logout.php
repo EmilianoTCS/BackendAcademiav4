@@ -12,7 +12,7 @@ if (isset($_GET['logout'])) {
 	// $usuario = $_SESSION['idCuenta'];
 	// $log = new Log("security/reports/log.txt");
 	// $log->writeLine("I", "[$usuario] Ha cerrado sesión");
-	$log->close();
+	// $log->close();
 	echo json_encode([
 		"statusConnected" => false,
 		"failure" => false

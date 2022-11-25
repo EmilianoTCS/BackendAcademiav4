@@ -39,7 +39,6 @@ if (isset($_GET['insertarCurso'])) {
         $hora2 = strtotime($duracion);
         $horaFin = date('H:i:s', $hora1 + $hora2);
 
-        // echo $horaFin;
         $queryVerify = "SELECT * FROM cursos WHERE codigoRamo = '$codigoRamo' AND fecha_hora = '$fechas[$i]' AND hora_inicio <= time('$formatTimeTemporal') AND hora_fin >= time('$horaFin') ";
         $resultVerify = mysqli_query($conection, $queryVerify);
 
