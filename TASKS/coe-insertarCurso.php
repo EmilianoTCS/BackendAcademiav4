@@ -1,4 +1,5 @@
 <?php
+set_time_limit(20);
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
 header("Access-Control-Allow-Methods: GET,POST");
@@ -14,7 +15,7 @@ if (isset($_GET['insertarCurso'])) {
     $duracion = $data->duracion;
     $codigoCuenta = $data->codigoCuenta;
     $codigoRamo = $data->codigoRamo;
-    $fechas = $data->fechasFormateadas;
+    $fechas = $data->fechasOrdenadas;
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
     $ultimoElemento = end($fechas);
