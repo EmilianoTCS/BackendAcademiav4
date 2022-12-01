@@ -14,7 +14,7 @@ if (isset($_GET['insertarCurso'])) {
     $duracion = $data->duracion;
     $codigoCuenta = $data->codigoCuenta;
     $codigoRamo = $data->codigoRamo;
-    $fechas = $data->fechasFormateadas;
+    $fechas = $data->fechasOrdenadas;
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
     $ultimoElemento = end($fechas);
@@ -48,7 +48,7 @@ if (isset($_GET['insertarCurso'])) {
             echo json_encode('errorRepeated');
         } else {
 
-            $query = "INSERT INTO cursos (idCuenta, codigoCurso, codigoRamo, fecha_hora, inicio, fin, hora_inicio, hora_fin, isActive) VALUES ('$codigoCuenta','$codigoCurso','$codigoRamo','$fechas[$i]','$fechaInicio', '$fechaFin', '$formatTimeTemporal', '$horaFin', true);";
+            $query = "INSERT INTO cursos (idCuenta, idRamo, grupo, codigoCurso, codigoRamo, fecha_hora, inicio, fin, hora_inicio, hora_fin, isActive, fechaActualizacion) VALUES ('$codigoCuenta','0','0', '$codigoCurso','$codigoRamo','$fechas[$i]','$fechaInicio', '$fechaFin', '$formatTimeTemporal', '$horaFin', true, '0000-00-00');";
             $result = mysqli_query($conection, $query);
             if (!$result) {
                 die('Query Failed' . mysqli_error($conection));
