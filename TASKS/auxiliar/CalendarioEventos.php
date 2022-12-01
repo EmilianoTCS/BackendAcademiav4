@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['Eventos'])) {
 
-    $query = "SELECT * FROM eventos WHERE isActive = true";
+    $query = "SELECT ID,titulo,descripcion,fecha_hora, TIMEDIFF(hora_fin, hora_inicio) as duracion FROM eventos WHERE isActive = true";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -22,10 +22,8 @@ if (isset($_GET['Eventos'])) {
             'ID' => $row['ID'],
             'titulo' => $row['titulo'],
             'descripcion' => $row['descripcion'],
-            'fechaInicio' => $row['fechaInicio'],
-            'fechaFin' => $row['fechaFin'],
-            'hora_inicio' => $row['hora_inicio'],
-            'hora_fin' => $row['hora_fin'],
+            'fecha_hora' => $row['fecha_hora'],
+            'duracion' => $row['duracion']
         );
     }
     $jsonstring = json_encode($json);
