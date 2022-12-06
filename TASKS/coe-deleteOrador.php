@@ -23,5 +23,5 @@ if (isset($_POST)) {
   $log->writeLine("I", "[$usuario] ha eliminado el orador: [$relator de $nombreRamo]");
   $log->close();
 } else {
-  echo "Error" . mysqli_error($conection);
+  echo json_encode("Error");
 }

@@ -9,8 +9,9 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 if (isset($_GET['delete'])) {
-  $ID = $_GET['delete'];
-  
+  $data = json_decode(file_get_contents("php://input"));
+  $ID = $data->ID;
+
   $query = "UPDATE cursos SET isActive = false WHERE ID = '$ID'";
 
   $result = mysqli_query($conection, $query);
@@ -18,7 +19,7 @@ if (isset($_GET['delete'])) {
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  echo json_encode("Success");
+  echo json_encode("successDeleted");
   // $usuario = $_SESSION['idCuenta'];
   $log = new Log("../security/reports/log.txt");
   $log->writeLine("I", "[] ha eliminado el curso: [ de ]");

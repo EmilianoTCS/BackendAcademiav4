@@ -1468,8 +1468,3 @@
 [I][20-09-2022 12:26:09]: [] ha cambiado el estado del curso: [ de ]
 [I][20-09-2022 12:26:15]: [] ha cambiado el estado del curso: [ de ]
 [I][20-09-2022 12:26:17]: [] ha cambiado el estado del curso: [ de ]
-[I][12-10-2022 14:45:15]: [] ha editado los datos: [fondo_esperanza, ADM, 2022-01-13, 2022-01-18, 16:30:00, 18:30:00]
-[I][12-10-2022 14:46:21]: [] ha cambiado el estado del curso: [ de ]
-[I][12-10-2022 14:46:23]: [] ha cambiado el estado del curso: [ de ]
-[I][12-10-2022 14:46:26]: [] ha cambiado el estado del curso: [ de ]
-[I][12-10-2022 14:46:28]: [] ha cambiado el estado del curso: [ de ]
