@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['delete'])) {
   $ID = $_GET['delete'];
-  
+
   $query = "DELETE FROM evaluaciones WHERE ID = '$ID'";
 
   $result = mysqli_query($conection, $query);
@@ -20,9 +20,9 @@ if (isset($_GET['delete'])) {
   }
   echo json_encode("Success");
   // $usuario = $_SESSION['idCuenta'];
-  $log = new Log("../security/reports/log.txt");
-  $log->writeLine("I", "[] ha eliminado el curso: [ de ]");
-  $log->close();
+  // $log = new Log("../security/reports/log.txt");
+  // $log->writeLine("I", "[] ha eliminado el curso: [ de ]");
+  // $log->close();
 } else {
   echo json_encode("Error");
 }

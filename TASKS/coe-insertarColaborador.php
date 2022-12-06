@@ -23,9 +23,9 @@ if (isset($_GET['insertarColaborador'])) {
         die('Query Failed' . mysqli_error($conection));
     } else {
         // $usuario = $_SESSION['codigoCuenta'];
-        $log = new Log("../security/reports/log.txt");
-        $log->writeLine("I", "[usuario] ha agregado un colaborador con los datos [$codigoCuenta, $nombre_completo, $usuario, $area, $subgerencia, $correo]");
-        $log->close();
+        // $log = new Log("../security/reports/log.txt");
+        // $log->writeLine("I", "[usuario] ha agregado un colaborador con los datos [$codigoCuenta, $nombre_completo, $usuario, $area, $subgerencia, $correo]");
+        // $log->close();
         echo json_encode("successCreated");
     }
 } else {

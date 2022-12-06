@@ -26,9 +26,9 @@ if (isset($_GET['insertarRamo'])) {
     } else {
         echo json_encode("successCreated");
         // $usuario = $_SESSION['codigoCuenta'];
-        $log = new Log("../security/reports/log.txt");
-        $log->writeLine("I", "[usuario] ha agregado el ramo con los datos: [$codigoCuenta, $codigoRamo, $nombreCurso, $hh_academicas, $pre_requsito, $relator]");
-        $log->close();
+        // $log = new Log("../security/reports/log.txt");
+        // $log->writeLine("I", "[usuario] ha agregado el ramo con los datos: [$codigoCuenta, $codigoRamo, $nombreCurso, $hh_academicas, $pre_requsito, $relator]");
+        // $log->close();
     }
 } else {
     echo json_encode("Error");

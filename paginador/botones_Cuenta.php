@@ -12,8 +12,8 @@ $paginas = pageCounter();
 
 
 for ($i = 1; $i <= $paginas['cantidad_paginas_cuenta']; $i++) {
-    $array[] = array(
-	'paginas' => $i
-	); 
+	$array[] = array(
+		'paginas' => $i
+	);
 }
 echo json_encode($array);

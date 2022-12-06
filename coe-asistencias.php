@@ -1,12 +1,7 @@
 <?php
 // VALIDACIÓN DE SESIÓN
 include("model/conexion.php");
-session_start();
-$nombre = $_SESSION['nombre'];
 
-if (!isset($_SESSION['idCuenta'])) {
-    header("Location: login.php");
-}
 
 ?>
 

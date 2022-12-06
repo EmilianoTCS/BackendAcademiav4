@@ -21,9 +21,9 @@ if (isset($_GET['delete'])) {
   }
   echo json_encode("successDeleted");
   // $usuario = $_SESSION['idCuenta'];
-  $log = new Log("../security/reports/log.txt");
-  $log->writeLine("I", "[] ha eliminado el curso: [ de ]");
-  $log->close();
+  // $log = new Log("../security/reports/log.txt");
+  // $log->writeLine("I", "[] ha eliminado el curso: [ de ]");
+  // $log->close();
 } else {
   echo json_encode("Error");
 }

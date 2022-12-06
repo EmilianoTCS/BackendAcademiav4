@@ -24,9 +24,9 @@ if (isset($_GET['editarRamo'])) {
     }
     echo json_encode("successEdited");
     // $usuario = $_SESSION['idCuenta'];
-    $log = new Log("../security/reports/log.txt");
-    $log->writeLine("I", "[] ha editado los datos: [$codigoRamo, $nombreRamo, $hh_academicas]");
-    $log->close();
+    // $log = new Log("../security/reports/log.txt");
+    // $log->writeLine("I", "[] ha editado los datos: [$codigoRamo, $nombreRamo, $hh_academicas]");
+    // $log->close();
 } else {
     echo json_encode("Error");
 }

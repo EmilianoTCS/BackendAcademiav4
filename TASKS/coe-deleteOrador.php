@@ -18,10 +18,10 @@ if (isset($_POST)) {
   if (!$result) {
     die('Query Failed.' . mysqli_error($conection));
   }
-  $usuario = $_SESSION['idCuenta'];
-  $log = new Log("../security/reports/log.txt");
-  $log->writeLine("I", "[$usuario] ha eliminado el orador: [$relator de $nombreRamo]");
-  $log->close();
+  // $usuario = $_SESSION['idCuenta'];
+  // $log = new Log("../security/reports/log.txt");
+  // $log->writeLine("I", "[$usuario] ha eliminado el orador: [$relator de $nombreRamo]");
+  // $log->close();
 } else {
   echo json_encode("Error");
 }

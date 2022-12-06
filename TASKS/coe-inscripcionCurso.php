@@ -27,7 +27,6 @@ if (isset($_GET['inscripcionCurso'])) {
         }
     }
 
-
     $query2 = "SELECT COUNT(req.pre_requisito) FROM aprobacion ap 
 			  INNER JOIN requisitos_curso req, personas per
 			  WHERE req.pre_requisito = ap.idCurso AND ap.porcentaje_aprobacion > 85 AND per.ID = ap.idPersona AND per.usuario = '$usuario' AND req.idCurso = '$idCurso'";
@@ -41,41 +40,17 @@ if (isset($_GET['inscripcionCurso'])) {
     }
 
 
-
     if ($total_pre_requisitosUsuario >= $total_pre_requisitos) {
         $query3 = "INSERT INTO aprobacion (ID, idCuenta, idCurso, codigoCuenta, codigoCurso, usuario, porcentaje_aprobacion) VALUES (, '$idCuenta', '$idCurso', '$codigoCuenta','$codigoCurso', '$usuario', '$porcentaje_aprobacion')";
         $result3 = mysqli_query($conection, $query2);
         if (!$result3) {
             die('Query failed' . mysqli_error($conection));
         } else {
-            echo json_encode(['queryAprobacion' => true]);
+            echo json_encode('successCreated');
         }
     } else {
-        echo json_encode(['queryAprobacion' => false]);
+        echo json_encode('Error');
     }
-
-
-
-    // $query = "SELECT ap.porcentaje_aprobacion, per.ID, ap.usuario, cur.*, if(ap.porcentaje_aprobacion > 85, 'Aprobado', 'Reprobado') as estado
-    // from cursos cur INNER JOIN aprobacion ap, personas per WHERE cur.codigoCurso = ap.codigoCurso and ap.usuario = '$usuario' group by codigoCurso";
-    // $result = mysqli_query($conection, $query);
-    // if (!$result) {
-    // die('Query Failed' . mysqli_error($conection));
-    // }
-
-    // $json = array();
-    // while ($row = mysqli_fetch_array($result)) {
-    // $json[] = array(
-    // 'ID' => $row['ID'],
-    // 'usuario' => $row['usuario'],
-    // 'codigoRamo' => $row['codigoRamo'],
-    // 'codigoCurso' => $row['codigoCurso'],
-    // 'aprobacion' => $row['porcentaje_aprobacion'],
-    // 'estado' => $row['estado']
-    // );
-    // }
-    // $jsonstring = json_encode($json);
-    // echo $jsonstring;
 } else {
     echo json_encode("Error");
 }

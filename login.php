@@ -40,11 +40,11 @@ if (isset($_GET['login'])) {
             $_SESSION['idCuenta'] = $row['idCuenta'];
             $_SESSION['nombre'] = $row['nombre'];
             $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
-            $usuario = $_SESSION['idCuenta'];
-            $log = new Log("security/reports/log.txt");
-            // $log->getSize();
-            $log->writeLine("I", "[$usuario] Ha iniciado sesión en ******");
-            $log->close();
+            // $usuario = $_SESSION['idCuenta'];
+            // $log = new Log("security/reports/log.txt");
+            // // $log->getSize();
+            // $log->writeLine("I", "[$usuario] Ha iniciado sesión en ******");
+            // $log->close();
 
             $json[] = array(
                 'statusConected' => true,

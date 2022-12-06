@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['Cursos'])) {
 
-    $query = "SELECT ID,inicio, fin, hora_inicio, hora_fin, codigoRamo, codigoCurso FROM cursos WHERE isActive = true";
+    $query = "SELECT cur.ID,cur.inicio, cur.fin, cur.hora_inicio, cur.hora_fin, cur.codigoRamo,cur.fecha_hora, TIMEDIFF(cur.hora_fin, cur.hora_inicio) as duracion, cur.codigoCurso, ram.nombreRamo FROM cursos cur INNER JOIN ramos ram WHERE cur.isActive = true AND cur.codigoRamo =  ram.codigoRamo";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -26,6 +26,10 @@ if (isset($_GET['Cursos'])) {
             'hora_inicio' => $row['hora_inicio'],
             'hora_fin' => $row['hora_fin'],
             'codigoRamo' => $row['codigoRamo'],
+            'fecha_hora' => $row['fecha_hora'],
+            'duracion' => $row['duracion'],
+            'nombreRamo' => $row['nombreRamo'],
+
         );
     }
     $jsonstring = json_encode($json);

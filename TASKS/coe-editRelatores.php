@@ -20,9 +20,9 @@ if (isset($_GET['editarRelatores'])) {
     }
     echo json_encode("successEdited");
     // $usuario = $_session['idcuenta'];
-    $log = new log("../security/reports/log.txt");
-    $log->writeline("i", "[] ha editado los datos: [$nombre]");
-    $log->close();
+    // $log = new log("../security/reports/log.txt");
+    // $log->writeline("i", "[] ha editado los datos: [$nombre]");
+    // $log->close();
 } else {
     echo json_encode("Error");
 }
