@@ -19,6 +19,7 @@ if (isset($_GET['insertarCurso'])) {
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
     $ultimoElemento = end($fechas);
+    $json = array();
 
     $fechaInicioTemporal = date_create($primerElemento);
     $fechaFinalTemporal = date_create($ultimoElemento);
@@ -53,7 +54,7 @@ if (isset($_GET['insertarCurso'])) {
             if (!$result) {
                 die('Query Failed' . mysqli_error($conection));
             } else {
-                echo json_encode("successCreated");
+                json_encode('successCreated');
                 // $usuario = $_SESSION['codigoCuenta'];
                 // $log = new Log("../security/reports/log.txt");
                 // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");

@@ -7,25 +7,24 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 if(isset($_GET['codigoCurso'])) {
-  $codigoCurso = $_GET['codigoCurso'];
+  $data = json_decode(file_get_contents("php://input"));
+  
+  $codigoCurso = $data->codigoCurso;
 
-$query = "SELECT cur.*, per.usuario, ap.porcentaje_aprobacion, if(ap.porcentaje_aprobacion > 85, 'Aprobado', 'Reprobado')
-          as estado from cursos cur INNER JOIN personas per, aprobacion ap 
-          where cur.codigoCurso = '$codigoCurso' AND ap.codigoCurso = '$codigoCurso' AND per.usuario = ap.usuario group by usuario order by usuario ASC";
+$query = "SELECT *, IF(fin < date(CURRENT_DATE), 'Finalizado', IF(inicio < date(CURRENT_DATE) and CURRENT_DATE < fin, 'En curso', IF(CURRENT_DATE < inicio, 'Pendiente', ''))) as estado FROM cursos WHERE codigoCurso = '$codigoCurso' ";
 $result = mysqli_query($conection, $query);
 if (!$result) {
     die('Query Failed' . mysqli_error($conection));
 }
-
 $json = array();
 while ($row = mysqli_fetch_array($result)) {
     $json[] = array(
 	    'ID' => $row['ID'],
         'codigoCurso' => $row['codigoCurso'],
-        'horaInicio' => $row['hora_inicio'],
-        'horaFin' => $row['hora_fin'],
-        'usuario' => $row['usuario'],
-        'aprobacion' => $row['porcentaje_aprobacion'],
+        'fecha_hora' => $row['fecha_hora'],
+        'codigoRamo' => $row['codigoRamo'],
+        'hora_inicio' => $row['hora_inicio'],
+        'hora_fin' => $row['hora_fin'],
         'estado' => $row['estado']
     );
 }
