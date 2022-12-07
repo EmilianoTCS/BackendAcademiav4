@@ -107,7 +107,7 @@ function pageCounter()
     }
     // CONTADOR PARA NOTAS---------------------------
     // SIN FILTROS
-    $queryCounter10 = "SELECT COUNT(ID) as total_evaluacionesNoFilter FROM evaluaciones";
+    $queryCounter10 = "SELECT COUNT(nota) as total_evaluacionesNoFilter FROM evaluaciones GROUP BY num_evaluaciones";
     $resultCounter10 = mysqli_query($conection, $queryCounter10);
     if (!$resultCounter10) {
         die('Query Failed' . mysqli_error($conection));
