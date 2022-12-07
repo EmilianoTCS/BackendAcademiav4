@@ -23,6 +23,7 @@ $paginas = pageCounter();
     <title>ACADEMIA DE FORMACIÓN TSOFT</title>
     <?php include 'template/header.php' ?>
     <?php include 'template/scripts.php' ?>
+    
 </head>
 
 <body>
