@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT ram.*, rel.nombre FROM ramos ram INNER JOIN relator rel, relator_ramo rel_ram WHERE ram.ID = '$ID' AND rel_ram.idRelator = rel.ID AND rel_ram.idRamo = ram.ID";
+    $query = "SELECT ram.* FROM ramos ram WHERE ID = '$ID'";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {
@@ -22,8 +22,6 @@ if (isset($_GET['ID'])) {
             'ID' => $row['ID'],
             'codigoRamo' => $row['codigoRamo'],
             'nombreRamo' => $row['nombreRamo'],
-            'nombre' => $row['nombre'],
-            'pre_requisitos' => $row['pre_requisito'],
             'hh_academicas' => $row['hh_academicas']
         );
     }

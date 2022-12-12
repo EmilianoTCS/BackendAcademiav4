@@ -10,10 +10,11 @@ include("../security/logBuilder.php");
 
 if (isset($_GET['editarRelatores'])) {
     $data = json_decode(file_get_contents("php://input"));
-    $ID = $data->IDEdit;
-    $nombre = $data->nombreEdit;
+    $ID = $data->ID;
+    $nombre = $data->nombre;
+    $idArea = $data->idArea;
 
-    $query = "update relator set nombre = '$nombre' WHERE ID = '$ID'";
+    $query = "update relator set nombre = '$nombre', idArea = '$idArea' WHERE ID = '$ID'";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('query failed' . mysqli_error($conection));

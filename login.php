@@ -26,9 +26,6 @@ if (isset($_GET['login'])) {
     }
     $token = gToken(40);
 
-
-
-
     $query = mysqli_query($conection, "SELECT idCuenta, password, nombre, tipo_usuario FROM cuentas_login where idCuenta = '$username'");
     $result = mysqli_num_rows($query);
     if ($result > 0) {
@@ -40,11 +37,7 @@ if (isset($_GET['login'])) {
             $_SESSION['idCuenta'] = $row['idCuenta'];
             $_SESSION['nombre'] = $row['nombre'];
             $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
-            // $usuario = $_SESSION['idCuenta'];
-            // $log = new Log("security/reports/log.txt");
-            // // $log->getSize();
-            // $log->writeLine("I", "[$usuario] Ha iniciado sesión en ******");
-            // $log->close();
+
 
             $json[] = array(
                 'statusConected' => true,
@@ -53,9 +46,9 @@ if (isset($_GET['login'])) {
             );
             echo json_encode($json);
         } else {
-            echo json_encode(['conectado' => false]);
+            echo json_encode(['statusConected' => false]);
         }
     } else {
-        echo json_encode(['conectado' => false]);
+        echo json_encode(['statusConected' => false]);
     }
 }
