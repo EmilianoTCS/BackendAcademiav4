@@ -20,7 +20,27 @@ if (isset($_GET['updateStateClientes'])) {
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  echo json_encode("successEdited");
+  $query2 = "SELECT ID, tipo_cliente, nombreCliente, correoReferente, telefonoReferente, isActive, fechaActualizacion from clientes WHERE ID = '$ID'";
+  $result2 = mysqli_query($conection, $query2);
+  if (!$result2) {
+    die('Query Failed' . mysqli_error($conection));
+  }
+  $json = array();
+  while ($row = mysqli_fetch_array($result2)) {
+
+    $json[] = array(
+      'ID' => $row['ID'],
+      'tipo_cliente' => $row['tipo_cliente'],
+      'nombreCliente' => $row['nombreCliente'],
+      'correoReferente' => $row['correoReferente'],
+      'telefonoReferente' => $row['telefonoReferente'],
+      'date' => $row['fechaActualizacion'],
+      'isActive' => $row['isActive'],
+      'successEdited' => "successEdited"
+    );
+  }
+  $jsonstring = json_encode($json);
+  echo $jsonstring;
   // $usuario = $_SESSION['idCuenta'];
   // $log = new Log("../security/reports/log.txt");
   // $log->writeLine("I", "[] ha cambiado el estado del curso: [ de ]");

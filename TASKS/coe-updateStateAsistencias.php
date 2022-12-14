@@ -10,19 +10,35 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['updateStateAsistencias'])) {
     $data = json_decode(file_get_contents("php://input"));
-    $ID = $data->IDsChange;
-    $longitud = count($ID);
+    $IDRegistro = $data->IDRegistro;
+    $IDCurso = $data->IDCurso;
+    $Fecha = $data->Fecha;
 
-    for ($i = 0; $i < $longitud; ++$i) {
 
-        $query = "UPDATE asistencias SET valor = !valor WHERE ID = '$ID[$i]'";
-        $result = mysqli_query($conection, $query);
+    $query = "UPDATE asistencias SET valor = !valor WHERE ID = '$IDRegistro'";
+    $result = mysqli_query($conection, $query);
 
-        if (!$result) {
-            die(json_encode('Query Failed.'));
-        }
+    if (!$result) {
+        die(json_encode('Query Failed.'));
     }
-    echo json_encode("successEdited");
+
+    $query2 = "SELECT ID, usuario, valor from asistencias WHERE idCurso = '$IDCurso' AND atributo = '$Fecha' AND ID = '$IDRegistro' group by usuario";
+    $result2 = mysqli_query($conection, $query2);
+    if (!$result2) {
+      die('Query Failed' . mysqli_error($conection));
+    }
+    $json = array();
+    while ($row = mysqli_fetch_array($result2)) {
+  
+      $json[] = array(
+        'ID' => $row['ID'],
+        'usuario' => $row['usuario'],
+        'valor' => $row['valor'],
+        'successEdited' => "successEdited"
+      );
+    }
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
 
     // // $usuario = $_SESSION['idCuenta'];
     // //   $log = new Log("../security/reports/log.txt");

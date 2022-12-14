@@ -19,7 +19,24 @@ if (isset($_GET['updateStateRelator'])) {
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  echo json_encode("successEdited");
+  $query2 = "SELECT ID, nombre, isActive, fechaActualizacion from relator WHERE ID = '$ID'";
+  $result2 = mysqli_query($conection, $query2);
+  if (!$result2) {
+    die('Query Failed' . mysqli_error($conection));
+  }
+  $json = array();
+  while ($row = mysqli_fetch_array($result2)) {
+
+    $json[] = array(
+      'ID' => $row['ID'],
+      'nombre' => $row['nombre'],
+      'date' => $row['fechaActualizacion'],
+      'isActive' => $row['isActive'],
+      'successEdited' => "successEdited"
+    );
+  }
+  $jsonstring = json_encode($json);
+  echo $jsonstring;
   // $usuario = $_SESSION['idCuenta'];
   // $log = new Log("../security/reports/log.txt");
   // $log->writeLine("I", "[] ha cambiado el estado del curso: [ de ]");

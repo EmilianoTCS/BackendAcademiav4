@@ -15,11 +15,29 @@ if (isset($_GET['updateStateCursos'])) {
   $date = date('Y-m-d H:i:s');
   $query = "UPDATE cursos SET isActive = !isActive, fechaActualizacion = '$date' WHERE ID = '$ID'";
   $result = mysqli_query($conection, $query);
-
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  echo json_encode("successEdited");
+    $query2 = "SELECT ID, codigoRamo, codigoCurso, isActive, fechaActualizacion from cursos WHERE ID = '$ID'";
+    $result2 = mysqli_query($conection, $query2);
+    if (!$result2) {
+        die('Query Failed' . mysqli_error($conection));
+    }
+    $json = array();
+    while ($row = mysqli_fetch_array($result2)) {
+
+        $json[] = array(
+			'ID' => $row['ID'],
+      'codigoRamo' => $row['codigoRamo'],
+      'codigoCurso' => $row['codigoCurso'],
+			'date' => $row['fechaActualizacion'],
+			'isActive' => $row['isActive'],
+      'successEdited' => "successEdited"
+        );
+    }
+    $jsonstring = json_encode($json);
+    echo $jsonstring;
+
   // $usuario = $_SESSION['idCuenta'];
   // $log = new Log("../security/reports/log.txt");
   // $log->writeLine("I", "[] ha cambiado el estado del curso: [ de ]");
