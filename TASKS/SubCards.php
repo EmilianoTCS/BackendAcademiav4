@@ -12,7 +12,7 @@ if (isset($_GET['usuario'])) {
     $query_total_cursos = mysqli_query($conection, "SELECT cur.codigoRamo, cur.inicio, cur.codigoCurso, ROUND(AVG(eva.nota),2) as promedio, eva.usuario,
 												5 * (DATEDIFF(cur.fin, cur.inicio) DIV 7) + MID('0123444401233334012222340111123400012345001234550', 7 * WEEKDAY(cur.inicio) + WEEKDAY(cur.fin) + 1, 1)AS totalClases,
 												IF( eva.estado = 'Enviado' || 'Entregado', 'Activo', 'Pendiente') as estado
-												FROM cursos cur INNER JOIN evaluaciones eva WHERE isActive = true AND cur.codigoCurso = eva.codigoCurso AND eva.usuario = '$usuario' GROUP BY cur.codigoCurso ORDER BY codigoRamo ASC");
+												FROM cursos cur INNER JOIN evaluaciones eva WHERE cur.isActive = true AND cur.codigoCurso = eva.codigoCurso AND eva.usuario = '$usuario' GROUP BY cur.codigoCurso ORDER BY codigoRamo ASC");
     $result = mysqli_num_rows($query_total_cursos);
     if ($result > 0) {
         while ($data = mysqli_fetch_array($query_total_cursos)) {

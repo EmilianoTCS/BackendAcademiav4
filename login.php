@@ -37,18 +37,29 @@ if (isset($_GET['login'])) {
             $_SESSION['idCuenta'] = $row['idCuenta'];
             $_SESSION['nombre'] = $row['nombre'];
             $_SESSION['tipo_usuario'] = $row['tipo_usuario'];
-
-
             $json[] = array(
                 'statusConected' => true,
+                'error' => false,
                 'token' => $token,
                 'username' => $row['idCuenta']
             );
             echo json_encode($json);
         } else {
-            echo json_encode(['statusConected' => false]);
+            $json[] = array(
+                'statusConected' => false,
+                'token' => null,
+                'error' => true,
+                'username' => null
+            );
+            echo (json_encode($json));
         }
     } else {
-        echo json_encode(['statusConected' => false]);
+        $json[] = array(
+            'statusConected' => false,
+            'token' => null,
+            'username' => null,
+            'error' => true
+        );
+        echo (json_encode($json));
     }
 }
