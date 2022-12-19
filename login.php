@@ -41,7 +41,8 @@ if (isset($_GET['login'])) {
                 'statusConected' => true,
                 'error' => false,
                 'token' => $token,
-                'username' => $row['idCuenta']
+                'username' => $row['idCuenta'],
+                'tipoUsuario' => $row['tipo_usuario']
             );
             echo json_encode($json);
         } else {
@@ -49,7 +50,9 @@ if (isset($_GET['login'])) {
                 'statusConected' => false,
                 'token' => null,
                 'error' => true,
-                'username' => null
+                'username' => null,
+                'tipoUsuario' => null
+
             );
             echo (json_encode($json));
         }
@@ -58,7 +61,9 @@ if (isset($_GET['login'])) {
             'statusConected' => false,
             'token' => null,
             'username' => null,
-            'error' => true
+            'error' => true,
+            'tipoUsuario' => null
+
         );
         echo (json_encode($json));
     }

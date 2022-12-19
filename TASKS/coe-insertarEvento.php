@@ -14,7 +14,7 @@ if (isset($_GET['insertarEvento'])) {
     $titulo = $data->titulo;
     $duracion = $data->duracion;
     $descripcion = $data->descripcion;
-    $fechas = $data->fechasFormateadas;
+    $fechas = $data->fechasOrdenadas;
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
     $ultimoElemento = end($fechas);
