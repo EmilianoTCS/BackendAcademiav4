@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../model/conexion.php');
+include('../model/conexion.php'); 
 include("../security/logBuilder.php");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");

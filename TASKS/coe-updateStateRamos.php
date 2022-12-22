@@ -34,7 +34,7 @@ if (isset($_GET['updateStateRamos'])) {
       'nombreRamo' => $row['nombreRamo'],
       'date' => $row['fechaActualizacion'],
       'isActive' => $row['isActive'],
-      'successEdited' => "successEdited"
+      'successEdited' => "successEdited"  
     );
   }
   $jsonstring = json_encode($json);
