@@ -26,7 +26,6 @@ if (isset($_GET['recuperarPassword'])) {
         echo json_encode('errorNotFound');
     } else {
 
-
         $mail = new PHPMailer(true);
 
         try {
@@ -58,7 +57,7 @@ if (isset($_GET['recuperarPassword'])) {
             $mail->Body    = "Hola, has generado este correo para restablecer la contraseña de tu cuenta, por favor ingresa al siguiente link para poder continuar con el proceso
             <br />
 
-            <a href='http://localhost:3000/RestablecerPassword/$ID/$correo'>Recuperar contraseña.</a>
+            <a href='https://academiaformacion.netlify.app/RestablecerPassword/$ID/$correo'>Recuperar contraseña.</a>
         
             <br />
             <br />
