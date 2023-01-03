@@ -27,7 +27,7 @@ if (isset($_GET['insertarEvento'])) {
 
         $hora1 = strtotime($formatTimeTemporal);
         $hora2 = strtotime($duracion);
-        $horaFin = date('H:i:s', $hora1 + $hora2);
+        $horaFin = date('H:i:s', $hora1 - $hora2);
 
 
         $fechaInicioTemporal = date_create($primerElemento);

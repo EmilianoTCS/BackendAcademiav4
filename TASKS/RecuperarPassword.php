@@ -25,40 +25,42 @@ if (isset($_GET['recuperarPassword'])) {
     if (mysqli_num_rows($resultVerify) === 0) {
         echo json_encode('errorNotFound');
     } else {
+        while ($row = mysqli_fetch_array($resultVerify)) {
+            $ID = $row['ID'];
+            $correo = $row['correo'];
+        }
 
-        $mail = new PHPMailer(true);
+        if (!empty($ID) && !empty($correo)) {
+            $mail = new PHPMailer(true);
+            try {
+                //Server settings
+                $mail->isSMTP();
+                $mail->Timeout = 20;
+                $mail->Host       = 'smtp-mail.outlook.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'testCorreosCoe@outlook.com';
+                $mail->Password   = 'examplepassword12345';
+                $mail->Port       = 587;
+                // $mail->SMTPDebug = 4;
 
-        try {
-            //Server settings
-            $mail->isSMTP();
-            $mail->Host       = 'smtp-mail.outlook.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'testCorreosCoe@outlook.com';
-            $mail->Password   = 'examplepassword12345';
-            $mail->Port       = 587;
+                //Recipients
+                $mail->setFrom('testCorreosCoe@outlook.com', 'COE - ACADEMIA');
+                $mail->addAddress('testRespuestasCorreosCoe@outlook.com', 'Usuario Final');     //Add a recipient
+
+                // //Attachments
+                // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+                // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+                //Content
+                $mail->isHTML(true);
+                $mail->CharSet = 'UTF-8';                         //Set email format to HTML
+                $mail->Subject = 'Restablecer contraseña';
 
 
-            //Recipients
-            $mail->setFrom('testCorreosCoe@outlook.com', 'COE - ACADEMIA');
-            $mail->addAddress('testRespuestasCorreosCoe@outlook.com', 'Usuario Final');     //Add a recipient
 
-            // //Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Restablecer contraseña';
-
-            while ($row = mysqli_fetch_array($resultVerify)) {
-                $ID = $row['ID'];
-                $correo = $row['correo'];
-            }
-            $mail->Body    = "Hola, has generado este correo para restablecer la contraseña de tu cuenta, por favor ingresa al siguiente link para poder continuar con el proceso
+                $mail->Body    = "Hola, has generado este correo para restablecer la contraseña de tu cuenta, por favor ingresa al siguiente link para poder continuar con el proceso
             <br />
-
             <a href='https://academiaformacion.netlify.app/RestablecerPassword/$ID/$correo'>Recuperar contraseña.</a>
-        
             <br />
             <br />
             <br />
@@ -69,18 +71,19 @@ if (isset($_GET['recuperarPassword'])) {
 
             - Equipo COE - Academia.
             ";
-            $mail->AltBody = 'Correo generado para restablecer contraseña.';
+                $mail->AltBody = 'Correo generado para restablecer contraseña.';
 
-            $mail->send();
-            echo json_encode(
-                [
-                    "success" => true,
-                    'message' => 'SuccessfulDelivery'
-                ]
+                $mail->send();
+                echo json_encode(
+                    [
+                        "success" => true,
+                        'message' => 'SuccessfulDelivery'
+                    ]
 
-            );
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                );
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
         }
     }
 }
