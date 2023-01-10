@@ -11,24 +11,54 @@ include("../model/conexion.php");
 include("../security/logBuilder.php");
 if (isset($_GET['insertarRamo'])) {
     $data = json_decode(file_get_contents("php://input"));
-    $codigoCuenta = $data->codigoCuenta;
+    $idCuenta = $data->idCuenta;
     $codigoRamo = $data->codigoRamo;
-    $area = $data->area;
-    $nombreCurso = $data->nombreCurso;
+    $nombreRamo = $data->nombreRamo;
     $hh_academicas = $data->hh_academicas;
-    $pre_requisito = $data->pre_requisito;
-    $relator = $data->relator;
+    $prerequisito = $data->prerequisito;
+    $nombreRelator = $data->nombreRelator;
 
-    $query = "INSERT INTO ramos (codigoCuenta,codigoRamo,area, nombreRamo, hh_academicas, pre_requisito, relator) VALUES ('$codigoCuenta','$codigoRamo','$area','$nombreCurso','$hh_academicas','$pre_requisito', '$relator');";
-    $result = mysqli_query($conection, $query);
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
+    $queryVerify = "SELECT * FROM ramos WHERE codigoRamo = '$codigoRamo' AND idCuenta = '$idCuenta' AND hh_academicas = $hh_academicas AND nombreRamo = '$nombreRamo'";
+    $resultVerify = mysqli_query($conection, $queryVerify);
+
+
+    if (mysqli_num_rows($resultVerify) >= 1) {
+        echo json_encode('errorRegisterRepeated');
     } else {
-        echo json_encode("successCreated");
-        // $usuario = $_SESSION['codigoCuenta'];
-        // $log = new Log("../security/reports/log.txt");
-        // $log->writeLine("I", "[usuario] ha agregado el ramo con los datos: [$codigoCuenta, $codigoRamo, $nombreCurso, $hh_academicas, $pre_requsito, $relator]");
-        // $log->close();
+
+        $query = "INSERT INTO ramos (idCuenta, codigoRamo, nombreRamo, hh_academicas, pre_requisito) VALUES ('$idCuenta','$codigoRamo','$nombreRamo','$hh_academicas','', true, 'empty');";
+        $result = mysqli_query($conection, $query);
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        } else {
+            //SELECCIONA EL ID DEL RAMO RECIÉN INSERTADO
+            $SelectUltimoRamo = "SELECT ID FROM ramos WHERE codigoRamo = '$codigoRamo' AND idCuenta = '$idCuenta' AND hh_academicas = $hh_academicas AND nombreRamo = '$nombreRamo'";
+            $resultUltimoRamo = mysqli_query($conection, $SelectUltimoRamo);
+            if (!$resultUltimoRamo) {
+                die('Query Failed' . mysqli_error($conection));
+            } else {
+                $rowUltimoRamo = mysqli_fetch_array($resultUltimoRamo);
+                $ultimoRamo = $rowUltimoRamo['ID'];
+                //------------------------------
+                $queryInsertRelator = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES ('$nombreRelator','$ultimoRamo', '1', '0000-00-00 00:00:00') ";
+                $resultRelator = mysqli_query($conection, $queryInsertRelator);
+                if (!$resultRelator) {
+                    die('Query Failed' . mysqli_error($conection));
+                } else {
+                    $queryPreRequisito = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$ultimoRamo','$prerequisito', '1', '0000-00-00 00:00:00') ";
+                    $resultPreRequisito = mysqli_query($conection, $queryPreRequisito);
+                    if (!$resultPreRequisito) {
+                        die('Query Failed' . mysqli_error($conection));
+                    } else {
+                        echo json_encode("successCreated");
+                    }
+                }
+            }
+            // $usuario = $_SESSION['codigoCuenta'];
+            // $log = new Log("../security/reports/log.txt");
+            // $log->writeLine("I", "[usuario] ha agregado el ramo con los datos: [$codigoCuenta, $codigoRamo, $nombreCurso, $hh_academicas, $pre_requsito, $relator]");
+            // $log->close();
+        }
     }
 } else {
     echo json_encode("Error");

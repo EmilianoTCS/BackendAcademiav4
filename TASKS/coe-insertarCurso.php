@@ -40,11 +40,10 @@ if (isset($_GET['insertarCurso'])) {
         $hora1 = strtotime($formatTimeTemporal);
         $hora2 = strtotime($duracion);
 
-        $horaFin = date('H:i:s', ($hora1 - $hora2));
-    
+        $horaFin = date('H:i:s', ($hora1 + $hora2));
+
         $queryVerify = "SELECT * FROM cursos WHERE codigoRamo = '$codigoRamo' AND fecha_hora = '$fechas[$i]' AND hora_inicio <= time('$formatTimeTemporal') AND hora_fin >= time('$horaFin') ";
         $resultVerify = mysqli_query($conection, $queryVerify);
-
 
         if (mysqli_num_rows($resultVerify) >= 1) {
             echo json_encode('errorRepeated');
@@ -55,12 +54,11 @@ if (isset($_GET['insertarCurso'])) {
             if (!$result) {
                 die('Query Failed' . mysqli_error($conection));
             } else {
-                json_encode('successCreated');
+                echo json_encode(['successCreated']);
                 // $usuario = $_SESSION['codigoCuenta'];
                 // $log = new Log("../security/reports/log.txt");
                 // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
                 // $log->close();
-
             }
         }
     }
