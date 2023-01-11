@@ -12,7 +12,7 @@ include("../security/logBuilder.php");
 
 if (isset($_GET['insertarCurso'])) {
     $data = json_decode(file_get_contents("php://input"));
-    $duracion = $data->duracion;
+    $duracion = strtotime($data->duracion) - strtotime('midnight');
     $codigoCuenta = $data->codigoCuenta;
     $codigoRamo = $data->codigoRamo;
     $fechas = $data->fechasOrdenadas;
@@ -38,12 +38,13 @@ if (isset($_GET['insertarCurso'])) {
 
         $codigoCurso = $codigoRamo . $fechaInicio_mod . $horaInicio_mod;
         $hora1 = strtotime($formatTimeTemporal);
-        $hora2 = strtotime($duracion);
 
-        $horaFin = date('H:i:s', ($hora1 + $hora2));
+
+        $horaFin = date('H:i:s', ($hora1 + $duracion));
 
         $queryVerify = "SELECT * FROM cursos WHERE codigoRamo = '$codigoRamo' AND fecha_hora = '$fechas[$i]' AND hora_inicio <= time('$formatTimeTemporal') AND hora_fin >= time('$horaFin') ";
         $resultVerify = mysqli_query($conection, $queryVerify);
+
 
         if (mysqli_num_rows($resultVerify) >= 1) {
             echo json_encode('errorRepeated');

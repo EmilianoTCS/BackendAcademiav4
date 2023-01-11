@@ -16,7 +16,7 @@ if (isset($_GET['pagina'])) {
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
     $query = "SELECT ram.*, cur.*, cuen.codigoCuenta,
               IF(cur.fin < date(CURRENT_DATE), 'Finalizado', IF(cur.inicio < date(CURRENT_DATE) and CURRENT_DATE < cur.fin, 'En curso', IF(CURRENT_DATE < cur.inicio, 'Pendiente', ''))) as estado
-              FROM cursos cur INNER JOIN ramos ram, cuentas cuen WHERE cur.idCuenta = cuen.ID AND cur.codigoRamo = ram.codigoRamo AND cur.isActive = true order by cur.ID ASC LIMIT $inicio,$cantidad_por_pagina ";
+              FROM cursos cur INNER JOIN ramos ram, cuentas cuen WHERE cur.idCuenta = cuen.ID AND cur.codigoRamo = ram.codigoRamo AND cur.isActive = true group by cur.codigoCurso order by cur.ID ASC LIMIT $inicio,$cantidad_por_pagina ";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -41,7 +41,7 @@ if (isset($_GET['pagina'])) {
     $query = "SELECT ram.*, cur.*, cuen.codigoCuenta,
           IF(cur.fin < date(CURRENT_DATE), 'Finalizado', IF(cur.inicio < date(CURRENT_DATE) and CURRENT_DATE < cur.fin, 'En curso', IF(CURRENT_DATE < cur.inicio, 'Pendiente', ''))) as estado
           FROM cursos cur INNER JOIN ramos ram, cuentas cuen
-          WHERE cur.idCuenta = cuen.ID AND cur.codigoRamo = ram.codigoRamo AND cur.isActive = true order by cur.ID ASC LIMIT $cantidad_por_pagina ";
+          WHERE cur.idCuenta = cuen.ID AND cur.codigoRamo = ram.codigoRamo AND cur.isActive = true group by cur.codigoCurso order by cur.ID ASC LIMIT $cantidad_por_pagina ";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
