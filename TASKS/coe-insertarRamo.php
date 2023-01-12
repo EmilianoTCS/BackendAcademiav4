@@ -26,7 +26,7 @@ if (isset($_GET['insertarRamo'])) {
         echo json_encode('errorRegisterRepeated');
     } else {
 
-        $query = "INSERT INTO ramos (idCuenta, codigoRamo, nombreRamo, hh_academicas, pre_requisito) VALUES ('$idCuenta','$codigoRamo','$nombreRamo','$hh_academicas','', true, 'empty');";
+        $query = "INSERT INTO ramos (idCuenta, codigoRamo, nombreRamo, hh_academicas, pre_requisito, isActive, fechaActualizacion) VALUES ('$idCuenta','$codigoRamo','$nombreRamo','$hh_academicas','', true, current_timestamp());";
         $result = mysqli_query($conection, $query);
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
