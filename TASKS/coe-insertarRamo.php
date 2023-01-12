@@ -22,11 +22,11 @@ if (isset($_GET['insertarRamo'])) {
     $resultVerify = mysqli_query($conection, $queryVerify);
 
 
-    if (mysqli_num_rows($resultVerify) >= 1) {
+    if (mysqli_num_rows($resultVerify) >= 2) {
         echo json_encode('errorRegisterRepeated');
     } else {
 
-        $query = "INSERT INTO ramos (idCuenta, codigoRamo, nombreRamo, hh_academicas, pre_requisito) VALUES ('$idCuenta','$codigoRamo','$nombreRamo','$hh_academicas','', true, 'empty');";
+        $query = "INSERT INTO ramos (idCuenta, codigoRamo, nombreRamo, hh_academicas, isActive, fechaActualizacion) VALUES ('$idCuenta','$codigoRamo','$nombreRamo','$hh_academicas', true, current_timestamp());";
         $result = mysqli_query($conection, $query);
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
@@ -40,12 +40,12 @@ if (isset($_GET['insertarRamo'])) {
                 $rowUltimoRamo = mysqli_fetch_array($resultUltimoRamo);
                 $ultimoRamo = $rowUltimoRamo['ID'];
                 //------------------------------
-                $queryInsertRelator = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES ('$nombreRelator','$ultimoRamo', '1', '0000-00-00 00:00:00') ";
+                $queryInsertRelator = "UPDATE SET relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES ('$nombreRelator','$ultimoRamo', true, current_timestamp()) ";
                 $resultRelator = mysqli_query($conection, $queryInsertRelator);
                 if (!$resultRelator) {
                     die('Query Failed' . mysqli_error($conection));
                 } else {
-                    $queryPreRequisito = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$ultimoRamo','$prerequisito', '1', '0000-00-00 00:00:00') ";
+                    $queryPreRequisito = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$ultimoRamo','$prerequisito', '1', current_timestamp()) ";
                     $resultPreRequisito = mysqli_query($conection, $queryPreRequisito);
                     if (!$resultPreRequisito) {
                         die('Query Failed' . mysqli_error($conection));

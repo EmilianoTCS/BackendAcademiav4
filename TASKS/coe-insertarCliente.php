@@ -18,7 +18,7 @@ if (isset($_GET['insertarCliente'])) {
     $cargoReferente = $data->cargoReferente;
     $isActive = true;
 
-    $query = "INSERT INTO clientes (tipo_cliente, nombreCliente, referente, correoReferente, telefonoReferente, cargoReferente, isActive) VALUES ('$tipo_cliente','$nombreCliente','$referente','$correoReferente','$telefonoReferente','$cargoReferente', '$isActive');";
+    $query = "INSERT INTO clientes (tipo_cliente, nombreCliente, referente, correoReferente, telefonoReferente, cargoReferente, isActive, fechaActualizacion) VALUES ('$tipo_cliente','$nombreCliente','$referente','$correoReferente','$telefonoReferente','$cargoReferente', '$isActive', current_timestamp());";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
