@@ -40,7 +40,7 @@ if (isset($_GET['insertarRamo'])) {
                 $rowUltimoRamo = mysqli_fetch_array($resultUltimoRamo);
                 $ultimoRamo = $rowUltimoRamo['ID'];
                 //------------------------------
-                $queryInsertRelator = "UPDATE SET relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES ('$nombreRelator','$ultimoRamo', true, current_timestamp()) ";
+                $queryInsertRelator = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES ('$nombreRelator','$ultimoRamo', true, current_timestamp()) ";
                 $resultRelator = mysqli_query($conection, $queryInsertRelator);
                 if (!$resultRelator) {
                     die('Query Failed' . mysqli_error($conection));

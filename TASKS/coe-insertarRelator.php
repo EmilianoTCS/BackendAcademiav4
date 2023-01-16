@@ -29,7 +29,7 @@ if (isset($_GET['insertarRelator'])) {
             $rowUltimoID =  mysqli_fetch_array($resultUltimoID);
             $ultimoID = $rowUltimoID['ID'];
             //------------------------------------
-            $queryInsertRelatorRamo = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) values ('$ultimoID', 0, true, current_timestamp())";
+            $queryInsertRelatorRamo = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) values ('$ultimoID', '0', true, current_timestamp())";
             $resultInsertRelatorRamo = mysqli_query($conection, $queryInsertRelatorRamo);
 
             if (!$resultInsertRelatorRamo) {
