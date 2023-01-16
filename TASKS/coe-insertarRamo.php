@@ -32,25 +32,53 @@ if (isset($_GET['insertarRamo'])) {
             die('Query Failed' . mysqli_error($conection));
         } else {
             //SELECCIONA EL ID DEL RAMO RECIÉN INSERTADO
-            $SelectUltimoRamo = "SELECT ID FROM ramos WHERE codigoRamo = '$codigoRamo' AND idCuenta = '$idCuenta' AND hh_academicas = $hh_academicas AND nombreRamo = '$nombreRamo'";
-            $resultUltimoRamo = mysqli_query($conection, $SelectUltimoRamo);
-            if (!$resultUltimoRamo) {
+            $queryUltimoID = "SELECT MAX(ID) AS ID FROM ramos";
+            $resultUltimoID = mysqli_query($conection, $queryUltimoID);
+            if (!$resultUltimoID) {
                 die('Query Failed' . mysqli_error($conection));
             } else {
-                $rowUltimoRamo = mysqli_fetch_array($resultUltimoRamo);
-                $ultimoRamo = $rowUltimoRamo['ID'];
+                $rowUltimoID =  mysqli_fetch_array($resultUltimoID);
+                $ultimoID = $rowUltimoID['ID'];
                 //------------------------------
-                $queryInsertRelator = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES ('$nombreRelator','$ultimoRamo', true, current_timestamp()) ";
-                $resultRelator = mysqli_query($conection, $queryInsertRelator);
-                if (!$resultRelator) {
-                    die('Query Failed' . mysqli_error($conection));
-                } else {
-                    $queryPreRequisito = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$ultimoRamo','$prerequisito', '1', current_timestamp()) ";
-                    $resultPreRequisito = mysqli_query($conection, $queryPreRequisito);
-                    if (!$resultPreRequisito) {
+
+                //COMPRUEBA UN REGISTRO EXISTENTE
+
+                $queryVerify = "SELECT * FROM relator_ramo WHERE idRelator = '$nombreRelator' AND idRamo = '0'";
+                $resultVerify = mysqli_query($conection, $queryVerify);
+
+                if (mysqli_num_rows($resultVerify) >= 1) {
+
+                    //SI EXISTE, LO ACTUALIZA
+
+                    $queryInsertRelator = "UPDATE relator_ramo SET idRamo = '$ultimoID', isActive = true, fechaActualización = current_timestamp() WHERE idRelator = '$nombreRelator' AND idRamo = '0'";
+                    $resultRelator = mysqli_query($conection, $queryInsertRelator);
+                    if (!$resultRelator) {
                         die('Query Failed' . mysqli_error($conection));
                     } else {
-                        echo json_encode("successCreated");
+
+                        $queryPreRequisito = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$ultimoID','$prerequisito', '1', current_timestamp()) ";
+                        $resultPreRequisito = mysqli_query($conection, $queryPreRequisito);
+                        if (!$resultPreRequisito) {
+                            die('Query Failed' . mysqli_error($conection));
+                        } else {
+                            echo json_encode("successCreated");
+                        }
+                    }
+                } else {
+
+                    //SI NO EXISTE, LO CREA
+                    $queryInsertRelator = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES('$nombreRelator', '$ultimoID', true, current_timestamp())";
+                    $resultRelator = mysqli_query($conection, $queryInsertRelator);
+                    if (!$resultRelator) {
+                        die('Query Failed' . mysqli_error($conection));
+                    } else {
+                        $queryPreRequisito = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$ultimoID','$prerequisito', '1', current_timestamp()) ";
+                        $resultPreRequisito = mysqli_query($conection, $queryPreRequisito);
+                        if (!$resultPreRequisito) {
+                            die('Query Failed' . mysqli_error($conection));
+                        } else {
+                            echo json_encode("successCreated");
+                        }
                     }
                 }
             }
