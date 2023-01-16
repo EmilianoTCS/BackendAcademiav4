@@ -26,7 +26,6 @@ if (isset($_GET['pagina'])) {
       'codigoRamo' => $row['codigoRamo'],
       'nombreRamo' => $row['nombreRamo'],
       'hh_academicas' => $row['hh_academicas'],
-      'pre_requisito' => $row['pre_requisito'],
       'nombre' => $row['nombre'],
       'nombreArea' => $row['nombreArea'],
       'isActive' => $row['isActive']
@@ -50,7 +49,6 @@ if (isset($_GET['pagina'])) {
       'codigoRamo' => $row['codigoRamo'],
       'nombreRamo' => $row['nombreRamo'],
       'hh_academicas' => $row['hh_academicas'],
-      'pre_requisito' => $row['pre_requisito'],
       'nombre' => $row['nombre'],
       'nombreArea' => $row['nombreArea'],
       'isActive' => $row['isActive']

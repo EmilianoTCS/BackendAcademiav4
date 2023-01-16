@@ -16,7 +16,7 @@ if (isset($_GET['insertarPrerequisito'])) {
     date_default_timezone_set("America/Argentina/Buenos_Aires");
     $date = date('Y-m-d H:i:s');
 
-    $query = "INSERT INTO requisitos_curso (ID,idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('','$idCurso','$prerequisito','$isActive', '$date');";
+    $query = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$idCurso','$prerequisito','$isActive', current_timestamp());";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

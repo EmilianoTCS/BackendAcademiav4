@@ -22,7 +22,7 @@ if (isset($_GET['updateStatePrerequisito'])) {
     die(json_encode('Query Failed.'));
   }
 
-  $query2 = "SELECT req.*, cur.codigoRamo, ram.nombreRamo FROM requisitos_curso req INNER JOIN cursos cur, ramos ram WHERE req.ID = '$ID' AND req.idCurso = '$IDCurso' AND req.pre_requisito = cur.ID AND cur.idRamo = ram.ID";
+  $query2 = "SELECT req.*, ram.codigoRamo, ram.nombreRamo FROM requisitos_curso req INNER JOIN ramos ram WHERE req.ID = '$ID' AND req.idCurso = '$IDCurso' AND req.pre_requisito = ram.ID";
   $result2 = mysqli_query($conection, $query2);
   if (!$result2) {
     die('Query Failed' . mysqli_error($conection));

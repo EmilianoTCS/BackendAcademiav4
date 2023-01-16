@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['idCurso'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT cur.ID, cur.isActive, ram.codigoRamo, ram.nombreRamo FROM cursos cur INNER JOIN ramos ram WHERE cur.ID != '$ID' AND cur.idRamo = ram.ID AND cur.isActive = true AND ram.isActive = true ORDER BY ram.nombreRamo";
+    $query = "SELECT * FROM ramos WHERE isActive = true AND ID != '$ID' ORDER BY nombreRamo";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

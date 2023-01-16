@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if(isset($_GET['idCurso'])) {
 
-    $query = "SELECT cur.ID, cur.isActive, ram.codigoRamo, ram.nombreRamo FROM cursos cur INNER JOIN ramos ram WHERE cur.idRamo = ram.ID AND cur.isActive = true AND ram.isActive = true ORDER BY ram.nombreRamo";
+    $query = "SELECT * FROM ramos WHERE isActive = true ORDER BY nombreRamo";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

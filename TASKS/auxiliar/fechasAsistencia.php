@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT ID, atributo as fechas from asistencias WHERE idCurso = '$ID' group by atributo";
+    $query = "SELECT asist.ID, asist.atributo as fechas from asistencias asist INNER JOIN cursos cur, ramos ram WHERE asist.idCurso = cur.ID AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$ID' group by asist.atributo";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {

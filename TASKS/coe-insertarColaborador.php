@@ -17,7 +17,7 @@ if (isset($_GET['insertarColaborador'])) {
     $subgerencia = $data->subgerencia;
     $correo = $data->correo;
 
-    $query = "INSERT INTO personas (codigoCuenta, nombre_completo, usuario, area, subgerencia, correo) VALUES ('$codigoCuenta','$nombre_completo','$usuario','$area','$subgerencia','$correo');";
+    $query = "INSERT INTO personas (codigoCuenta, nombre_completo, usuario, area, subgerencia, correo, isActive, fechaActualizacion) VALUES ('$codigoCuenta','$nombre_completo','$usuario','$area','$subgerencia','$correo', true, current_timestamp());";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

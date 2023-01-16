@@ -9,41 +9,42 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 if (isset($_GET['updateStateAsistencias'])) {
-    $data = json_decode(file_get_contents("php://input"));
-    $IDRegistro = $data->IDRegistro;
-    $IDCurso = $data->IDCurso;
-    $Fecha = $data->Fecha;
+  $data = json_decode(file_get_contents("php://input"));
+  $IDRegistro = $data->IDRegistro;
+  $IDCurso = $data->IDCurso;
+  $Fecha = $data->Fecha;
 
 
-    $query = "UPDATE asistencias SET valor = !valor WHERE ID = '$IDRegistro'";
-    $result = mysqli_query($conection, $query);
+  $query = "UPDATE asistencias SET valor = !valor WHERE ID = '$IDRegistro'";
+  $result = mysqli_query($conection, $query);
 
-    if (!$result) {
-        die(json_encode('Query Failed.'));
-    }
+  if (!$result) {
+    die(json_encode('Query Failed.'));
+  }
 
-    $query2 = "SELECT ID, usuario, valor from asistencias WHERE idCurso = '$IDCurso' AND atributo = '$Fecha' AND ID = '$IDRegistro' group by usuario";
-    $result2 = mysqli_query($conection, $query2);
-    if (!$result2) {
-      die('Query Failed' . mysqli_error($conection));
-    }
-    $json = array();
-    while ($row = mysqli_fetch_array($result2)) {
-  
-      $json[] = array(
-        'ID' => $row['ID'],
-        'usuario' => $row['usuario'],
-        'valor' => $row['valor'],
-        'successEdited' => "successEdited"
-      );
-    }
-    $jsonstring = json_encode($json);
-    echo $jsonstring;
+  $query2 = "SELECT asist.ID, asist.usuario, asist.valor from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
+    idCurso = cur.ID AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$IDCurso' AND asist.atributo = '$Fecha' AND asist.ID = '$IDRegistro' group by usuario";
+  $result2 = mysqli_query($conection, $query2);
+  if (!$result2) {
+    die('Query Failed' . mysqli_error($conection));
+  }
+  $json = array();
+  while ($row = mysqli_fetch_array($result2)) {
 
-    // // $usuario = $_SESSION['idCuenta'];
-    // //   $log = new Log("../security/reports/log.txt");
-    // //   $log->writeLine("I", "[] ha cambiado el estado del curso: [ de ]");
-    // //   $log->close();
+    $json[] = array(
+      'ID' => $row['ID'],
+      'usuario' => $row['usuario'],
+      'valor' => $row['valor'],
+      'successEdited' => "successEdited"
+    );
+  }
+  $jsonstring = json_encode($json);
+  echo $jsonstring;
+
+  // // $usuario = $_SESSION['idCuenta'];
+  // //   $log = new Log("../security/reports/log.txt");
+  // //   $log->writeLine("I", "[] ha cambiado el estado del curso: [ de ]");
+  // //   $log->close();
 } else {
-    echo json_encode("Error");
+  echo json_encode("Error");
 }
