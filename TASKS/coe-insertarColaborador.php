@@ -10,14 +10,14 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['insertarColaborador'])) {
     $data = json_decode(file_get_contents("php://input"));
-    $codigoCuenta = $data->codigoCuenta;
+    $idCuenta = $data->idCuenta;
     $nombre_completo = $data->nombre_completo;
     $usuario = $data->usuario;
     $area = $data->area;
     $subgerencia = $data->subgerencia;
     $correo = $data->correo;
 
-    $query = "INSERT INTO personas (codigoCuenta, nombre_completo, usuario, area, subgerencia, correo, isActive, fechaActualizacion) VALUES ('$codigoCuenta','$nombre_completo','$usuario','$area','$subgerencia','$correo', true, current_timestamp());";
+    $query = "INSERT INTO personas (idCuenta, nombre_completo, usuario, area, subgerencia, correo, isActive, fechaActualizacion) VALUES ('$idCuenta','$nombre_completo','$usuario','$area','$subgerencia','$correo', true, current_timestamp());";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
