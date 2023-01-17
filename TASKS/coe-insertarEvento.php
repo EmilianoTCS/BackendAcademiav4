@@ -12,7 +12,7 @@ include("../security/logBuilder.php");
 if (isset($_GET['insertarEvento'])) {
     $data = json_decode(file_get_contents("php://input"));
     $titulo = $data->titulo;
-    $duracion = $data->duracion;
+    $duracion = strtotime($data->duracion) - strtotime('midnight');
     $descripcion = $data->descripcion;
     $fechas = $data->fechasOrdenadas;
     $longitud = count($fechas);
@@ -26,8 +26,7 @@ if (isset($_GET['insertarEvento'])) {
         $formatDateTemporal = date_format($createDateTemporal, 'Y-m-d');
 
         $hora1 = strtotime($formatTimeTemporal);
-        $hora2 = strtotime($duracion);
-        $horaFin = date('H:i:s', $hora1 - $hora2);
+        $horaFin = date('H:i:s', $hora1 + $duracion);
 
 
         $fechaInicioTemporal = date_create($primerElemento);
