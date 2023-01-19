@@ -27,18 +27,22 @@ if (isset($_GET['editarCurso'])) {
 
     $idCurso_mod = $codigoRamo . $fechaInicio_mod . $horaInicio_mod;
 
-    $query = "UPDATE cursos SET codigoCurso = '$idCurso_mod', idCuenta = '$idCuenta', codigoRamo = '$codigoRamo', inicio = '$dateformat_inicio', fin = '$dateformat_fin', hora_inicio = '$horaInicio', hora_fin = '$horaFin'
-              WHERE ID = '$ID' ";
-    $result = mysqli_query($conection, $query);
+    if (!empty($codigoRamo) && !empty($ID)) {
 
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
+
+        $query = "UPDATE cursos SET codigoCurso = '$idCurso_mod', idCuenta = '$idCuenta', codigoRamo = '$codigoRamo', inicio = '$dateformat_inicio', fin = '$dateformat_fin', hora_inicio = '$horaInicio', hora_fin = '$horaFin'
+              WHERE ID = '$ID' ";
+        $result = mysqli_query($conection, $query);
+
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        }
+        echo json_encode("successEdited");
+        // $usuario = $_SESSION['idCuenta'];
+        // $log = new Log("../security/reports/log.txt");
+        // $log->writeLine("I", "[] ha editado los datos: [$idCuenta, $codigoRamo, $fechaInicio, $fechaFin, $horaInicio, $horaFin]");
+        // $log->close();
     }
-    echo json_encode("successEdited");
-    // $usuario = $_SESSION['idCuenta'];
-    // $log = new Log("../security/reports/log.txt");
-    // $log->writeLine("I", "[] ha editado los datos: [$idCuenta, $codigoRamo, $fechaInicio, $fechaFin, $horaInicio, $horaFin]");
-    // $log->close();
 } else {
     echo json_encode("Error");
 }

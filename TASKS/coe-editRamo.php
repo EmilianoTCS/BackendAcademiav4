@@ -16,22 +16,24 @@ if (isset($_GET['editarRamo'])) {
     $hh_academicas = $data->hh_academicas;
     $nombreRelator = $data->nombreRelator;
 
+    if (!empty($codigoRamo) && !empty($nombreRamo)) {
 
-    $query = "UPDATE ramos SET codigoRamo = '$codigoRamo', nombreRamo = '$nombreRamo', hh_academicas = '$hh_academicas'
+
+        $query = "UPDATE ramos SET codigoRamo = '$codigoRamo', nombreRamo = '$nombreRamo', hh_academicas = '$hh_academicas'
               WHERE ID = '$ID' ";
-    $result = mysqli_query($conection, $query);
+        $result = mysqli_query($conection, $query);
 
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        }
+        $queryActualizarRelator = "UPDATE relator_ramo set idRelator = '$nombreRelator', fechaActualización = current_timestamp() WHERE idRamo = '$ID'";
+        $resultActualizarRelator = mysqli_query($conection, $queryActualizarRelator);
+        if (!$resultActualizarRelator) {
+            die('Query Failed' . mysqli_error($conection));
+        } else {
+            echo json_encode('successEdited');
+        }
     }
-    $queryActualizarRelator = "UPDATE relator_ramo set idRelator = '$nombreRelator', fechaActualización = current_timestamp() WHERE idRamo = '$ID'";
-    $resultActualizarRelator = mysqli_query($conection, $queryActualizarRelator);
-    if (!$resultActualizarRelator) {
-        die('Query Failed' . mysqli_error($conection));
-    } else {
-        echo json_encode('successEdited');
-    }
-
     // $usuario = $_SESSION['idCuenta'];
     // $log = new Log("../security/reports/log.txt");
     // $log->writeLine("I", "[] ha editado los datos: [$codigoRamo, $nombreRamo, $hh_academicas]");

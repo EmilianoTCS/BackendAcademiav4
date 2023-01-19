@@ -27,9 +27,9 @@ if (isset($_GET['inscripcionCurso'])) {
         }
     }
 
-    $query2 = "SELECT COUNT(req.pre_requisito) FROM aprobacion ap 
-			  INNER JOIN requisitos_curso req, personas per
-			  WHERE req.pre_requisito = ap.idCurso AND ap.porcentaje_aprobacion > 85 AND per.ID = ap.idPersona AND per.usuario = '$usuario' AND req.idCurso = '$idCurso'";
+    $query2 = "SELECT COUNT(req.pre_requisito) FROM requisitos_curso req 
+			  INNER JOIN aprobacion ap, personas per, ramos ram, cursos cur
+			  WHERE req.pre_requisito = ram.ID AND ram.ID = cur.idRamo AND cur.codigoCurso = ap.codigoCurso AND ap.porcentaje_aprobacion > 85 AND per.ID = ap.idPersona AND per.usuario = '$usuario' AND req.idCurso = '$idCurso'";
     $result2 = mysqli_query($conection, $query2);
     if (!$result2) {
         die('Query Failed' . mysqli_error($conection));
@@ -41,15 +41,24 @@ if (isset($_GET['inscripcionCurso'])) {
 
 
     if ($total_pre_requisitosUsuario >= $total_pre_requisitos) {
-        $query3 = "INSERT INTO aprobacion (ID, idCuenta, idCurso, codigoCuenta, codigoCurso, usuario, porcentaje_aprobacion) VALUES (, '$idCuenta', '$idCurso', '$codigoCuenta','$codigoCurso', '$usuario', '$porcentaje_aprobacion')";
-        $result3 = mysqli_query($conection, $query2);
-        if (!$result3) {
-            die('Query failed' . mysqli_error($conection));
-        } else {
-            echo json_encode('successCreated');
-        }
+        // $query3 = "INSERT INTO aprobacion (ID, idCuenta, idCurso, codigoCuenta, codigoCurso, usuario, porcentaje_aprobacion) VALUES (, '$idCuenta', '$idCurso', '$codigoCuenta','$codigoCurso', '$usuario', '$porcentaje_aprobacion')";
+        // $result3 = mysqli_query($conection, $query2);
+        // if (!$result3) {
+        //     die('Query failed' . mysqli_error($conection));
+        // } else {
+        //     echo json_encode('successCreated');
+        // }
+        echo json_encode([
+            'TotalPreRequisitosCumplidos' => $total_pre_requisitosUsuario,
+            'TotalPreRequisitos' => $total_pre_requisitos,
+            'message' => 'errorRequisitos'
+        ]);
     } else {
-        echo json_encode('Error');
+        echo json_encode([
+            'TotalPreRequisitosCumplidos' => $total_pre_requisitosUsuario,
+            'TotalPreRequisitos' => $total_pre_requisitos,
+            'message' => 'errorRequisitos'
+        ]);
     }
 } else {
     echo json_encode("Error");

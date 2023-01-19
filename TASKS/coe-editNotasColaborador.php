@@ -15,14 +15,15 @@ if (isset($_GET['editarNotasColaborador'])) {
     $nota = $data->nota;
     $porcentaje = $data->porcentaje;
 
+    if (!empty($nota) && !empty($ID)) {
+        $query = "UPDATE evaluaciones SET nota = '$nota', porcentaje = '$porcentaje' WHERE ID = '$ID' ";
+        $result = mysqli_query($conection, $query);
 
-    $query = "UPDATE evaluaciones SET nota = '$nota', porcentaje = '$porcentaje' WHERE ID = '$ID' ";
-    $result = mysqli_query($conection, $query);
-
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        }
+        echo json_encode("successEdited");
     }
-    echo json_encode("successEdited");
     // $usuario = $_SESSION['idCuenta'];
     // $log = new Log("../security/reports/log.txt");
     // $log->writeLine("I", "[usuario] ha editado los datos: [$codigoCuenta, $usuario, $nombre_completo,$area,$subgerencia,$correo]");
