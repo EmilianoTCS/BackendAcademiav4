@@ -18,16 +18,19 @@ if (isset($_GET['insertarCliente'])) {
     $cargoReferente = $data->cargoReferente;
     $isActive = true;
 
-    $query = "INSERT INTO clientes (tipo_cliente, nombreCliente, referente, correoReferente, telefonoReferente, cargoReferente, isActive, fechaActualizacion) VALUES ('$tipo_cliente','$nombreCliente','$referente','$correoReferente','$telefonoReferente','$cargoReferente', '$isActive', current_timestamp());";
-    $result = mysqli_query($conection, $query);
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
-    } else {
-        // $usuario = $_SESSION['codigoCuenta'];
-        // $log = new Log("../security/reports/log.txt");
-        // $log->writeLine("I", "[usuario] ha agregado un colaborador con los datos [$tipo_cliente, $nombreCliente, $referente, $correoReferente, $telefonoReferente, $cargoReferente]");
-        // $log->close();
-        // echo json_encode("successCreated");
+    if (!empty($nombreCliente) && !empty($correoReferente)) {
+
+        $query = "INSERT INTO clientes (tipo_cliente, nombreCliente, referente, correoReferente, telefonoReferente, cargoReferente, isActive, fechaActualizacion) VALUES ('$tipo_cliente','$nombreCliente','$referente','$correoReferente','$telefonoReferente','$cargoReferente', '$isActive', current_timestamp());";
+        $result = mysqli_query($conection, $query);
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        } else {
+            // $usuario = $_SESSION['codigoCuenta'];
+            // $log = new Log("../security/reports/log.txt");
+            // $log->writeLine("I", "[usuario] ha agregado un colaborador con los datos [$tipo_cliente, $nombreCliente, $referente, $correoReferente, $telefonoReferente, $cargoReferente]");
+            // $log->close();
+            // echo json_encode("successCreated");
+        }
     }
 } else {
     echo json_encode("Error");
