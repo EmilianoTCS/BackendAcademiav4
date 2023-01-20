@@ -18,6 +18,7 @@ if (isset($_GET['insertarEvento'])) {
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
     $ultimoElemento = end($fechas);
+    $json = array();
 
     if (!empty($titulo) && !empty($descripcion)) {
 
@@ -40,19 +41,24 @@ if (isset($_GET['insertarEvento'])) {
             if (mysqli_num_rows($resultVerify) >= 1) {
                 echo json_encode('errorRepeated');
             } else {
-                $query = "INSERT INTO eventos (titulo, descripcion, fecha_hora, hora_inicio, hora_fin, isActive) VALUES ('$titulo','$descripcion', '$fechas[$i]','$formatTimeTemporal','$horaFin', true);";
-                $result = mysqli_query($conection, $query);
-                if (!$result) {
-                    die('Query Failed' . mysqli_error($conection));
+                if (strtotime($primerElemento) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($ultimoElemento)) {
+                    $query = "INSERT INTO eventos (titulo, descripcion, fecha_hora, hora_inicio, hora_fin, isActive) VALUES ('$titulo','$descripcion', '$fechas[$i]','$formatTimeTemporal','$horaFin', true);";
+                    $result = mysqli_query($conection, $query);
+                    if (!$result) {
+                        die('Query Failed' . mysqli_error($conection));
+                    } else {
+                        echo json_encode("successCreated");
+                        // $usuario = $_SESSION['codigoCuenta'];
+                        // $log = new Log("../security/reports/log.txt");
+                        // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
+                        // $log->close();
+                    }
                 } else {
-                    echo json_encode("successCreated");
-                    // $usuario = $_SESSION['codigoCuenta'];
-                    // $log = new Log("../security/reports/log.txt");
-                    // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
-                    // $log->close();
+                    array_push($json, 'errorFechas');
                 }
             }
         }
+        echo json_encode(array_unique($json));
     }
 } else {
     echo json_encode("Error");
