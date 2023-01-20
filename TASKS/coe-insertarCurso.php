@@ -49,7 +49,7 @@ if (isset($_GET['insertarCurso'])) {
 
 
             if (mysqli_num_rows($resultVerify) >= 1) {
-                echo json_encode('errorRepeated');
+                array_push($json, 'errorRepeated');
             } else {
                 if (strtotime($primerElemento) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($ultimoElemento)) {
                     $query = "INSERT INTO cursos (idCuenta, idRamo, grupo, codigoCurso, codigoRamo, fecha_hora, inicio, fin, hora_inicio, hora_fin, isActive, fechaActualizacion) VALUES ('$codigoCuenta','0','0', '$codigoCurso','$codigoRamo','$fechas[$i]','$fechaInicio', '$fechaFin', '$formatTimeTemporal', '$horaFin', true, current_timestamp());";
