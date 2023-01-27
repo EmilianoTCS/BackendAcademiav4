@@ -15,7 +15,7 @@ if (isset($_GET['ID'])) {
     $fecha = $data->fecha;
 
     $query = "SELECT asist.ID, asist.usuario, asist.valor from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
-    asist.idCurso = cur.ID AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$ID' AND asist.atributo = '$fecha' group by usuario";
+    asist.codigoCurso = cur.codigoCurso AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$ID' AND asist.atributo = '$fecha' AND usuario != 'null' group by usuario";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {

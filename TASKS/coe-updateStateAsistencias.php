@@ -23,7 +23,7 @@ if (isset($_GET['updateStateAsistencias'])) {
   }
 
   $query2 = "SELECT asist.ID, asist.usuario, asist.valor from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
-    idCurso = cur.ID AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$IDCurso' AND asist.atributo = '$Fecha' AND asist.ID = '$IDRegistro' group by usuario";
+    asist.codigoCurso = cur.codigoCurso AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$IDCurso' AND asist.atributo = '$Fecha' AND asist.ID = '$IDRegistro' group by usuario";
   $result2 = mysqli_query($conection, $query2);
   if (!$result2) {
     die('Query Failed' . mysqli_error($conection));

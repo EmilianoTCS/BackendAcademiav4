@@ -32,9 +32,14 @@ if (isset($_GET['insertarCurso'])) {
 
         for ($i = 0; $i < $longitud; ++$i) {
 
-            $createDateTemporal = date_create($fechas[$i]);
+            $createDateTemporal = date_create($fechas[0]);
             $formatTimeTemporal = date_format($createDateTemporal, 'H:i:s');
             $formatDateTemporal = date_format($createDateTemporal, 'Y-m-d');
+
+            $createDateTemporalAsistencias = date_create($fechas[$i]);
+            $formatDateTemporalAsistencias = date_format($createDateTemporalAsistencias, 'Y-m-d');
+
+
             $fechaInicio_mod = preg_replace('/-/', '', $formatDateTemporal);
             $horaInicio_mod = preg_replace('/:/', '', $formatTimeTemporal);
 
@@ -51,13 +56,26 @@ if (isset($_GET['insertarCurso'])) {
             if (mysqli_num_rows($resultVerify) >= 1) {
                 array_push($json, 'errorRepeated');
             } else {
+
                 if (strtotime($primerElemento) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($ultimoElemento)) {
-                    $query = "INSERT INTO cursos (idCuenta, idRamo, grupo, codigoCurso, codigoRamo, fecha_hora, inicio, fin, hora_inicio, hora_fin, isActive, fechaActualizacion) VALUES ('$codigoCuenta','0','0', '$codigoCurso','$codigoRamo','$fechas[$i]','$fechaInicio', '$fechaFin', '$formatTimeTemporal', '$horaFin', true, current_timestamp());";
+
+                    $query = "INSERT INTO cursos (idCuenta, idRamo, codigoCurso, codigoRamo, fecha_hora, inicio, fin, hora_inicio, hora_fin, isActive, fechaActualizacion) VALUES ('$codigoCuenta',(SELECT ID from ramos WHERE codigoRamo = '$codigoRamo'), '$codigoCurso','$codigoRamo','$fechas[$i]','$fechaInicio', '$fechaFin', '$formatTimeTemporal', '$horaFin', true, current_timestamp());";
                     $result = mysqli_query($conection, $query);
+
                     if (!$result) {
                         die('Query Failed' . mysqli_error($conection));
                     } else {
-                        array_push($json, 'successCreated');
+
+                        $query2 = "INSERT INTO asistencias (idCuenta, idPersona, codigoCurso, usuario, atributo, valor) VALUES ('$codigoCuenta', 0,'$codigoCurso', 'null', '$formatDateTemporalAsistencias', 0 ) ";
+                        $result2 = mysqli_query($conection, $query2);
+
+                        if (!$result2) {
+                            die('Query Failed' . mysqli_error($conection));
+                        } else {
+                            array_push($json, 'successCreated');
+                        }
+
+
                         // $usuario = $_SESSION['codigoCuenta'];
                         // $log = new Log("../security/reports/log.txt");
                         // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
