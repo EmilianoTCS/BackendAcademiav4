@@ -7,7 +7,7 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if (isset($_GET['insertarEDDReferentes'])) {
+if (isset($_GET['insertarEDDAnalistas'])) {
     $data = json_decode(file_get_contents("php://input"));
     $fechaInicioTemporal = date_create($data->fechaInicio);
     $fechaFinTemporal = date_create($data->fechaFin);
@@ -19,12 +19,11 @@ if (isset($_GET['insertarEDDReferentes'])) {
 
 
     $fechaInicio_mod = preg_replace('/-/', '', $fechaInicio);
-    $codigoEvaluacion = "EDDREF" . $fechaInicio_mod;
+    $codigoEvaluacion = "EDDAN" . $fechaInicio_mod;
 
 
     if (!empty($proyecto) && !empty($fechaInicio) && !empty($data->fechaInicio) && !empty($data->fechaFin)) {
-
-        $query = "INSERT INTO `edd-evaluacion-referentes-servicio` (codigoEvaluacion, fechaInicio, fechaFin, proyecto, idCliente, estado, isActive, fechaActualizacion) VALUES ('$codigoEvaluacion', '$fechaInicio', '$fechaFin', '$proyecto', '$cliente', 'Inactivo', true, current_timestamp()) ";
+        $query = "INSERT INTO `edd-evaluacion-analistas-automatizadores` (codigoEvaluacion, fechaInicio, fechaFin, proyecto, idCliente, estado, isActive, fechaActualizacion) VALUES ('$codigoEvaluacion', '$fechaInicio', '$fechaFin', '$proyecto', '$cliente', 'Inactivo', true, current_timestamp()) ";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {
