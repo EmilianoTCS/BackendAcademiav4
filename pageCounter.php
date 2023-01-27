@@ -118,6 +118,18 @@ function pageCounter()
         }
     }
 
+    // CONTADOR PARA EDD REFERENTES---------------------------
+    $queryCounter11 = "SELECT COUNT(ID) as total_EDDReferentes FROM `edd-evaluacion-referentes-servicio` WHERE isActive = true";
+    $resultCounter11 = mysqli_query($conection, $queryCounter11);
+    if (!$resultCounter11) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter11 = mysqli_fetch_array($resultCounter11)) {
+            $totalRegistros_EDDReferentes = $rowCounter11['total_EDDReferentes'];
+            $cantidad_paginas_EDDReferentes = ceil($totalRegistros_EDDReferentes / $Cantidad_por_pagina);
+        }
+    }
+
 
 
     return [
@@ -130,6 +142,7 @@ function pageCounter()
         'cantidad_paginas_ramos' => $cantidad_paginas_ramos,
         'cantidad_paginas_relator' => $cantidad_paginas_relator,
         'cantidad_paginas_usuarios' => $cantidad_paginas_usuarios,
-        'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones
+        'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones,
+        'cantidad_paginas_EDDReferentes' => $cantidad_paginas_EDDReferentes,
     ];
 }
