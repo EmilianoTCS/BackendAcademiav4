@@ -130,6 +130,18 @@ function pageCounter()
         }
     }
 
+    // CONTADOR PARA EDD ANALISTAS---------------------------
+    $queryCounter12 = "SELECT COUNT(ID) as total_EDDAnalistas FROM `edd-evaluacion-analistas-automatizadores` WHERE isActive = true";
+    $resultCounter12 = mysqli_query($conection, $queryCounter12);
+    if (!$resultCounter12) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter12 = mysqli_fetch_array($resultCounter12)) {
+            $totalRegistros_EDDAnalistas = $rowCounter12['total_EDDAnalistas'];
+            $cantidad_paginas_EDDAnalistas = ceil($totalRegistros_EDDAnalistas / $Cantidad_por_pagina);
+        }
+    }
+
 
 
     return [
@@ -144,5 +156,7 @@ function pageCounter()
         'cantidad_paginas_usuarios' => $cantidad_paginas_usuarios,
         'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones,
         'cantidad_paginas_EDDReferentes' => $cantidad_paginas_EDDReferentes,
+        'cantidad_paginas_EDDAnalistas' => $cantidad_paginas_EDDAnalistas,
+
     ];
 }
