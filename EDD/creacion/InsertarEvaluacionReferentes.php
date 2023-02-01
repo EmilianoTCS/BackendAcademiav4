@@ -10,12 +10,12 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['insertarEDDReferentes'])) {
     $data = json_decode(file_get_contents("php://input"));
     $fechaInicioTemporal = date_create($data->fechaInicio);
-    $fechaFinalTemporal = date_create($data->fechaFin);
+    $fechaFinTemporal = date_create($data->fechaFin);
     $proyecto = $data->proyecto;
     $cliente = $data->cliente;
 
     $fechaInicio = date_format($fechaInicioTemporal, 'Y-m-d');
-    $fechaFin = date_format($fechaInicioTemporal, 'Y-m-d');
+    $fechaFin = date_format($fechaFinTemporal, 'Y-m-d');
 
 
     $fechaInicio_mod = preg_replace('/-/', '', $fechaInicio);
