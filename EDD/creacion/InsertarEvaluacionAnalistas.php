@@ -13,6 +13,7 @@ if (isset($_GET['insertarEDDAnalistas'])) {
     $fechaFinTemporal = date_create($data->fechaFin);
     $proyecto = $data->proyecto;
     $cliente = $data->cliente;
+    $nombreEquipo = $data->nombreEquipo;
 
     $fechaInicio = date_format($fechaInicioTemporal, 'Y-m-d');
     $fechaFin = date_format($fechaFinTemporal, 'Y-m-d');
@@ -23,7 +24,7 @@ if (isset($_GET['insertarEDDAnalistas'])) {
 
 
     if (!empty($proyecto) && !empty($fechaInicio) && !empty($data->fechaInicio) && !empty($data->fechaFin)) {
-        $query = "INSERT INTO `edd-evaluacion-analistas-automatizadores` (codigoEvaluacion, fechaInicio, fechaFin, proyecto, idCliente, estado, isActive, fechaActualizacion) VALUES ('$codigoEvaluacion', '$fechaInicio', '$fechaFin', '$proyecto', '$cliente', 'Inactivo', true, current_timestamp()) ";
+        $query = "INSERT INTO `edd-evaluacion-analistas-automatizadores` (codigoEvaluacion, fechaInicio, fechaFin, proyecto, nombreCliente,nombreEquipo, estado, isActive, fechaActualizacion) VALUES ('$codigoEvaluacion', '$fechaInicio', '$fechaFin', '$proyecto', '$cliente','$nombreEquipo', 'Inactivo', true, current_timestamp()) ";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {

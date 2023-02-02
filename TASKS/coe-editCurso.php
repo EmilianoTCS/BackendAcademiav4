@@ -29,6 +29,7 @@ if (isset($_GET['editarCurso'])) {
 
     if (!empty($codigoRamo) && !empty($ID)) {
 
+        if (strtotime($fechaInicio) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($fechaFin)) {
 
         $query = "UPDATE cursos SET codigoCurso = '$idCurso_mod', idCuenta = '$idCuenta', codigoRamo = '$codigoRamo', inicio = '$dateformat_inicio', fin = '$dateformat_fin', hora_inicio = '$horaInicio', hora_fin = '$horaFin'
               WHERE ID = '$ID' ";
@@ -38,6 +39,7 @@ if (isset($_GET['editarCurso'])) {
             die('Query Failed' . mysqli_error($conection));
         }
         echo json_encode("successEdited");
+    }
         // $usuario = $_SESSION['idCuenta'];
         // $log = new Log("../security/reports/log.txt");
         // $log->writeLine("I", "[] ha editado los datos: [$idCuenta, $codigoRamo, $fechaInicio, $fechaFin, $horaInicio, $horaFin]");
