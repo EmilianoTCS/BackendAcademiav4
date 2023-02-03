@@ -26,7 +26,7 @@ if (isset($_GET['pagina'])) {
             'fechaInicio' => $row['fechaInicio'],
             'fechaFin' => $row['fechaFin'],
             'proyecto' => $row['proyecto'],
-            'idCliente' => $row['idCliente'],
+            'nombreCliente' => $row['nombreCliente'],
             'estado' => $row['estado']
         );
     }
@@ -48,7 +48,7 @@ if (isset($_GET['pagina'])) {
             'fechaInicio' => $row['fechaInicio'],
             'fechaFin' => $row['fechaFin'],
             'proyecto' => $row['proyecto'],
-            'idCliente' => $row['idCliente'],
+            'nombreCliente' => $row['nombreCliente'],
             'estado' => $row['estado']
         );
     }
