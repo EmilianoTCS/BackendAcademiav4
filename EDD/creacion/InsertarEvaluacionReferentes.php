@@ -12,7 +12,7 @@ if (isset($_GET['insertarEDDReferentes'])) {
     $fechaInicioTemporal = date_create($data->fechaInicio);
     $fechaFinTemporal = date_create($data->fechaFin);
     $proyecto = $data->proyecto;
-    $cliente = $data->cliente;
+    $nombreCliente = $data->nombreCliente;
 
     $fechaInicio = date_format($fechaInicioTemporal, 'Y-m-d');
     $fechaFin = date_format($fechaFinTemporal, 'Y-m-d');
@@ -24,7 +24,7 @@ if (isset($_GET['insertarEDDReferentes'])) {
 
     if (!empty($proyecto) && !empty($fechaInicio) && !empty($data->fechaInicio) && !empty($data->fechaFin)) {
 
-        $query = "INSERT INTO `edd-evaluacion-referentes-servicio` (codigoEvaluacion, fechaInicio, fechaFin, proyecto, idCliente, estado, isActive, fechaActualizacion) VALUES ('$codigoEvaluacion', '$fechaInicio', '$fechaFin', '$proyecto', '$cliente', 'Inactivo', true, current_timestamp()) ";
+        $query = "INSERT INTO `edd-evaluacion-referentes-servicio` (codigoEvaluacion, fechaInicio, fechaFin, proyecto, nombreCliente, estado, isActive, fechaActualizacion) VALUES ('$codigoEvaluacion', '$fechaInicio', '$fechaFin', '$proyecto', '$nombreCliente', 'Inactivo', true, current_timestamp()) ";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {

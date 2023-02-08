@@ -15,8 +15,8 @@ if (isset($_GET['insertarResultadosRef'])) {
     $json = array();
     $numPregunta = 2;
 
-    $queryCodigo = "SELECT codigoEvaluacion from `edd-resultados-evaluacion-referentes-servicio` evaRef INNER JOIN equipos equip, empleados emp WHERE evaRef.nombreEquipo = equip.nombreEquipo AND equip.idEmpleado = emp.ID AND emp.nombreApellido LIKE '$nombApellido'";
-    $resultCodigo = mysqli_query($conection, $queryCodigo);
+    $queryCodigo = "SELECT codigoEvaluacion from `edd-evaluacion-referentes-servicio` evaRef INNER JOIN equipos equip, empleados emp WHERE evaRef.nombreEquipo = equip.nombreEquipo AND equip.idEmpleado = emp.ID AND emp.nombreApellido LIKE '$nombApellido'";
+    $resultCodigo = mysqli_query($conection, $queryCodigo); 
 
     if (!$resultCodigo) {
         die('Query Failed' . mysqli_error($conection));
