@@ -7,42 +7,41 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if (isset($_GET['insertarResultadosReferentes'])) {
+if (isset($_GET['insertarResultadosRef'])) {
     $data = json_decode(file_get_contents("php://input"));
-    $nombApellido= $data->nombApellido;
-    $nombApellidoClienteEvaluado= $data->nombApellidoClienteEvaluado;
-    $nivelComunicacionCE= $data->nivelComunicacionCE;
-    $criticasFundamentadasCE= $data->criticasFundamentadasCE;
-    $decisionesObjetivamenteCE= $data->decisionesObjetivamenteCE;
-    $responsableDeResultadosCE= $data->responsableDeResultadosCE;
-    $comunicarConLibertadCE= $data->comunicarConLibertadCE;
-    $reconocerEsfuerzoCE= $data->reconocerEsfuerzoCE;
-    $conocimientoNegocioCE= $data->conocimientoNegocioCE;
-    $gestionarOrganizarCE= $data->gestionarOrganizarCE;
-    $actividadesEncomendadasCE= $data->actividadesEncomendadasCE;
-    $influirGrupoTrabajoCE= $data->influirGrupoTrabajoCE;
-    $indiqueReclamosEtcCE= $data->indiqueReclamosEtcCE;
-    $nombApellidoReferenteTSoft= $data->nombApellidoReferenteTSoft;
-    $apoyoRefTSoft= $data->apoyoRefTSoft;
-    $actividadesEncomendadasRef= $data->actividadesEncomendadasRef;
-    $poseeConocimientosRef= $data->poseeConocimientosRef;
-    $participacionJefeProyecto= $data->participacionJefeProyecto;
-    $apoyoJefeProyecto= $data->apoyoJefeProyecto;
-    $indiqueReclamosEtc= $data->indiqueReclamosEtc;
-    
+    $nombApellido = $data->nombApellido;
+    $nombApellidoRef = $data->nombApellidoRef;
+    $respuestas = $data->respuestas;
+    $json = array();
+    $numPregunta = 2;
 
+    $queryCodigo = "SELECT codigoEvaluacion from `edd-evaluacion-referentes-servicio` evaRef INNER JOIN equipos equip, empleados emp WHERE evaRef.nombreEquipo = equip.nombreEquipo AND equip.idEmpleado = emp.ID AND emp.nombreApellido LIKE '$nombApellido'";
+    $resultCodigo = mysqli_query($conection, $queryCodigo); 
 
-    if (!empty($nombApellido) && !empty($nombApellidoClienteEvaluado) && !empty($nivelComunicacionCE) && !empty($criticasFundamentadasCE)) {
-
-        $query = "INSERT INTO `edd-resultados-evaluacion-referentes-servicio` (`pgt1-NomAp`, `pgt2-NomApRef`, `pgt3-NvlComunicacion`, `pgt4-CriticasFundamentadas`, `pgt5-DecisionesCorrectas`, `pgt6-ResponsableDecisiones`, `pgt7-RespetoIdeasDecisiones`, `pgt8-ReconocerEsfuerzo`,`pgt9-ConocimientosAptos`,`pgt10-CapacidadGestion`,`pgt11-SeguimientoOptimo`,`pgt12-InfluyePositivamente`,`pgt13-ObservacionesCliente`,`pgt14-NomApRefTSOFT`,`pgt15-ApoyoRefTSOFT`,`pgt16-SeguimientoRefTSOFT`,`pgt17-ConocimientosAptosRefTSOFT`,`pgt18-ParticipacionJefeProyecto`,`pgt19-ApoyoJefeProyecto`,`pgt20-ObservacionesCuestionario`) VALUES ('$nombApellido', '$nombApellidoClienteEvaluado', '$nivelComunicacionCE', '$criticasFundamentadasCE', '$decisionesObjetivamenteCE','$responsableDeResultadosCE','$comunicarConLibertadCE','$reconocerEsfuerzoCE','$conocimientoNegocioCE','$gestionarOrganizarCE','$actividadesEncomendadasCE','$influirGrupoTrabajoCE','$indiqueReclamosEtcCE','$nombApellidoReferenteTSoft','$apoyoRefTSoft','$actividadesEncomendadasRef','$poseeConocimientosRef','$participacionJefeProyecto','$apoyoJefeProyecto','$indiqueReclamosEtc') ";
-        $result = mysqli_query($conection, $query);
-
-        if (!$result) {
-            die('Query Failed' . mysqli_error($conection));
-        } else {
-            echo json_encode("successCreated");
+    if (!$resultCodigo) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        $json = array();
+        while ($row = mysqli_fetch_array($resultCodigo)) {
+            $codigoEvaluacion = $row['codigoEvaluacion'];
         }
     }
+    for ($i = 0; $i < count($respuestas); $i++) {
+        if (!empty($nombApellido) && !empty($nombApellidoRef) && !empty($respuestas)) {
+            $numPregunta += 1;
+            $query = "INSERT INTO `edd-resultados-evaluacion-referentes-servicio` (codigoEvaluacion, NomAp, NomApRef, numPregunta, resultado) VALUES ('$codigoEvaluacion', '$nombApellido', '$nombApellidoRef', '$numPregunta', '$respuestas[$i]') ";
+            $result = mysqli_query($conection, $query);
+
+            if (!$result) {
+                die('Query Failed' . mysqli_error($conection));
+            } else {
+                array_push($json, "SuccessfulAnswered");
+            }
+        } else {
+            array_push($json, "Error");
+        }
+    }
+    echo json_encode(array_unique($json));
 } else {
     echo json_encode('Error');
 }
