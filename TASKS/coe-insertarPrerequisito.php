@@ -20,6 +20,7 @@ if (isset($_GET['insertarPrerequisito'])) {
 
         $query = "INSERT INTO requisitos_curso (idCurso, pre_requisito, isActive, fechaActualizacion) VALUES ('$idCurso','$prerequisito','$isActive', current_timestamp());";
         $result = mysqli_query($conection, $query);
+
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
         } else {
