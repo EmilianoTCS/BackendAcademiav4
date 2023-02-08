@@ -8,9 +8,9 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if(isset($_GET['idCurso'])) {
+if (isset($_GET['idCurso'])) {
 
-    $query = "SELECT * FROM ramos WHERE isActive = true ORDER BY nombreRamo";
+    $query = "SELECT * FROM ramos WHERE isActive = true AND ID != 0 ORDER BY nombreRamo";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -19,9 +19,9 @@ if(isset($_GET['idCurso'])) {
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
+            'ID' => $row['ID'],
             'codigoRamo' => $row['codigoRamo'],
-			'nombreRamo' => $row['nombreRamo'],
+            'nombreRamo' => $row['nombreRamo'],
         );
     }
     $jsonstring = json_encode($json);

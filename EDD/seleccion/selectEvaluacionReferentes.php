@@ -12,7 +12,7 @@ if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->IDEvaluacion;
 
-    $query = "SELECT * FROM `edd-evaluacion-analistas-automatizadores` WHERE ID = '$ID' AND isActive = true order by ID";
+    $query = "SELECT * FROM `edd-evaluacion-referentes-servicio` WHERE ID = '$ID' AND isActive = true order by ID";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

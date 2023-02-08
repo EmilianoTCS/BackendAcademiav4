@@ -7,12 +7,9 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if (isset($_GET['ID'])) {
+if (isset($_GET['listadoEvaluaciones'])) {
 
-    $data = json_decode(file_get_contents("php://input"));
-    $ID = $data->IDEvaluacion;
-
-    $query = "SELECT * FROM `edd-evaluacion-analistas-automatizadores` WHERE ID = '$ID' AND isActive = true order by ID";
+    $query = "SELECT * FROM `edd-evaluacion-analistas-automatizadores` WHERE ID != 0 order by ID";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -26,8 +23,9 @@ if (isset($_GET['ID'])) {
             'fechaFin' => $row['fechaFin'],
             'proyecto' => $row['proyecto'],
             'nombreCliente' => $row['nombreCliente'],
-            'nombreEquipo' => $row['nombreEquipo'],
-            'estado' => $row['estado']
+            'estado' => $row['estado'],
+            'fechaActualizacion' => $row['fechaActualizacion'],
+            'isActive' => $row['isActive']
         );
     }
     $jsonstring = json_encode($json);
