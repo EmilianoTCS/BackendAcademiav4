@@ -29,6 +29,7 @@ if (isset($_GET['insertarResultadosReferentes'])) {
     $participacionJefeProyecto= $data->participacionJefeProyecto;
     $apoyoJefeProyecto= $data->apoyoJefeProyecto;
     $indiqueReclamosEtc= $data->indiqueReclamosEtc;
+    
 
 
     if (!empty($nombApellido) && !empty($nombApellidoClienteEvaluado) && !empty($nivelComunicacionCE) && !empty($criticasFundamentadasCE)) {
