@@ -22,13 +22,12 @@ if (isset($_GET['inscripcionCurso'])) {
 
     $queryVerify = "SELECT ap.*,asist.*,eva.* from aprobacion ap, asistencias asist, evaluaciones eva WHERE ap.codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso') AND asist.codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso')
     AND eva.codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso') AND ap.usuario = '$usuario' AND eva.usuario = '$usuario' AND asist.usuario = '$usuario' ";
-<<<<<<< HEAD
+
     $resultado = mysqli_query($conection, $queryVerify);
     if (!$resultado) {
-=======
+
     $resultadoVerify = mysqli_query($conection, $queryVerify);
     if (!$resultadoVerify) {
->>>>>>> 76ba8ff396d2b56cd8f8dff38a25a86fb49af48e
         die('Query Failed' . mysqli_error($conection));
     } else {
         while ($row = mysqli_fetch_array($resultadoVerify)) {
@@ -151,4 +150,5 @@ if (isset($_GET['inscripcionCurso'])) {
     echo json_encode(array_unique($json));
 } else {
     echo json_encode("Error");
+}
 }
