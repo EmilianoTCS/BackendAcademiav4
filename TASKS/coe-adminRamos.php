@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if(isset($_GET['ramos'])) {
 	
-    $query = "SELECT ID, codigoRamo, nombreRamo, isActive, fechaActualizacion from ramos";
+    $query = "SELECT ID, codigoRamo, nombreRamo, isActive, fechaActualizacion, ultimoUsuario from ramos";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -24,6 +24,7 @@ if(isset($_GET['ramos'])) {
             'codigoRamo' => $row['codigoRamo'],
             'nombreRamo' => $row['nombreRamo'],
 			'date' => $row['fechaActualizacion'],
+            'usuario' => $row['ultimoUsuario'],
 			'isActive' => $row['isActive']
         );
     }

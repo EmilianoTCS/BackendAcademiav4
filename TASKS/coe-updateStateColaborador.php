@@ -11,16 +11,17 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['updateStateColaborador'])) {
   $data = json_decode(file_get_contents("php://input"));
   $ID = $data->ID;
+  $usuario = $data->usuario;
 
   date_default_timezone_set("America/Argentina/Buenos_Aires");
   $date = date('Y-m-d H:i:s');
-  $query = "UPDATE personas SET isActive = !isActive, fechaActualizacion = '$date' WHERE ID = '$ID'";
+  $query = "UPDATE personas SET isActive = !isActive, fechaActualizacion = '$date',ultimoUsuario= '$usuario' WHERE ID = '$ID'";
   $result = mysqli_query($conection, $query);
 
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  $query2 = "SELECT ID, nombre_completo, usuario,area, isActive, fechaActualizacion from personas WHERE ID = '$ID'";
+  $query2 = "SELECT ID, nombre_completo, usuario,area, isActive, fechaActualizacion,ultimoUsuario from personas WHERE ID = '$ID'";
   $result2 = mysqli_query($conection, $query2);
   if (!$result2) {
     die('Query Failed' . mysqli_error($conection));
@@ -31,9 +32,10 @@ if (isset($_GET['updateStateColaborador'])) {
     $json[] = array(
       'ID' => $row['ID'],
       'nombre_completo' => $row['nombre_completo'],
-      'usuario' => $row['usuario'],
+      'usuario1' => $row['usuario'],
       'area' => $row['area'],
       'date' => $row['fechaActualizacion'],
+      'usuario' => $row['ultimoUsuario'],
       'successEdited' => "successEdited"
     );
   }

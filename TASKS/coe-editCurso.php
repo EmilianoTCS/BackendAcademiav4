@@ -11,7 +11,7 @@ include("../security/logBuilder.php");
 if (isset($_GET['editarCurso'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $idCuenta = $data->codigoCuenta;
+    $idCuenta = $data->idCuenta;
     $codigoRamo = $data->codigoRamo;
     $fechaInicio = $data->fechaInicio;
     $fechaFin = $data->fechaFin;
@@ -29,17 +29,19 @@ if (isset($_GET['editarCurso'])) {
 
     if (!empty($codigoRamo) && !empty($ID)) {
 
-        if (strtotime($fechaInicio) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($fechaFin)) {
+        if (strtotime($fechaInicio) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($fechaFin) && strtotime($fechaInicio) < strtotime($fechaFin)) {
 
-        $query = "UPDATE cursos SET codigoCurso = '$idCurso_mod', idCuenta = '$idCuenta', codigoRamo = '$codigoRamo', inicio = '$dateformat_inicio', fin = '$dateformat_fin', hora_inicio = '$horaInicio', hora_fin = '$horaFin'
-              WHERE ID = '$ID' ";
-        $result = mysqli_query($conection, $query);
+            $query = "UPDATE cursos SET codigoCurso = '$idCurso_mod', idCuenta = '$idCuenta', codigoRamo = '$codigoRamo', inicio = '$dateformat_inicio', fin = '$dateformat_fin', hora_inicio = '$horaInicio', hora_fin = '$horaFin'
+                WHERE ID = '$ID' ";
+            $result = mysqli_query($conection, $query);
 
-        if (!$result) {
-            die('Query Failed' . mysqli_error($conection));
+            if (!$result) {
+                die('Query Failed' . mysqli_error($conection));
+            }
+            echo json_encode("successEdited");
+        } else {
+            echo json_encode('errorFechas');
         }
-        echo json_encode("successEdited");
-    }
         // $usuario = $_SESSION['idCuenta'];
         // $log = new Log("../security/reports/log.txt");
         // $log->writeLine("I", "[] ha editado los datos: [$idCuenta, $codigoRamo, $fechaInicio, $fechaFin, $horaInicio, $horaFin]");

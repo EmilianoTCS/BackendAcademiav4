@@ -22,7 +22,7 @@ if (isset($_GET['inscripcionCurso'])) {
 
     $queryVerify = "SELECT ap.*,asist.*,eva.* from aprobacion ap, asistencias asist, evaluaciones eva WHERE ap.codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso') AND asist.codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso')
     AND eva.codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso') AND ap.usuario = '$usuario' AND eva.usuario = '$usuario' AND asist.usuario = '$usuario' ";
-    $resultado = mysqli_query($conection, $queryGetFechas);
+    $resultado = mysqli_query($conection, $queryVerify);
     if (!$resultado) {
         die('Query Failed' . mysqli_error($conection));
     } else {

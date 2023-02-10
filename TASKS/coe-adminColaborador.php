@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if(isset($_GET['colaborador'])) {
 	
-    $query = "SELECT ID, nombre_completo, usuario,area, isActive, fechaActualizacion from personas";
+    $query = "SELECT ID, nombre_completo, usuario,area, isActive, fechaActualizacion,ultimoUsuario from personas";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -22,9 +22,10 @@ if(isset($_GET['colaborador'])) {
         $json[] = array(
 			'ID' => $row['ID'],
             'nombre_completo' => $row['nombre_completo'],
-            'usuario' => $row['usuario'],
+            'usuario1' => $row['usuario'],
 			'area' => $row['area'],
 			'date' => $row['fechaActualizacion'],
+            'usuario' => $row['ultimoUsuario'],
 			'isActive' => $row['isActive']
         );
     }

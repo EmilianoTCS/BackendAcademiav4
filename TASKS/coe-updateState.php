@@ -11,14 +11,16 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['updateStateCursos'])) {
   $data = json_decode(file_get_contents("php://input"));
   $ID = $data->ID;
+  $usuario = $data->usuario;
+
   date_default_timezone_set("America/Argentina/Buenos_Aires");
   $date = date('Y-m-d H:i:s');
-  $query = "UPDATE cursos SET isActive = !isActive, fechaActualizacion = '$date' WHERE ID = '$ID'";
+  $query = "UPDATE cursos SET isActive = !isActive, fechaActualizacion= '$date', ultimoUsuario = '$usuario' WHERE ID = '$ID'";
   $result = mysqli_query($conection, $query);
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-    $query2 = "SELECT ID, codigoRamo, codigoCurso, isActive, fechaActualizacion from cursos WHERE ID = '$ID'";
+    $query2 = "SELECT ID, codigoRamo, codigoCurso, isActive, fechaActualizacion,ultimoUsuario from cursos WHERE ID = '$ID'";
     $result2 = mysqli_query($conection, $query2);
     if (!$result2) {
         die('Query Failed' . mysqli_error($conection));
@@ -31,6 +33,7 @@ if (isset($_GET['updateStateCursos'])) {
       'codigoRamo' => $row['codigoRamo'],
       'codigoCurso' => $row['codigoCurso'],
 			'date' => $row['fechaActualizacion'],
+      'usuario' => $row['ultimoUsuario'],
 			'isActive' => $row['isActive'],
       'successEdited' => "successEdited"
         );

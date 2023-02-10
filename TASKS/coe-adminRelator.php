@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if(isset($_GET['relator'])) {
 	
-    $query = "SELECT ID, nombre, isActive, fechaActualizacion from relator";
+    $query = "SELECT ID, nombre, isActive, fechaActualizacion ,ultimoUsuario from relator";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -23,6 +23,7 @@ if(isset($_GET['relator'])) {
 			'ID' => $row['ID'],
             'nombre' => $row['nombre'],
 			'date' => $row['fechaActualizacion'],
+            'usuario' => $row['ultimoUsuario'],
 			'isActive' => $row['isActive']
         );
     }
