@@ -66,7 +66,6 @@ if (isset($_GET['insertarRamo'])) {
                             }
                         }
                     } else {
-
                         //SI NO EXISTE, LO CREA
                         $queryInsertRelator = "INSERT INTO relator_ramo (idRelator, idRamo, isActive, fechaActualización) VALUES('$nombreRelator', '$ultimoID', true, current_timestamp())";
                         $resultRelator = mysqli_query($conection, $queryInsertRelator);
@@ -78,17 +77,37 @@ if (isset($_GET['insertarRamo'])) {
                             if (!$resultPreRequisito) {
                                 die('Query Failed' . mysqli_error($conection));
                             } else {
-                                echo json_encode("successCreated");
+                                $query2 = "SELECT ram.*, rel.nombre, rel.idArea, ar.nombreArea, cuen.codigoCuenta from ramos ram INNER JOIN relator rel, area ar, relator_ramo rel_ram, cuentas cuen WHERE ram.idCuenta = cuen.ID AND ram.ID = rel_ram.idRamo AND rel.idArea = ar.ID AND rel.ID = rel_ram.idRelator AND ram.isActive = true AND ram.ID = (SELECT MAX(ID) from ramos) order by ram.ID ASC";
+                                $result2 = mysqli_query($conection, $query2);
+                                if (!$result2) {
+                                    die('Query Failed' . mysqli_error($conection));
+                                }
+                                $json = array();
+                                while ($row = mysqli_fetch_array($result2)) {
+                                    $json[] = array(
+                                        'ID' => $row['ID'],
+                                        'codigoCuenta' => $row['codigoCuenta'],
+                                        'codigoRamo' => $row['codigoRamo'],
+                                        'nombreRamo' => $row['nombreRamo'],
+                                        'hh_academicas' => $row['hh_academicas'],
+                                        'nombre' => $row['nombre'],
+                                        'nombreArea' => $row['nombreArea'],
+                                        'isActive' => $row['isActive'],
+                                        'successCreated' => 'successCreated'
+                                    );
+                                }
+                                $jsonstring = json_encode($json);
+                                echo $jsonstring;
                             }
                         }
                     }
                 }
             }
-            // $usuario = $_SESSION['codigoCuenta'];
-            // $log = new Log("../security/reports/log.txt");
-            // $log->writeLine("I", "[usuario] ha agregado el ramo con los datos: [$codigoCuenta, $codigoRamo, $nombreCurso, $hh_academicas, $pre_requsito, $relator]");
-            // $log->close();
         }
+        // $usuario = $_SESSION['codigoCuenta'];
+        // $log = new Log("../security/reports/log.txt");
+        // $log->writeLine("I", "[usuario] ha agregado el ramo con los datos: [$codigoCuenta, $codigoRamo, $nombreCurso, $hh_academicas, $pre_requsito, $relator]");
+        // $log->close();
     }
 } else {
     echo json_encode("Error");
