@@ -30,6 +30,8 @@ if (isset($_GET['ID'])) {
                     'fechaActualizacion' => $row['fechaActualizacion'],
                     'isActive' => $row['isActive'],
                     'Busqueda' => true,
+                    'isEmpty' => false
+
                 );
             }
             $jsonstring = json_encode($json);
@@ -42,7 +44,8 @@ if (isset($_GET['ID'])) {
                 'codigoRamo' => null,
                 'fechaActualizacion' => null,
                 'isActive' => null,
-                'Busqueda' => false
+                'Busqueda' => false,
+                'isEmpty' => true
             );
             echo json_encode($json);
         }
@@ -54,7 +57,9 @@ if (isset($_GET['ID'])) {
             'codigoRamo' => null,
             'fechaActualizacion' => null,
             'isActive' => null,
-            'Busqueda' => false
+            'Busqueda' => false,
+            'isEmpty' => true
+
         );
         echo json_encode($json);
     }

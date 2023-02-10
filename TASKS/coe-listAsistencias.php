@@ -14,6 +14,7 @@ if (isset($_GET['ID'])) {
     $ID = $data->ID;
     $fecha = $data->fecha;
 
+
     $query = "SELECT asist.ID, asist.usuario, asist.valor from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
     asist.codigoCurso = cur.codigoCurso AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$ID' AND asist.atributo = '$fecha' AND usuario != 'null' group by usuario";
     $result = mysqli_query($conection, $query);
@@ -21,17 +22,29 @@ if (isset($_GET['ID'])) {
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
     }
-    $json = array();
-    while ($row = mysqli_fetch_array($result)) {
-
+    $result2 = mysqli_num_rows($result);
+    if ($result2 < 1) {
         $json[] = array(
-            'ID' => $row['ID'],
-            'usuario' => $row['usuario'],
-            'valor' => $row['valor'],
+            'ID' => null,
+            'usuario' => null,
+            'valor' => null,
+            'isEmpty' => true
         );
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    } else {
+        $json = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $json[] = array(
+                'ID' => $row['ID'],
+                'usuario' => $row['usuario'],
+                'valor' => $row['valor'],
+                'isEmpty' => false
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
     }
-    $jsonstring = json_encode($json);
-    echo $jsonstring;
 } else {
     echo json_encode("Error");
 }
