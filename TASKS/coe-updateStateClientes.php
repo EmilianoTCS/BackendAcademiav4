@@ -15,7 +15,7 @@ if (isset($_GET['updateStateClientes'])) {
 
   date_default_timezone_set("America/Argentina/Buenos_Aires");
   $date = date('Y-m-d H:i:s');
-  $query = "UPDATE clientes SET isActive = !isActive, fechaActualizacion = '$date',ultimoUsuario = '$usuario' WHERE ID = '$ID'";
+  $query = "UPDATE clientes SET isActive = !isActive, fechaActualizacion = '$date', ultimoUsuario = '$usuario' WHERE ID = '$ID'";
   $result = mysqli_query($conection, $query);
 
   if (!$result) {
