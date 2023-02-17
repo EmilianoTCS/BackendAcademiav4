@@ -25,7 +25,8 @@ if (isset($_GET['NotasColaboradores'])) {
 
 	switch ([$idCurso, $usuario]) {
 		case ['', '']:
-			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID GROUP BY eva.num_evaluaciones, eva.usuario, eva.codigoCurso order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje,
+			IF(eva.porcentaje>=85,'Aprobado', IF(eva.porcentaje<85,'Desaprobado','')) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID GROUP BY eva.num_evaluaciones, eva.usuario, eva.codigoCurso order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
@@ -40,6 +41,7 @@ if (isset($_GET['NotasColaboradores'])) {
 						'nota' => $row1['nota'],
 						'promedio' => $row1['promedio'],
 						'porcentaje' => $row1['porcentaje'],
+						'aprobado' => $row1['aprobado'],
 						'isEmpty' => false
 					);
 				}
@@ -49,7 +51,7 @@ if (isset($_GET['NotasColaboradores'])) {
 
 			break;
 		case [!empty($idCurso), '']:
-			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$idCurso' GROUP BY eva.usuario, eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje,IF(eva.porcentaje>=85,'Aprobado', IF(eva.porcentaje<85,'Desaprobado','')) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$idCurso' GROUP BY eva.usuario, eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
@@ -65,6 +67,7 @@ if (isset($_GET['NotasColaboradores'])) {
 							'nota' => $row1['nota'],
 							'promedio' => $row1['promedio'],
 							'porcentaje' => $row1['porcentaje'],
+							'aprobado'=> $row1['aprobado'],
 							'isEmpty' => false
 						);
 					}
@@ -78,7 +81,7 @@ if (isset($_GET['NotasColaboradores'])) {
 			break;
 
 		case ['', !empty($usuario)]:
-			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID AND eva.usuario = '$usuario' group by eva.codigoCurso, eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje,IF(eva.porcentaje>=85,'Aprobado', IF(eva.porcentaje<85,'Desaprobado','')) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID AND eva.usuario = '$usuario' group by eva.codigoCurso, eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
@@ -94,8 +97,8 @@ if (isset($_GET['NotasColaboradores'])) {
 							'nota' => $row1['nota'],
 							'promedio' => $row1['promedio'],
 							'porcentaje' => $row1['porcentaje'],
+							'aprobado'=> $row1['aprobado'],
 							'isEmpty' => false
-
 						);
 					}
 					$json_encode = json_encode($json);
@@ -108,7 +111,7 @@ if (isset($_GET['NotasColaboradores'])) {
 			}
 			break;
 		case [!empty($idCurso), !empty($usuario)]:
-			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID AND eva.usuario = '$usuario' AND ram.ID = '$idCurso' GROUP BY eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje,IF(eva.porcentaje>=85,'Aprobado', IF(eva.porcentaje<85,'Desaprobado','')) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID AND eva.usuario = '$usuario' AND ram.ID = '$idCurso' GROUP BY eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
@@ -124,6 +127,7 @@ if (isset($_GET['NotasColaboradores'])) {
 							'nota' => $row1['nota'],
 							'promedio' => $row1['promedio'],
 							'porcentaje' => $row1['porcentaje'],
+							'aprobado'=> $row1['aprobado'],
 							'isEmpty' => false
 						);
 					}
@@ -139,7 +143,7 @@ if (isset($_GET['NotasColaboradores'])) {
 } else {
 	$cantidad_por_pagina = 10;
 	$inicio = 0;
-	$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID GROUP BY eva.num_evaluaciones, eva.usuario, eva.codigoCurso order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+	$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.nota, ROUND(AVG(eva.nota),2) as promedio, eva.porcentaje,IF(eva.porcentaje>=85,'Aprobado', IF(eva.porcentaje<85,'Desaprobado','')) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID GROUP BY eva.num_evaluaciones, eva.usuario, eva.codigoCurso order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 	$result1 = mysqli_query($conection, $query1);
 	if (!$result1) {
 		die('Query Failed' . mysqli_error($conection));
@@ -155,6 +159,7 @@ if (isset($_GET['NotasColaboradores'])) {
 					'nota' => $row1['nota'],
 					'promedio' => $row1['promedio'],
 					'porcentaje' => $row1['porcentaje'],
+					'aprobado'=> $row1['aprobado'],
 					'isEmpty' => false
 
 				);

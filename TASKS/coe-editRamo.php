@@ -19,25 +19,15 @@ if (isset($_GET['editarRamo'])) {
     if (!empty($ID)) {
 
         $query = "UPDATE ramos SET codigoRamo = '$codigoRamo', nombreRamo = '$nombreRamo', hh_academicas = '$hh_academicas'
-              WHERE ID = '$ID' ";
+                WHERE ID = '$ID' ";
         $result = mysqli_query($conection, $query);
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
         }
 
-        $queryCodigo = "SELECT ID from relator WHERE nombre = '$nombreRelator'";
-        $resultCodigo = mysqli_query($conection, $queryCodigo);
 
-        if (!$resultCodigo) {
-            die('Query Failed' . mysqli_error($conection));
-        } else {
-            $json = array();
-            while ($row = mysqli_fetch_array($resultCodigo)) {
-                $idRelator = $row['ID'];
-            }
-        }
 
-        $queryActualizarRelator = "UPDATE relator_ramo set idRelator = '$idRelator', fechaActualización = current_timestamp() WHERE idRamo = '$ID'";
+        $queryActualizarRelator = "UPDATE relator_ramo set idRelator = '$nombreRelator', fechaActualización = current_timestamp() WHERE idRamo = '$ID'";
         $resultActualizarRelator = mysqli_query($conection, $queryActualizarRelator);
         if (!$resultActualizarRelator) {
             die('Query Failed' . mysqli_error($conection));

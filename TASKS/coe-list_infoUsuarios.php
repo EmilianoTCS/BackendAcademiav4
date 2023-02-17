@@ -9,10 +9,10 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 if(isset($_GET['usuario'])) {
-  $usuario = $_GET['usuario'];
+    $usuario = $_GET['usuario'];
 	
     $query = "SELECT ap.porcentaje_aprobacion, per.usuario, ram.nombreRamo ,ram.ID, cur.codigoCurso,  if(ap.porcentaje_aprobacion > 85, 'Aprobado', 'Reprobado') as estado
-              from cursos cur INNER JOIN aprobacion ap, personas per, ramos ram WHERE cur.codigoCurso = ap.codigoCurso AND cur.idRamo = ram.ID AND ap.usuario = '$usuario' group by codigoCurso";
+            from cursos cur INNER JOIN aprobacion ap, personas per, ramos ram WHERE cur.codigoCurso = ap.codigoCurso AND cur.idRamo = ram.ID AND ap.usuario = '$usuario' group by codigoCurso";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
