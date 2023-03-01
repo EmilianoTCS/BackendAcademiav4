@@ -36,7 +36,9 @@ if (isset($_GET['updateStateColaborador'])) {
       'area' => $row['area'],
       'date' => $row['fechaActualizacion'],
       'usuario' => $row['ultimoUsuario'],
-      'successEdited' => "successEdited"
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
+
     );
   }
   $jsonstring = json_encode($json);

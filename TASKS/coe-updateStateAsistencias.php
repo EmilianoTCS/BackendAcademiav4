@@ -35,7 +35,9 @@ if (isset($_GET['updateStateAsistencias'])) {
       'ID' => $row['ID'],
       'usuario' => $row['usuario'],
       'valor' => $row['valor'],
-      'successEdited' => "successEdited"
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
+
     );
   }
   $jsonstring = json_encode($json);

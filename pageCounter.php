@@ -5,7 +5,7 @@ function pageCounter()
     $Cantidad_por_pagina = 6;
     include("model/conexion.php");
     // CONTADOR PARA CUENTAS
-    $queryCounter1 = "SELECT count(ID) as total_registros_cuenta FROM `cursos` WHERE isActive= true ";
+    $queryCounter1 = "SELECT count(ID) as total_registros_cuenta FROM `cursos` WHERE isActive = true ";
     $resultCounter1 = mysqli_query($conection, $queryCounter1);
     if (!$resultCounter1) {
         die('Query Failed' . mysqli_error($conection));

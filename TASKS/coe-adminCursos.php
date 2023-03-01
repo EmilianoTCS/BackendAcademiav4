@@ -9,9 +9,9 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-if(isset($_GET['cursos'])) {
-	
-    $query = "SELECT ID, codigoRamo, codigoCurso, isActive, fechaActualizacion,ultimoUsuario from cursos";
+if (isset($_GET['cursos'])) {
+
+    $query = "SELECT cur.*, ram.nombreRamo from cursos cur INNER JOIN ramos ram WHERE cur.ID != 0 AND cur.idRamo = ram.ID";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -20,12 +20,12 @@ if(isset($_GET['cursos'])) {
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
-            'codigoRamo' => $row['codigoRamo'],
+            'ID' => $row['ID'],
             'codigoCurso' => $row['codigoCurso'],
-			'date' => $row['fechaActualizacion'],
+            'nombreRamo' => $row['nombreRamo'],
+            'date' => $row['fechaActualizacion'],
             'usuario' => $row['ultimoUsuario'],
-			'isActive' => $row['isActive']
+            'isActive' => $row['isActive']
         );
     }
     $jsonstring = json_encode($json);

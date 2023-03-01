@@ -20,26 +20,29 @@ if (isset($_GET['updateStateCursos'])) {
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-    $query2 = "SELECT ID, codigoRamo, codigoCurso, isActive, fechaActualizacion,ultimoUsuario from cursos WHERE ID = '$ID'";
-    $result2 = mysqli_query($conection, $query2);
-    if (!$result2) {
-        die('Query Failed' . mysqli_error($conection));
-    }
-    $json = array();
-    while ($row = mysqli_fetch_array($result2)) {
+  $query2 = "SELECT ID, codigoRamo, codigoCurso, isActive, fechaActualizacion,ultimoUsuario from cursos WHERE ID = '$ID'";
+  $result2 = mysqli_query($conection, $query2);
+  if (!$result2) {
+    die('Query Failed' . mysqli_error($conection));
+  }
+  $json = array();
+  while ($row = mysqli_fetch_array($result2)) {
 
-        $json[] = array(
-			'ID' => $row['ID'],
+    $json[] = array(
+      'ID' => $row['ID'],
       'codigoRamo' => $row['codigoRamo'],
       'codigoCurso' => $row['codigoCurso'],
-			'date' => $row['fechaActualizacion'],
+      'date' => $row['fechaActualizacion'],
       'usuario' => $row['ultimoUsuario'],
-			'isActive' => $row['isActive'],
-      'successEditedCursos' => "successEditedCursos"
-        );
-    }
-    $jsonstring = json_encode($json);
-    echo $jsonstring;
+      'isActive' => $row['isActive'],
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
+
+
+    );
+  }
+  $jsonstring = json_encode($json);
+  echo $jsonstring;
 
   // $usuario = $_SESSION['idCuenta'];
   // $log = new Log("../security/reports/log.txt");

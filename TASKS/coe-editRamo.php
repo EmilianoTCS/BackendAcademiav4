@@ -14,7 +14,7 @@ if (isset($_GET['editarRamo'])) {
     $codigoRamo = $data->codigoRamo;
     $nombreRamo = $data->nombreRamo;
     $hh_academicas = $data->hh_academicas;
-    $nombreRelator = $data->nombreRelator;
+    $idRelator = $data->idRelator;
 
     if (!empty($ID)) {
 
@@ -27,7 +27,7 @@ if (isset($_GET['editarRamo'])) {
 
 
 
-        $queryActualizarRelator = "UPDATE relator_ramo set idRelator = '$nombreRelator', fechaActualización = current_timestamp() WHERE idRamo = '$ID'";
+        $queryActualizarRelator = "UPDATE relator_ramo set idRelator = '$idRelator', fechaActualización = current_timestamp() WHERE idRamo = '$ID'";
         $resultActualizarRelator = mysqli_query($conection, $queryActualizarRelator);
         if (!$resultActualizarRelator) {
             die('Query Failed' . mysqli_error($conection));

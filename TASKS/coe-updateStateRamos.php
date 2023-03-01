@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['updateStateRamos'])) {
   $data = json_decode(file_get_contents("php://input"));
-  $ID = $data->ID ;
+  $ID = $data->ID;
   $usuario = $data->usuario;
 
   date_default_timezone_set("America/Argentina/Buenos_Aires");
@@ -36,7 +36,9 @@ if (isset($_GET['updateStateRamos'])) {
       'date' => $row['fechaActualizacion'],
       'usuario' => $row['ultimoUsuario'],
       'isActive' => $row['isActive'],
-      'successEdited' => "successEdited"  
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
+
     );
   }
   $jsonstring = json_encode($json);

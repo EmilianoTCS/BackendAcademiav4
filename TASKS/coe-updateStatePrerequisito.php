@@ -37,7 +37,9 @@ if (isset($_GET['updateStatePrerequisito'])) {
       'codigoRamo' => $row['codigoRamo'],
       'fechaActualizacion' => $row['fechaActualizacion'],
       'isActive' => $row['isActive'],
-      'successEdited' => "successEdited"
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
+
 
     );
   }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../model/conexion.php'); 
+include('../model/conexion.php');
 include("../security/logBuilder.php");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
@@ -35,7 +35,8 @@ if (isset($_GET['updateStateRelator'])) {
       'date' => $row['fechaActualizacion'],
       'usuario' => $row['ultimoUsuario'],
       'isActive' => $row['isActive'],
-      'successEdited' => "successEdited"
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
     );
   }
   $jsonstring = json_encode($json);
