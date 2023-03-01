@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['Cursos'])) {
 
-    $query = "SELECT cur.ID,cur.inicio, cur.fin, cur.hora_inicio, cur.hora_fin, cur.codigoRamo, cur.fecha_hora, TIMEDIFF(cur.hora_fin, cur.hora_inicio) as duracion, cur.codigoCurso, ram.nombreRamo FROM cursos cur INNER JOIN ramos ram WHERE cur.isActive = true AND cur.codigoRamo =  ram.codigoRamo";
+    $query = "SELECT cur.ID,cur.inicio, cur.fin, cur.hora_inicio, cur.hora_fin,cur.codigoCurso, ram.codigoRamo, cur.fecha_hora, TIMEDIFF(cur.hora_fin, cur.hora_inicio) as duracion, ram.nombreRamo FROM cursos cur INNER JOIN ramos ram WHERE cur.isActive = true AND cur.idRamo =  ram.ID";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
