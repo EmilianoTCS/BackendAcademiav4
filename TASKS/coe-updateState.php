@@ -35,7 +35,7 @@ if (isset($_GET['updateStateCursos'])) {
 			'date' => $row['fechaActualizacion'],
       'usuario' => $row['ultimoUsuario'],
 			'isActive' => $row['isActive'],
-      'successEdited' => "successEdited"
+      'successEditedCursos' => "successEditedCursos"
         );
     }
     $jsonstring = json_encode($json);

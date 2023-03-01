@@ -93,7 +93,7 @@ if (isset($_GET['insertarRamo'])) {
                                         'nombre' => $row['nombre'],
                                         'nombreArea' => $row['nombreArea'],
                                         'isActive' => $row['isActive'],
-                                        'successCreated' => 'successCreated'
+                                        'successCreatedRamos' => 'successCreatedRamos'
                                     );
                                 }
                                 $jsonstring = json_encode($json);

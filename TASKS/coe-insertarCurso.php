@@ -19,6 +19,7 @@ if (isset($_GET['insertarCurso'])) {
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
     $ultimoElemento = end($fechas);
+    $sesionCount = 0;
     $json = array();
 
     $fechaInicioTemporal = date_create($primerElemento);
@@ -75,7 +76,7 @@ if (isset($_GET['insertarCurso'])) {
                             if (!$result2) {
                                 die('Query Failed' . mysqli_error($conection));
                             } else {
-                                array_push($json, 'successCreated');
+                                array_push($json, 'successEditedCursos');
                             }
 
 

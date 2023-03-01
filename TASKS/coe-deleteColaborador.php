@@ -21,7 +21,7 @@ if (isset($_GET['delete'])) {
     //   $log = new Log("../security/reports/log.txt");
     // $log->writeLine("I", "[usuario] Ha eliminado el colaborador [usuario] en [COE -");
     //   $log->close();
-    echo json_encode("Success");
+    echo json_encode("successDeleted");
   }
 } else {
   echo json_encode("Error");
