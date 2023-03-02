@@ -15,7 +15,7 @@ if (isset($_GET['ID'])) {
     $fecha = $data->fecha;
 
 
-    $query = "SELECT asist.ID, asist.usuario, asist.valor from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
+    $query = "SELECT asist.ID, asist.usuario, asist.valor, asist.ultimoUsuario from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
     asist.codigoCurso = cur.codigoCurso AND ram.ID = '$ID' AND asist.atributo = '$fecha' AND usuario != 'null' group by usuario";
     $result = mysqli_query($conection, $query);
 
@@ -28,6 +28,7 @@ if (isset($_GET['ID'])) {
             'ID' => null,
             'usuario' => null,
             'valor' => null,
+            'usuarioModi' => null,
             'isEmpty' => true
         );
         $jsonstring = json_encode($json);
@@ -39,6 +40,7 @@ if (isset($_GET['ID'])) {
                 'ID' => $row['ID'],
                 'usuario' => $row['usuario'],
                 'valor' => $row['valor'],
+                'usuarioModi' => $row['ultimoUsuario'],
                 'isEmpty' => false
             );
         }

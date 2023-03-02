@@ -12,7 +12,7 @@ if (isset($_GET['editarCurso'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
     $idCuenta = $data->idCuenta;
-    $codigoRamo = $data->codigoRamo;
+    $idRamoEdit = $data->idRamoEdit;
     $fechaInicio = $data->fechaInicio;
     $fechaFin = $data->fechaFin;
     $horaInicio = $data->horaInicio;
@@ -25,13 +25,27 @@ if (isset($_GET['editarCurso'])) {
     $fechaInicio_mod = preg_replace('/-/', '', $dateformat_inicio);
     $horaInicio_mod = preg_replace('/:/', '', $horaInicio);
 
+
+
+
+    $queryGetRamos = "SELECT codigoRamo from ramos WHERE ID = '$idRamoEdit'";
+    $resultado = mysqli_query($conection, $queryGetRamos);
+    if (!$resultado) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($row = mysqli_fetch_array($resultado)) {
+            $codigoRamo = $row['codigoRamo'];
+        }
+    }
+
     $idCurso_mod = $codigoRamo . $fechaInicio_mod . $horaInicio_mod;
 
-    if (!empty($codigoRamo) && !empty($ID)) {
+
+    if (!empty($idRamoEdit) && !empty($ID)) {
 
         if (strtotime($fechaInicio) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($fechaFin) && strtotime($fechaInicio) < strtotime($fechaFin)) {
 
-            $query = "UPDATE cursos SET codigoCurso = '$idCurso_mod', idCuenta = '$idCuenta', codigoRamo = '$codigoRamo', inicio = '$dateformat_inicio', fin = '$dateformat_fin', hora_inicio = '$horaInicio', hora_fin = '$horaFin'
+            $query = "UPDATE cursos SET codigoCurso = '$idCurso_mod', idCuenta = '$idCuenta', idRamo = '$idRamoEdit', inicio = '$dateformat_inicio', fin = '$dateformat_fin', hora_inicio = '$horaInicio', hora_fin = '$horaFin'
                 WHERE ID = '$ID' ";
             $result = mysqli_query($conection, $query);
 
