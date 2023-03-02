@@ -41,7 +41,7 @@ if (isset($_GET['insertarEvento'])) {
             if (mysqli_num_rows($resultVerify) >= 1) {
                 array_push($json, 'errorRepeated');
             } else {
-                if (strtotime($primerElemento) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($ultimoElemento)) {
+                if (strtotime($primerElemento) >= strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) <= strtotime($ultimoElemento)) {
                     $query = "INSERT INTO eventos (titulo, descripcion, fecha_hora, hora_inicio, hora_fin, isActive) VALUES ('$titulo','$descripcion', '$fechas[$i]','$formatTimeTemporal','$horaFin', true);";
                     $result = mysqli_query($conection, $query);
                     if (!$result) {
