@@ -14,7 +14,7 @@ if (isset($_GET['insertarCurso'])) {
     $data = json_decode(file_get_contents("php://input"));
     $duracion = strtotime($data->duracion) - strtotime('midnight');
     $codigoCuenta = $data->codigoCuenta;
-    $codigoRamo = $data->codigoRamo;
+    $idRamo = $data->idRamo;
     $fechas = $data->fechasOrdenadas;
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
@@ -28,7 +28,7 @@ if (isset($_GET['insertarCurso'])) {
     $fechaInicio = date_format($fechaInicioTemporal, 'Y-m-d');
     $fechaFin = date_format($fechaFinalTemporal, 'Y-m-d');
 
-    if (!empty($codigoRamo) && !empty($fechas)) {
+    if (!empty($idRamo) && !empty($fechas)) {
 
 
 
@@ -45,6 +45,17 @@ if (isset($_GET['insertarCurso'])) {
             $fechaInicio_mod = preg_replace('/-/', '', $formatDateTemporal);
             $horaInicio_mod = preg_replace('/:/', '', $formatTimeTemporal);
 
+            $queryGetRamos = "SELECT codigoRamo from ramos WHERE ID = '$idRamo'";
+            $resultado = mysqli_query($conection, $queryGetRamos);
+            if (!$resultado) {
+                die('Query Failed' . mysqli_error($conection));
+            } else {
+                while ($row = mysqli_fetch_array($resultado)) {
+                    $codigoRamo = $row['codigoRamo'];
+                }
+            }
+
+
             $codigoCurso = $codigoRamo . $fechaInicio_mod . $horaInicio_mod;
             $hora1 = strtotime($formatTimeTemporal);
             $sesionCount += 1;
@@ -53,7 +64,7 @@ if (isset($_GET['insertarCurso'])) {
 
             $horaFin = date('H:i:s', ($hora1 + $duracion));
 
-            $queryVerify = "SELECT * FROM cursos WHERE idRamo = (SELECT ID from ramos WHERE codigoRamo = '$codigoRamo') AND fecha_hora = '$fechas[$i]' AND sesion = '$sesion' AND hora_inicio <= time('$formatTimeTemporal') AND hora_fin >= time('$horaFin') ";
+            $queryVerify = "SELECT * FROM cursos WHERE idRamo = (SELECT ID from ramos WHERE ID = '$idRamo') AND fecha_hora = '$fechas[$i]' AND sesion = '$sesion' AND hora_inicio <= time('$formatTimeTemporal') AND hora_fin >= time('$horaFin') ";
             $resultVerify = mysqli_query($conection, $queryVerify);
 
 
@@ -63,7 +74,7 @@ if (isset($_GET['insertarCurso'])) {
 
                 if (strtotime($primerElemento) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($ultimoElemento)) {
 
-                    $query = "INSERT INTO cursos (idCuenta, idRamo, codigoCurso, fecha_hora, sesion, inicio, fin, hora_inicio, hora_fin, isActive, fechaActualizacion) VALUES ('$codigoCuenta',(SELECT ID from ramos WHERE codigoRamo = '$codigoRamo'), '$codigoCurso','$fechas[$i]','$sesion','$fechaInicio', '$fechaFin', '$formatTimeTemporal', '$horaFin', true, current_timestamp());";
+                    $query = "INSERT INTO cursos (idCuenta, idRamo, codigoCurso, fecha_hora, sesion, inicio, fin, hora_inicio, hora_fin, isActive, fechaActualizacion) VALUES ('$codigoCuenta',(SELECT ID from ramos WHERE ID = '$idRamo'), '$codigoCurso','$fechas[$i]','$sesion','$fechaInicio', '$fechaFin', '$formatTimeTemporal', '$horaFin', true, current_timestamp());";
                     $result = mysqli_query($conection, $query);
 
 
