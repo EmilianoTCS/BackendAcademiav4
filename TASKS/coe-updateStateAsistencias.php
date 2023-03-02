@@ -13,17 +13,17 @@ if (isset($_GET['updateStateAsistencias'])) {
   $IDRegistro = $data->IDRegistro;
   $IDCurso = $data->IDCurso;
   $Fecha = $data->Fecha;
+  $usuario = $data-> usuarioModi;
 
-
-  $query = "UPDATE asistencias SET valor = !valor WHERE ID = '$IDRegistro'";
+  $query = "UPDATE asistencias SET valor = !valor, ultimoUsuario = '$usuario' WHERE ID = '$IDRegistro'";
   $result = mysqli_query($conection, $query);
 
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
 
-  $query2 = "SELECT asist.ID, asist.usuario, asist.valor from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
-    asist.codigoCurso = cur.codigoCurso AND cur.codigoRamo = ram.codigoRamo AND ram.ID = '$IDCurso' AND asist.atributo = '$Fecha' AND asist.ID = '$IDRegistro' group by usuario";
+  $query2 = "SELECT asist.ID, asist.usuario, asist.valor, asist.ultimoUsuario from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
+    asist.codigoCurso = cur.codigoCurso AND ram.ID = '$IDCurso' AND asist.atributo = '$Fecha' AND asist.ID = '$IDRegistro' group by usuario";
   $result2 = mysqli_query($conection, $query2);
   if (!$result2) {
     die('Query Failed' . mysqli_error($conection));
@@ -35,6 +35,7 @@ if (isset($_GET['updateStateAsistencias'])) {
       'ID' => $row['ID'],
       'usuario' => $row['usuario'],
       'valor' => $row['valor'],
+      'usuarioModi' => $row['ultimoUsuario'],
       'successEdited' => "successEdited",
       'successEnabled' => "successEnabled",
 
