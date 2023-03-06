@@ -13,25 +13,27 @@ if (isset($_GET['editarColaborador'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
     $usuario = $data->usuario;
-    $codigoCuenta = $data->codigoCuenta;
+    $idCuenta = $data->idCuenta;
     $nombre_completo = $data->nombre_completo;
     $area = $data->area;
     $subgerencia = $data->subgerencia;
     $correo = $data->correo;
 
+    if (!empty($usuario) && !empty($nombre_completo)) {
 
-    $query = "UPDATE personas SET codigoCuenta = '$codigoCuenta', usuario = '$usuario', nombre_completo = '$nombre_completo', area = '$area', subgerencia = '$subgerencia', correo = '$correo'
+        $query = "UPDATE personas SET idCuenta = '$idCuenta', usuario = '$usuario', nombre_completo = '$nombre_completo', area = '$area', subgerencia = '$subgerencia', correo = '$correo'
               WHERE ID = '$ID' ";
-    $result = mysqli_query($conection, $query);
+        $result = mysqli_query($conection, $query);
 
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        }
+        echo json_encode("successEdited");
+        // $usuario = $_SESSION['idCuenta'];
+        // $log = new Log("../security/reports/log.txt");
+        // $log->writeLine("I", "[usuario] ha editado los datos: [$codigoCuenta, $usuario, $nombre_completo,$area,$subgerencia,$correo]");
+        // $log->close();
     }
-    echo json_encode("successEdited");
-    // $usuario = $_SESSION['idCuenta'];
-    // $log = new Log("../security/reports/log.txt");
-    // $log->writeLine("I", "[usuario] ha editado los datos: [$codigoCuenta, $usuario, $nombre_completo,$area,$subgerencia,$correo]");
-    // $log->close();
 } else {
     echo json_encode("Error");
 }

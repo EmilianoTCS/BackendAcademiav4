@@ -25,7 +25,7 @@ if (isset($_GET['ID'])) {
             'nombre_completo' => $row['nombre_completo'],
             'usuario' => $row['usuario'],
             'area' => $row['area'],
-            'codigoCuenta' => $row['codigoCuenta'],
+            'idCuenta' => $row['idCuenta'],
             'subgerencia' => $row['subgerencia'],
             'correo' => $row['correo']
         );

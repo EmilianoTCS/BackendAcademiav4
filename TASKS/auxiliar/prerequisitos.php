@@ -12,25 +12,57 @@ if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
 
-    $query = "SELECT req.*, cur.codigoRamo, ram.nombreRamo FROM requisitos_curso req INNER JOIN cursos cur, ramos ram WHERE req.idCurso = '$ID'  AND req.pre_requisito = cur.ID AND cur.idRamo = ram.ID";
-    $result = mysqli_query($conection, $query);
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
-    }
+    if (!empty($ID)) {
+        $query = "SELECT req.*, ram.codigoRamo, ram.nombreRamo FROM requisitos_curso req INNER JOIN ramos ram WHERE req.idCurso = '$ID'  AND req.pre_requisito = ram.ID";
+        $result = mysqli_query($conection, $query);
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        }
+        $result2 = mysqli_num_rows($result);
+        if ($result2 > 0) {
+            $json = array();
+            while ($row = mysqli_fetch_array($result)) {
+                $json[] = array(
+                    'ID' => $row['ID'],
+                    'nombreRamo' => $row['nombreRamo'],
+                    'pre_requisito' => $row['pre_requisito'],
+                    'codigoRamo' => $row['codigoRamo'],
+                    'fechaActualizacion' => $row['fechaActualizacion'],
+                    'isActive' => $row['isActive'],
+                    'Busqueda' => true,
+                    'isEmpty' => false
 
-    $json = array();
-    while ($row = mysqli_fetch_array($result)) {
+                );
+            }
+            $jsonstring = json_encode($json);
+            echo $jsonstring;
+        } else {
+            $json[] = array(
+                'ID' => null,
+                'nombreRamo' => null,
+                'pre_requisito' => null,
+                'codigoRamo' => null,
+                'fechaActualizacion' => null,
+                'isActive' => null,
+                'Busqueda' => false,
+                'isEmpty' => true
+            );
+            echo json_encode($json);
+        }
+    } else {
         $json[] = array(
-            'ID' => $row['ID'],
-            'nombreRamo' => $row['nombreRamo'],
-            'pre_requisito' => $row['pre_requisito'],
-            'codigoRamo' => $row['codigoRamo'],
-            'fechaActualizacion' => $row['fechaActualizacion'],
-            'isActive' => $row['isActive'],
+            'ID' => null,
+            'nombreRamo' => null,
+            'pre_requisito' => null,
+            'codigoRamo' => null,
+            'fechaActualizacion' => null,
+            'isActive' => null,
+            'Busqueda' => false,
+            'isEmpty' => true
+
         );
+        echo json_encode($json);
     }
-    $jsonstring = json_encode($json);
-    echo $jsonstring;
 } else {
     echo json_encode("Error");
 }

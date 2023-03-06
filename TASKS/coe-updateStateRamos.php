@@ -11,16 +11,38 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['updateStateRamos'])) {
   $data = json_decode(file_get_contents("php://input"));
   $ID = $data->ID;
+  $usuario = $data->usuario;
 
   date_default_timezone_set("America/Argentina/Buenos_Aires");
   $date = date('Y-m-d H:i:s');
-  $query = "UPDATE ramos SET isActive = !isActive, fechaActualizacion = '$date' WHERE ID = '$ID'";
+  $query = "UPDATE ramos SET isActive = !isActive, fechaActualizacion = '$date', ultimoUsuario = '$usuario' WHERE ID = '$ID'";
   $result = mysqli_query($conection, $query);
 
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  echo json_encode("successEdited");
+  $query2 = "SELECT ID, codigoRamo, nombreRamo, isActive, fechaActualizacion ,ultimoUsuario from ramos WHERE ID = '$ID'";
+  $result2 = mysqli_query($conection, $query2);
+  if (!$result2) {
+    die('Query Failed' . mysqli_error($conection));
+  }
+  $json = array();
+  while ($row = mysqli_fetch_array($result2)) {
+
+    $json[] = array(
+      'ID' => $row['ID'],
+      'codigoRamo' => $row['codigoRamo'],
+      'nombreRamo' => $row['nombreRamo'],
+      'date' => $row['fechaActualizacion'],
+      'usuario' => $row['ultimoUsuario'],
+      'isActive' => $row['isActive'],
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
+
+    );
+  }
+  $jsonstring = json_encode($json);
+  echo $jsonstring;
   // $usuario = $_SESSION['idCuenta'];
   // $log = new Log("../security/reports/log.txt");
   // $log->writeLine("I", "[] ha cambiado el estado del curso: [ de ]");

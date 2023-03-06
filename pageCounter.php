@@ -5,7 +5,7 @@ function pageCounter()
     $Cantidad_por_pagina = 6;
     include("model/conexion.php");
     // CONTADOR PARA CUENTAS
-    $queryCounter1 = "SELECT count(ID) as total_registros_cuenta FROM `cursos` WHERE isActive= true ";
+    $queryCounter1 = "SELECT count(ID) as total_registros_cuenta FROM `cursos` WHERE isActive = true ";
     $resultCounter1 = mysqli_query($conection, $queryCounter1);
     if (!$resultCounter1) {
         die('Query Failed' . mysqli_error($conection));
@@ -107,7 +107,7 @@ function pageCounter()
     }
     // CONTADOR PARA NOTAS---------------------------
     // SIN FILTROS
-    $queryCounter10 = "SELECT COUNT(ID) as total_evaluacionesNoFilter FROM evaluaciones";
+    $queryCounter10 = "SELECT COUNT(nota) as total_evaluacionesNoFilter FROM evaluaciones GROUP BY num_evaluaciones";
     $resultCounter10 = mysqli_query($conection, $queryCounter10);
     if (!$resultCounter10) {
         die('Query Failed' . mysqli_error($conection));
@@ -115,6 +115,30 @@ function pageCounter()
         while ($rowCounter10 = mysqli_fetch_array($resultCounter10)) {
             $totalRegistros_evaluaciones = $rowCounter10['total_evaluacionesNoFilter'];
             $cantidad_paginas_evaluaciones = ceil($totalRegistros_evaluaciones / $Cantidad_por_pagina);
+        }
+    }
+
+    // CONTADOR PARA EDD REFERENTES---------------------------
+    $queryCounter11 = "SELECT COUNT(ID) as total_EDDReferentes FROM `edd-evaluacion-referentes-servicio` WHERE isActive = true";
+    $resultCounter11 = mysqli_query($conection, $queryCounter11);
+    if (!$resultCounter11) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter11 = mysqli_fetch_array($resultCounter11)) {
+            $totalRegistros_EDDReferentes = $rowCounter11['total_EDDReferentes'];
+            $cantidad_paginas_EDDReferentes = ceil($totalRegistros_EDDReferentes / $Cantidad_por_pagina);
+        }
+    }
+
+    // CONTADOR PARA EDD ANALISTAS---------------------------
+    $queryCounter12 = "SELECT COUNT(ID) as total_EDDAnalistas FROM `edd-evaluacion-analistas-automatizadores` WHERE isActive = true";
+    $resultCounter12 = mysqli_query($conection, $queryCounter12);
+    if (!$resultCounter12) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter12 = mysqli_fetch_array($resultCounter12)) {
+            $totalRegistros_EDDAnalistas = $rowCounter12['total_EDDAnalistas'];
+            $cantidad_paginas_EDDAnalistas = ceil($totalRegistros_EDDAnalistas / $Cantidad_por_pagina);
         }
     }
 
@@ -130,6 +154,9 @@ function pageCounter()
         'cantidad_paginas_ramos' => $cantidad_paginas_ramos,
         'cantidad_paginas_relator' => $cantidad_paginas_relator,
         'cantidad_paginas_usuarios' => $cantidad_paginas_usuarios,
-        'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones
+        'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones,
+        'cantidad_paginas_EDDReferentes' => $cantidad_paginas_EDDReferentes,
+        'cantidad_paginas_EDDAnalistas' => $cantidad_paginas_EDDAnalistas,
+
     ];
 }

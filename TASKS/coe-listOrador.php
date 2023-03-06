@@ -7,12 +7,12 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include("../model/conexion.php");
 if (isset($_GET['pagina'])) {
-    $data= json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"));
     $num_boton = $data->num_boton;
     $cantidad_por_pagina = 6;
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
 
-$query = "SELECT rel.nombre, rel.ID, rel.idArea, ar.nombreArea, ram.nombreRamo, ram.codigoRamo, ram.codigoCuenta FROM relator rel INNER JOIN ramos ram, relator_ramo rel_ram , area ar WHERE rel.ID = rel_ram.idRelator AND rel.idArea = ar.ID AND rel_ram.idRamo = ram.ID AND rel.isActive = true LIMIT $inicio, $cantidad_por_pagina";
+    $query = "SELECT rel.*, ar.nombreArea, ram.nombreRamo, ram.codigoRamo FROM relator rel INNER JOIN ramos ram, relator_ramo rel_ram , area ar WHERE rel.ID = rel_ram.idRelator AND rel.idArea = ar.ID AND rel_ram.idRamo = ram.ID AND rel.isActive = true LIMIT $inicio, $cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -21,10 +21,9 @@ $query = "SELECT rel.nombre, rel.ID, rel.idArea, ar.nombreArea, ram.nombreRamo, 
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
+            'ID' => $row['ID'],
             'nombre' => $row['nombre'],
-			'nombreArea' => $row['nombreArea'],
-            'codigoCuenta' => $row['codigoCuenta'],
+            'nombreArea' => $row['nombreArea'],
             'codigoRamo' => $row['codigoRamo'],
             'nombreRamo' => $row['nombreRamo'],
         );
@@ -34,7 +33,7 @@ $query = "SELECT rel.nombre, rel.ID, rel.idArea, ar.nombreArea, ram.nombreRamo, 
 } else {
     $cantidad_por_pagina = 6;
     $inicio = 0;
-    $query = "SELECT rel.nombre, rel.ID, rel.idArea, ar.nombreArea, ram.nombreRamo, ram.codigoRamo, ram.codigoCuenta FROM relator rel INNER JOIN ramos ram, relator_ramo rel_ram , area ar WHERE rel.ID = rel_ram.idRelator AND rel.idArea = ar.ID AND rel_ram.idRamo = ram.ID AND rel.isActive = true LIMIT $inicio, $cantidad_por_pagina";
+    $query = "SELECT rel.*, ar.nombreArea, ram.nombreRamo, ram.codigoRamo FROM relator rel INNER JOIN ramos ram, relator_ramo rel_ram , area ar WHERE rel.ID = rel_ram.idRelator AND rel.idArea = ar.ID AND rel_ram.idRamo = ram.ID AND rel.isActive = true LIMIT $inicio, $cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -43,10 +42,9 @@ $query = "SELECT rel.nombre, rel.ID, rel.idArea, ar.nombreArea, ram.nombreRamo, 
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
+            'ID' => $row['ID'],
             'nombre' => $row['nombre'],
-			'nombreArea' => $row['nombreArea'],
-            'codigoCuenta' => $row['codigoCuenta'],
+            'nombreArea' => $row['nombreArea'],
             'codigoRamo' => $row['codigoRamo'],
             'nombreRamo' => $row['nombreRamo'],
         );

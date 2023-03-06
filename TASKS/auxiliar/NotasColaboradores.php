@@ -25,111 +25,132 @@ if (isset($_GET['NotasColaboradores'])) {
 
 	switch ([$idCurso, $usuario]) {
 		case ['', '']:
-			$query1 = "SELECT ID, usuario, codigoCurso, num_evaluaciones, nota, ROUND(AVG(nota),2) as promedio, porcentaje from evaluaciones GROUP BY num_evaluaciones, usuario, codigoCurso order by codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.porcentaje, IF(eva.porcentaje >= 85,'Aprobado', IF (eva.porcentaje < 85 and eva.porcentaje > 0, 'Reprobado', IF(eva.estado='Pendiente', 'Pendiente','Deserción'))) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID GROUP BY eva.num_evaluaciones, eva.usuario, eva.codigoCurso order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
 			} else {
+
 				while ($row1 = mysqli_fetch_array($result1)) {
 					$json[] = array(
 						'ID' => $row1['ID'],
 						'usuario' => $row1['usuario'],
 						'codigoCurso' => $row1['codigoCurso'],
-						'num_evaluaciones' => $row1['num_evaluaciones'],
-						'nota' => $row1['nota'],
-						'promedio' => $row1['promedio'],
-						'porcentaje' => $row1['porcentaje']
+						'porcentaje' => $row1['porcentaje'],
+						'aprobado' => $row1['aprobado'],
+						'isEmpty' => false
 					);
 				}
 				$json_encode = json_encode($json);
 				echo $json_encode;
 			}
+
 			break;
 		case [!empty($idCurso), '']:
-			$query1 = "SELECT ID, usuario, codigoCurso, num_evaluaciones, nota, ROUND(AVG(nota),2) as promedio, porcentaje from evaluaciones WHERE idCurso = '$idCurso' GROUP BY usuario, num_evaluaciones order by codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.porcentaje, IF(eva.porcentaje >= 85,'Aprobado', IF (eva.porcentaje < 85 and eva.porcentaje > 0, 'Reprobado', IF(eva.estado='Pendiente', 'Pendiente','Deserción'))) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID AND ram.ID = '$idCurso' GROUP BY eva.usuario, eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
+				// echo json_encode("error");
 			} else {
-				while ($row1 = mysqli_fetch_array($result1)) {
-					$json[] = array(
-						'ID' => $row1['ID'],
-						'usuario' => $row1['usuario'],
-						'codigoCurso' => $row1['codigoCurso'],
-						'num_evaluaciones' => $row1['num_evaluaciones'],
-						'nota' => $row1['nota'],
-						'promedio' => $row1['promedio'],
-						'porcentaje' => $row1['porcentaje']
-					);
+				if (mysqli_num_rows($result1) > 1) {
+					while ($row1 = mysqli_fetch_array($result1)) {
+						$json[] = array(
+							'ID' => $row1['ID'],
+							'usuario' => $row1['usuario'],
+							'codigoCurso' => $row1['codigoCurso'],
+							'porcentaje' => $row1['porcentaje'],
+							'aprobado' => $row1['aprobado'],
+							'isEmpty' => false
+						);
+					}
+					$json_encode = json_encode($json,);
+					echo $json_encode;
+				} else {
+					$json[] = array('isEmpty' => true);
+					echo json_encode($json);
 				}
-				$json_encode = json_encode($json);
-				echo $json_encode;
 			}
 			break;
 
 		case ['', !empty($usuario)]:
-			$query1 = "SELECT ID, usuario, codigoCurso, num_evaluaciones, nota, ROUND(AVG(nota),2) as promedio, porcentaje from evaluaciones WHERE usuario = '$usuario' group by codigoCurso, num_evaluaciones order by codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.num_evaluaciones, eva.porcentaje, IF(eva.porcentaje >= 85,'Aprobado', IF (eva.porcentaje < 85 and eva.porcentaje > 0, 'Reprobado', IF(eva.estado='Pendiente', 'Pendiente','Deserción'))) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID AND eva.usuario = '$usuario' group by eva.codigoCurso, eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
 			} else {
-				while ($row1 = mysqli_fetch_array($result1)) {
-					$json[] = array(
-						'ID' => $row1['ID'],
-						'usuario' => $row1['usuario'],
-						'codigoCurso' => $row1['codigoCurso'],
-						'num_evaluaciones' => $row1['num_evaluaciones'],
-						'nota' => $row1['nota'],
-						'promedio' => $row1['promedio'],
-						'porcentaje' => $row1['porcentaje']
-					);
+				if (mysqli_num_rows($result1) > 1) {
+
+					while ($row1 = mysqli_fetch_array($result1)) {
+						$json[] = array(
+							'ID' => $row1['ID'],
+							'usuario' => $row1['usuario'],
+							'codigoCurso' => $row1['codigoCurso'],
+							'porcentaje' => $row1['porcentaje'],
+							'aprobado' => $row1['aprobado'],
+							'isEmpty' => false
+						);
+					}
+					$json_encode = json_encode($json);
+					echo $json_encode;
+				} else {
+
+					$json[] = array('isEmpty' => true);
+					echo json_encode($json);
 				}
-				$json_encode = json_encode($json);
-				echo $json_encode;
 			}
 			break;
 		case [!empty($idCurso), !empty($usuario)]:
-			$query1 = "SELECT ID, usuario, codigoCurso, num_evaluaciones, nota, ROUND(AVG(nota),2) as promedio, porcentaje from evaluaciones WHERE usuario = '$usuario' AND idCurso = '$idCurso' GROUP BY num_evaluaciones order by codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+			$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.porcentaje, IF(eva.porcentaje >= 85,'Aprobado', IF (eva.porcentaje < 85 and eva.porcentaje > 0, 'Reprobado', IF(eva.estado='Pendiente', 'Pendiente','Deserción'))) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID AND eva.usuario = '$usuario' AND ram.ID = '$idCurso' GROUP BY eva.num_evaluaciones order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 			$result1 = mysqli_query($conection, $query1);
 			if (!$result1) {
 				die('Query Failed' . mysqli_error($conection));
 			} else {
-				while ($row1 = mysqli_fetch_array($result1)) {
-					$json[] = array(
-						'ID' => $row1['ID'],
-						'usuario' => $row1['usuario'],
-						'codigoCurso' => $row1['codigoCurso'],
-						'num_evaluaciones' => $row1['num_evaluaciones'],
-						'nota' => $row1['nota'],
-						'promedio' => $row1['promedio'],
-						'porcentaje' => $row1['porcentaje']
-					);
+				if (mysqli_num_rows($result1) >= 1) {
+
+					while ($row1 = mysqli_fetch_array($result1)) {
+						$json[] = array(
+							'ID' => $row1['ID'],
+							'usuario' => $row1['usuario'],
+							'codigoCurso' => $row1['codigoCurso'],
+							'porcentaje' => $row1['porcentaje'],
+							'aprobado' => $row1['aprobado'],
+							'isEmpty' => false
+						);
+					}
+					$json_encode = json_encode($json);
+					echo $json_encode;
+				} else {
+					$json[] = array('isEmpty' => true);
+					echo json_encode($json);
 				}
-				$json_encode = json_encode($json);
-				echo $json_encode;
 			}
 			break;
 	}
 } else {
 	$cantidad_por_pagina = 10;
 	$inicio = 0;
-	$query1 = "SELECT ID, usuario, codigoCurso, num_evaluaciones, nota, ROUND(AVG(nota),2) as promedio, porcentaje from evaluaciones GROUP BY num_evaluaciones, usuario, codigoCurso order by codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
+	$query1 = "SELECT eva.ID, eva.usuario, eva.codigoCurso, eva.porcentaje, IF(eva.porcentaje >= 85,'Aprobado', IF (eva.porcentaje < 85 and eva.porcentaje > 0, 'Reprobado', IF(eva.estado='Pendiente', 'Pendiente','Deserción'))) as aprobado from evaluaciones eva INNER JOIN ramos ram, cursos cur WHERE eva.codigoCurso = cur.codigoCurso AND cur.idRamo = ram.ID GROUP BY eva.num_evaluaciones, eva.usuario, eva.codigoCurso order by eva.codigoCurso ASC LIMIT $inicio, $cantidad_por_pagina";
 	$result1 = mysqli_query($conection, $query1);
 	if (!$result1) {
 		die('Query Failed' . mysqli_error($conection));
 	} else {
-		while ($row1 = mysqli_fetch_array($result1)) {
-			$json[] = array(
-				'ID' => $row1['ID'],
-				'usuario' => $row1['usuario'],
-				'codigoCurso' => $row1['codigoCurso'],
-				'num_evaluaciones' => $row1['num_evaluaciones'],
-				'nota' => $row1['nota'],
-				'promedio' => $row1['promedio'],
-				'porcentaje' => $row1['porcentaje']
-			);
+		if (mysqli_num_rows($result1) > 1) {
+
+			while ($row1 = mysqli_fetch_array($result1)) {
+				$json[] = array(
+					'ID' => $row1['ID'],
+					'usuario' => $row1['usuario'],
+					'codigoCurso' => $row1['codigoCurso'],
+					'porcentaje' => $row1['porcentaje'],
+					'aprobado' => $row1['aprobado'],
+					'isEmpty' => false
+
+				);
+			}
+			echo json_encode(['isEmpty' => true]);
+		} else {
+			echo json_encode(['isEmpty' => true]);
 		}
-		$json_encode = json_encode($json);
-		echo $json_encode;
 	}
 }

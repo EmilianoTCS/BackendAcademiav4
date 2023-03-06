@@ -12,22 +12,37 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT ID, atributo as fechas from asistencias WHERE idCurso = '$ID' group by atributo";
+    $query = "SELECT asist.ID, asist.atributo as fechas from asistencias asist INNER JOIN cursos cur, ramos ram WHERE asist.codigoCurso = cur.codigoCurso AND ram.ID = '$ID' AND usuario != 'null' AND cur.idRamo = ram.ID group by asist.atributo";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
-    }
-    $json = array();
-    while ($row = mysqli_fetch_array($result)) {
+    } else {
 
-        $json[] = array(
-            'fechas' => $row["fechas"],
-            'ID' => $row["ID"]
-        );
+        $result2 = mysqli_num_rows($result);
+        if ($result2 < 1) {
+            $json[] = array(
+                'fechas' => null,
+                'ID' => null,
+                'isEmpty' => true
+            );
+            $jsonstring = json_encode($json);
+            echo $jsonstring;
+        } else {
+            $json = array();
+            while ($row = mysqli_fetch_array($result)) {
+
+                $json[] = array(
+                    'fechas' => $row["fechas"],
+                    'ID' => $row["ID"],
+                    'isEmpty' => false
+
+                );
+            }
+            $jsonstring = json_encode($json);
+            echo $jsonstring;
+        }
     }
-    $jsonstring = json_encode($json);
-    echo $jsonstring;
 } else {
     echo json_encode("Error");
 }

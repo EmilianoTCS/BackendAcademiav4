@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT * FROM relator WHERE ID = '$ID'";
+    $query = "SELECT rel.*, area.* FROM relator rel INNER JOIN area area WHERE rel.ID = '$ID' AND rel.idArea = area.ID";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {
@@ -21,8 +21,10 @@ if (isset($_GET['ID'])) {
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-            'IDEdit' => $row['ID'],
-            'nombreEdit' => $row['nombre'],
+            'ID' => $row['ID'],
+            'nombre' => $row['nombre'],
+            'idArea' => $row['idArea'],
+            'nombreArea' => $row['nombreArea'],
         );
     }
     $jsonstring = json_encode($json);

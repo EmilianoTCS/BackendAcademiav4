@@ -11,6 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['updateStatePrerequisito'])) {
   $data = json_decode(file_get_contents("php://input"));
   $ID = $data->ID;
+  $IDCurso = $data->IDCurso;
 
   date_default_timezone_set("America/Argentina/Buenos_Aires");
   $date = date('Y-m-d H:i:s');
@@ -20,7 +21,30 @@ if (isset($_GET['updateStatePrerequisito'])) {
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  echo json_encode("successEdited");
+
+  $query2 = "SELECT req.*, ram.codigoRamo, ram.nombreRamo FROM requisitos_curso req INNER JOIN ramos ram WHERE req.ID = '$ID' AND req.idCurso = '$IDCurso' AND req.pre_requisito = ram.ID";
+  $result2 = mysqli_query($conection, $query2);
+  if (!$result2) {
+    die('Query Failed' . mysqli_error($conection));
+  }
+  $json = array();
+  while ($row = mysqli_fetch_array($result2)) {
+
+    $json[] = array(
+      'ID' => $row['ID'],
+      'nombreRamo' => $row['nombreRamo'],
+      'pre_requisito' => $row['pre_requisito'],
+      'codigoRamo' => $row['codigoRamo'],
+      'fechaActualizacion' => $row['fechaActualizacion'],
+      'isActive' => $row['isActive'],
+      'successEdited' => "successEdited",
+      'successEnabled' => "successEnabled",
+
+
+    );
+  }
+  $jsonstring = json_encode($json);
+  echo $jsonstring;
   // $usuario = $_SESSION['idCuenta'];
   // $log = new Log("../security/reports/log.txt");
   // $log->writeLine("I", "[] ha cambiado el estado del curso: [ de ]");

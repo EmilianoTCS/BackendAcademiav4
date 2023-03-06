@@ -75,7 +75,7 @@ if ($result3 > 0) {
 // PORCENTAJE DE CURSOS
 $porcentajeCursosTerminados = ($cantidadFinalizado * 100) / $totalCursos;
 // PORCENTAJE DE APROBADOS
-$porcentajeAprobados = ($totalAprobados * 100) / $totalColaboradores;
+$porcentajeAprobados = round((($totalAprobados * 100) / $totalColaboradores), 2, 2);
 
 
 
@@ -85,11 +85,9 @@ $json[] = array(
     'totalAprobados' => $totalAprobados,
     'totalFinalizados' => $cantidadFinalizado,
     'totalActivos' => $cantidadEnCurso,
-	'porcentajeFinalizados' => $porcentajeCursosTerminados,
+    'porcentajeFinalizados' => $porcentajeCursosTerminados,
     'totalPendientes' => $cantidadPendientes
 );
 
 $json_string = json_encode($json);
 echo $json_string;
-
-?>

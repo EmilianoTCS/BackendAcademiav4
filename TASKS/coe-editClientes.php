@@ -19,19 +19,41 @@ if (isset($_GET['editarCliente'])) {
     $telefonoReferente = $data->telefonoReferente;
     $cargoReferente = $data->cargoReferente;
 
+    if (!empty($ID)) {
 
-    $query = "UPDATE clientes SET tipo_cliente = '$tipo_cliente', nombreCliente = '$nombreCliente', referente = '$referente', correoReferente = '$correoReferente', telefonoReferente = '$telefonoReferente', cargoReferente = '$cargoReferente'
+        $query = "UPDATE clientes SET tipo_cliente = '$tipo_cliente', nombreCliente = '$nombreCliente', referente = '$referente', correoReferente = '$correoReferente', telefonoReferente = '$telefonoReferente', cargoReferente = '$cargoReferente'
               WHERE ID = '$ID' ";
-    $result = mysqli_query($conection, $query);
+        $result = mysqli_query($conection, $query);
 
-    if (!$result) {
-        die('Query Failed' . mysqli_error($conection));
+        if (!$result) {
+            die('Query Failed' . mysqli_error($conection));
+        }
+        $querySelect = "SELECT * from clientes WHERE ID = '$ID'";
+        $resultSelect = mysqli_query($conection, $querySelect);
+        if (!$resultSelect) {
+            die('Query Failed' . mysqli_error($conection));
+        } else {
+            $json = array();
+            while ($rowSelect = mysqli_fetch_array($resultSelect)) {
+                $json[] = array(
+                    'ID' => $rowSelect['ID'],
+                    'tipo_cliente' => $rowSelect['tipo_cliente'],
+                    'nombreCliente' => $rowSelect['nombreCliente'],
+                    'referente' => $rowSelect['referente'],
+                    'correoReferente' => $rowSelect['correoReferente'],
+                    'cargoReferente' => $rowSelect['cargoReferente'],
+                    'telefonoReferente' => $rowSelect['telefonoReferente'],
+                    'successEdited' => 'successEdited'
+                );
+            }
+            $jsonstring = json_encode($json);
+            echo $jsonstring;
+        }
+        // $usuario = $_SESSION['idCuenta'];
+        // $log = new Log("../security/reports/log.txt");
+        // $log->writeLine("I", "[usuario] ha editado los datos: []");
+        // $log->close();
     }
-    echo json_encode("successEdited");
-    // $usuario = $_SESSION['idCuenta'];
-    // $log = new Log("../security/reports/log.txt");
-    // $log->writeLine("I", "[usuario] ha editado los datos: []");
-    // $log->close();
 } else {
     echo json_encode("Error");
 }

@@ -12,46 +12,53 @@ include("../security/logBuilder.php");
 if (isset($_GET['insertarEvento'])) {
     $data = json_decode(file_get_contents("php://input"));
     $titulo = $data->titulo;
-    $duracion = $data->duracion;
+    $duracion = strtotime($data->duracion) - strtotime('midnight');
     $descripcion = $data->descripcion;
-    $fechas = $data->fechasFormateadas;
+    $fechas = $data->fechasOrdenadas;
     $longitud = count($fechas);
     $primerElemento = reset($fechas);
     $ultimoElemento = end($fechas);
+    $json = array();
+
+    if (!empty($titulo) && !empty($descripcion)) {
+
+        for ($i = 0; $i < $longitud; ++$i) {
+            $createDateTemporal = date_create($fechas[$i]);
+            $formatTimeTemporal = date_format($createDateTemporal, 'H:i:s');
+            $formatDateTemporal = date_format($createDateTemporal, 'Y-m-d');
+
+            $hora1 = strtotime($formatTimeTemporal);
+            $horaFin = date('H:i:s', $hora1 + $duracion);
 
 
-    for ($i = 0; $i < $longitud; ++$i) {
-        $createDateTemporal = date_create($fechas[$i]);
-        $formatTimeTemporal = date_format($createDateTemporal, 'H:i:s');
-        $formatDateTemporal = date_format($createDateTemporal, 'Y-m-d');
-
-        $hora1 = strtotime($formatTimeTemporal);
-        $hora2 = strtotime($duracion);
-        $horaFin = date('H:i:s', $hora1 + $hora2);
+            $fechaInicioTemporal = date_create($primerElemento);
+            $fechaFinalTemporal = date_create($ultimoElemento);
 
 
-        $fechaInicioTemporal = date_create($primerElemento);
-        $fechaFinalTemporal = date_create($ultimoElemento);
+            $queryVerify = "SELECT * FROM eventos WHERE fecha_hora = '$fechas[$i]' AND hora_inicio <= time('$formatTimeTemporal') AND hora_fin >= time('$horaFin') ";
+            $resultVerify = mysqli_query($conection, $queryVerify);
 
-
-        $queryVerify = "SELECT * FROM eventos WHERE fecha_hora = '$fechas[$i]' AND hora_inicio <= time('$formatTimeTemporal') AND hora_fin >= time('$horaFin') ";
-        $resultVerify = mysqli_query($conection, $queryVerify);
-
-        if (mysqli_num_rows($resultVerify) >= 1) {
-            echo json_encode('errorRepeated');
-        } else {
-            $query = "INSERT INTO eventos (titulo, descripcion, fecha_hora, hora_inicio, hora_fin, isActive) VALUES ('$titulo','$descripcion', '$fechas[$i]','$formatTimeTemporal','$horaFin', true);";
-            $result = mysqli_query($conection, $query);
-            if (!$result) {
-                die('Query Failed' . mysqli_error($conection));
+            if (mysqli_num_rows($resultVerify) >= 1) {
+                array_push($json, 'errorRepeated');
             } else {
-                echo json_encode("successCreated");
-                // $usuario = $_SESSION['codigoCuenta'];
-                // $log = new Log("../security/reports/log.txt");
-                // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
-                // $log->close();
+                if (strtotime($primerElemento) >= strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) <= strtotime($ultimoElemento)) {
+                    $query = "INSERT INTO eventos (titulo, descripcion, fecha_hora, hora_inicio, hora_fin, isActive) VALUES ('$titulo','$descripcion', '$fechas[$i]','$formatTimeTemporal','$horaFin', true);";
+                    $result = mysqli_query($conection, $query);
+                    if (!$result) {
+                        die('Query Failed' . mysqli_error($conection));
+                    } else {
+                        array_push($json, 'successCreated');
+                        // $usuario = $_SESSION['codigoCuenta'];
+                        // $log = new Log("../security/reports/log.txt");
+                        // $log->writeLine("I", " ha agregado el curso con los datos: [$codigoCuenta, $codigoCurso, $codigoRamo, $dateformat_inicio, $dateformat_fin, $horaInicio, $horaFin]");
+                        // $log->close();
+                    }
+                } else {
+                    array_push($json, 'errorFechas');
+                }
             }
         }
+        echo json_encode(array_unique($json));
     }
 } else {
     echo json_encode("Error");
