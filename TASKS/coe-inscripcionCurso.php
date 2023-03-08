@@ -92,36 +92,42 @@ if (isset($_GET['inscripcionCurso'])) {
             if (!empty($fechasInicioFin) && !empty($fechasInicioFin)) {
                 if (strtotime($fechasInicioFin[0]['fechaInicio']) > strtotime(date('Y-m-d H:i:s', time())) && strtotime(date('Y-m-d H:i:s', time())) < strtotime($fechasInicioFin[0]['fechaFin'])) {
 
-                    $query3 = "INSERT INTO aprobacion ( idCuenta, codigoCuenta, codigoCurso, usuario, porcentaje_aprobacion) VALUES ('$idCuenta', (SELECT codigoCuenta from cuentas WHERE ID = '$idCuenta'),(SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso'), '$usuario', '$porcentaje_aprobacion')";
-
-                    $result3 = mysqli_query($conection, $query3);
-                    if (!$result3) {
-                        die('Query failed' . mysqli_error($conection));
+                    $queryVerify = "SELECT * FROM asistencias WHERE usuario = '$usuario'";
+                    $resultVerify = mysqli_query($conection, $queryVerify);
+                    if (mysqli_num_rows($resultVerify) >= 1) {
+                        array_push($json, 'errorInscripcionExistente');
                     } else {
+                        $query3 = "INSERT INTO aprobacion ( idCuenta, codigoCuenta, codigoCurso, usuario, porcentaje_aprobacion) VALUES ('$idCuenta', (SELECT codigoCuenta from cuentas WHERE ID = '$idCuenta'),(SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso'), '$usuario', '$porcentaje_aprobacion')";
 
-                        $query4 = "INSERT INTO evaluaciones (idCuenta, idPersona, codigoCuenta, codigoCurso, usuario, num_evaluaciones, estado, puntaje, nota, porcentaje) VALUES ('$idCuenta',(SELECT ID from personas WHERE usuario = '$usuario'), (SELECT codigoCuenta from cuentas WHERE ID = '$idCuenta'),(SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso' ), '$usuario', '1','Pendiente','0','0','0')";
-                        $result4 = mysqli_query($conection, $query4);
-
-                        if (!$result4) {
+                        $result3 = mysqli_query($conection, $query3);
+                        if (!$result3) {
                             die('Query failed' . mysqli_error($conection));
                         } else {
 
-                            $query5 = "UPDATE asistencias SET idPersona = (SELECT ID FROM personas WHERE usuario = '$usuario'), usuario = '$usuario' WHERE
-                        codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso') AND usuario = 'null'";
-                            $result5 = mysqli_query($conection, $query5);
+                            $query4 = "INSERT INTO evaluaciones (idCuenta, idPersona, codigoCuenta, codigoCurso, usuario, num_evaluaciones, estado, puntaje, nota, porcentaje) VALUES ('$idCuenta',(SELECT ID from personas WHERE usuario = '$usuario'), (SELECT codigoCuenta from cuentas WHERE ID = '$idCuenta'),(SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso' ), '$usuario', '1','Pendiente','0','0','0')";
+                            $result4 = mysqli_query($conection, $query4);
 
-                            if (!$result5) {
+                            if (!$result4) {
                                 die('Query failed' . mysqli_error($conection));
                             } else {
-                                foreach ($fechas as $valores) {
-                                    $query6 = "INSERT INTO asistencias (idCuenta, idPersona, codigoCurso, usuario, atributo, valor) VALUES ('$valores[idCuenta]','0', (SELECT MAX(codigoCurso) from cursos WHERE idRamo ='$idCurso'), 'null',
-                                '$valores[atributo]', '0')";
-                                    $result6 = mysqli_query($conection, $query6);
 
-                                    if (!$result6) {
-                                        die('Query Failed' . mysqli_error($conection));
-                                    } else {
-                                        array_push($json, 'successCreated');
+                                $query5 = "UPDATE asistencias SET idPersona = (SELECT ID FROM personas WHERE usuario = '$usuario'), usuario = '$usuario' WHERE
+                        codigoCurso = (SELECT MAX(codigoCurso) from cursos WHERE idRamo = '$idCurso') AND usuario = 'null'";
+                                $result5 = mysqli_query($conection, $query5);
+
+                                if (!$result5) {
+                                    die('Query failed' . mysqli_error($conection));
+                                } else {
+                                    foreach ($fechas as $valores) {
+                                        $query6 = "INSERT INTO asistencias (idCuenta, idPersona, codigoCurso, usuario, atributo, valor) VALUES ('$valores[idCuenta]','0', (SELECT MAX(codigoCurso) from cursos WHERE idRamo ='$idCurso'), 'null',
+                                '$valores[atributo]', '0')";
+                                        $result6 = mysqli_query($conection, $query6);
+
+                                        if (!$result6) {
+                                            die('Query Failed' . mysqli_error($conection));
+                                        } else {
+                                            array_push($json, 'successCreated');
+                                        }
                                     }
                                 }
                             }
