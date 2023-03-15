@@ -9,9 +9,9 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
-if(isset($_GET['clientes'])) {
-	
-    $query = "SELECT ID, tipo_cliente, nombreCliente, correoReferente, telefonoReferente, isActive, fechaActualizacion,ultimoUsuario from clientes WHERE ID != 0";
+if (isset($_GET['clientes'])) {
+
+    $query = "SELECT ID, tipo_cliente, nombreCliente, correoReferente, telefonoReferente, isActive, fechaActualizacion,ultimoUsuario from clientes WHERE ID != 0 ORDER BY ID ASC";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -20,15 +20,15 @@ if(isset($_GET['clientes'])) {
     $json = array();
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
-			'ID' => $row['ID'],
+            'ID' => $row['ID'],
             'tipo_cliente' => $row['tipo_cliente'],
             'nombreCliente' => $row['nombreCliente'],
-			'correoReferente' => $row['correoReferente'],
-			'telefonoReferente' => $row['telefonoReferente'],
-			'date' => $row['fechaActualizacion'],
+            'correoReferente' => $row['correoReferente'],
+            'telefonoReferente' => $row['telefonoReferente'],
+            'date' => $row['fechaActualizacion'],
             'usuario' => $row['ultimoUsuario'],
 
-			'isActive' => $row['isActive']
+            'isActive' => $row['isActive']
         );
     }
     $jsonstring = json_encode($json);

@@ -20,7 +20,7 @@ if (isset($_GET['updateStateCursos'])) {
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-  $query2 = "SELECT ID, codigoRamo, codigoCurso, isActive, fechaActualizacion,ultimoUsuario from cursos WHERE ID = '$ID'";
+  $query2 = "SELECT cur.ID, ram.nombreRamo, cur.codigoCurso, cur.isActive, cur.fechaActualizacion, cur.ultimoUsuario from cursos cur INNER JOIN ramos ram WHERE cur.ID = '$ID' AND cur.idRamo = ram.ID";
   $result2 = mysqli_query($conection, $query2);
   if (!$result2) {
     die('Query Failed' . mysqli_error($conection));
@@ -30,8 +30,8 @@ if (isset($_GET['updateStateCursos'])) {
 
     $json[] = array(
       'ID' => $row['ID'],
-      'codigoRamo' => $row['codigoRamo'],
       'codigoCurso' => $row['codigoCurso'],
+      'codigoRamo' => $row['nombreRamo'],
       'date' => $row['fechaActualizacion'],
       'usuario' => $row['ultimoUsuario'],
       'isActive' => $row['isActive'],

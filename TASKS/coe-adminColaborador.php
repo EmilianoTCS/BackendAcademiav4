@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['colaborador'])) {
 
-    $query = "SELECT ID, nombre_completo, usuario,area, isActive, fechaActualizacion,ultimoUsuario from personas WHERE ID != 0";
+    $query = "SELECT ID, nombre_completo, usuario,area, isActive, fechaActualizacion,ultimoUsuario from personas WHERE ID != 0 ORDER BY ID ASC";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
