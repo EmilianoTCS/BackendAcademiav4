@@ -31,7 +31,7 @@ if (isset($_GET['updateStateCursos'])) {
     $json[] = array(
       'ID' => $row['ID'],
       'codigoCurso' => $row['codigoCurso'],
-      'codigoRamo' => $row['nombreRamo'],
+      'nombreRamo' => $row['nombreRamo'],
       'date' => $row['fechaActualizacion'],
       'usuario' => $row['ultimoUsuario'],
       'isActive' => $row['isActive'],
