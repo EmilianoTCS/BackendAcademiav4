@@ -23,7 +23,7 @@ if (isset($_GET['insertarRamo'])) {
 
 
     if (mysqli_num_rows($resultVerify) >= 2) {
-        echo json_encode('errorRegisterRepeated');
+        echo json_encode(['successCreated' => 'errorRegisterRepeated']);
     } else {
         if (!empty($codigoRamo) && !empty($nombreRamo)) {
 
@@ -93,7 +93,7 @@ if (isset($_GET['insertarRamo'])) {
                                         'nombre' => $row['nombre'],
                                         'nombreArea' => $row['nombreArea'],
                                         'isActive' => $row['isActive'],
-                                        'successCreatedRamos' => 'successCreatedRamos'
+                                        'successCreated' => 'successCreated'
                                     );
                                 }
                                 $jsonstring = json_encode($json);
