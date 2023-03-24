@@ -22,8 +22,13 @@ if (isset($_GET['insertarRamo'])) {
     $resultVerify = mysqli_query($conection, $queryVerify);
 
 
-    if (mysqli_num_rows($resultVerify) >= 2) {
-        echo json_encode(['successCreated' => 'errorRegisterRepeated']);
+    if (mysqli_num_rows($resultVerify) >= 1) {
+        $json[] = array(
+            'successCreated' => 'errorRegisterRepeated'
+        );
+
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
     } else {
         if (!empty($codigoRamo) && !empty($nombreRamo)) {
 
