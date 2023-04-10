@@ -25,6 +25,7 @@ if (isset($_GET['listadoEvaluaciones'])) {
             'nombreCliente' => $row['nombreCliente'],
             'estado' => $row['estado'],
             'fechaActualizacion' => $row['fechaActualizacion'],
+            'usuario' => $row['ultimoUsuario'],
             'isActive' => $row['isActive']
         );
     }

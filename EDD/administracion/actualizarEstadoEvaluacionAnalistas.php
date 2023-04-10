@@ -11,11 +11,12 @@ include('../../model/conexion.php');
 if (isset($_GET['actualizarEvaluacion'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
+    $usuario = $data->usuario;
 
     if (!empty($ID)) {
 
 
-        $query = "UPDATE `edd-evaluacion-analistas-automatizadores` SET isActive = !isActive, fechaActualizacion = current_timestamp() WHERE ID = '$ID' ";
+        $query = "UPDATE `edd-evaluacion-analistas-automatizadores` SET isActive = !isActive, fechaActualizacion = current_timestamp(), ultimoUsuario = '$usuario' WHERE ID = '$ID' ";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {
@@ -37,6 +38,7 @@ if (isset($_GET['actualizarEvaluacion'])) {
                     'nombreCliente' => $row['nombreCliente'],
                     'estado' => $row['estado'],
                     'fechaActualizacion' => $row['fechaActualizacion'],
+                    'usuario' => $row['ultimoUsuario'],
                     'isActive' => $row['isActive'],
                     'successEdited' => "successEdited"
                 );

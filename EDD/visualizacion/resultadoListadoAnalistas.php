@@ -10,10 +10,11 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['pagina'])) {
     $data = json_decode(file_get_contents("php://input"));
     $num_boton = $data->num_boton;
+    $codigoEvaluacion = $data->codigoEvaluacion; 
     $cantidad_por_pagina = 6;
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
-
-    $query = "SELECT * FROM `edd-evaluacion-analistas-automatizadores` WHERE isActive = true AND ID != 0 order by ID ASC LIMIT $inicio,$cantidad_por_pagina";
+    
+    $query = "SELECT * FROM `edd-resultado-evaluacion-analistas-automatizadores` WHERE ID != 0 AND codigoEvaluacion = '$codigoEvaluacion' order by ID ASC LIMIT $inicio,$cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -23,19 +24,20 @@ if (isset($_GET['pagina'])) {
         $json[] = array(
             'ID' => $row['ID'],
             'codigoEvaluacion' => $row['codigoEvaluacion'],
-            'fechaInicio' => $row['fechaInicio'],
-            'fechaFin' => $row['fechaFin'],
-            'proyecto' => $row['proyecto'],
-            'nombreCliente' => $row['nombreCliente'],
-            'estado' => $row['estado'],
+            'NomAp' => $row['NomAp'],
+            'NomApAnalista' => $row['NomApAnalista'],
+            'numPregunta' => $row['numPregunta'],
+            'resultado' => $row['resultado'],
         );
     }
     $jsonstring = json_encode($json);
     echo $jsonstring;
 } else {
+    $data = json_decode(file_get_contents("php://input"));
+    $codigoEvaluacion = $data->codigoEvaluacion; 
     $cantidad_por_pagina = 6;
-
-    $query = "SELECT * FROM `edd-evaluacion-analistas-automatizadores` WHERE isActive = true order by ID ASC LIMIT $cantidad_por_pagina";
+    
+    $query = "SELECT * FROM `edd-resultado-evaluacion-analistas-automatizadores` WHERE ID != 0 AND codigoEvaluacion = '$codigoEvaluacion' order by ID ASC LIMIT $cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -45,12 +47,10 @@ if (isset($_GET['pagina'])) {
         $json[] = array(
             'ID' => $row['ID'],
             'codigoEvaluacion' => $row['codigoEvaluacion'],
-            'fechaInicio' => $row['fechaInicio'],
-            'fechaFin' => $row['fechaFin'],
-            'proyecto' => $row['proyecto'],
-            'idCliente' => $row['idCliente'],
-            'estado' => $row['estado'],
-
+            'NomAp' => $row['NomAp'],
+            'NomApAnalista' => $row['NomApAnalista'],
+            'numPregunta' => $row['numPregunta'],
+            'resultado' => $row['resultado'],
         );
     }
     $jsonstring = json_encode($json);
