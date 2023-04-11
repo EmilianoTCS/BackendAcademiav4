@@ -10,11 +10,11 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['pagina'])) {
     $data = json_decode(file_get_contents("php://input"));
     $num_boton = $data->num_boton;
-    $codigoEvaluacion = $data->codigoEvaluacion; 
+    $codigoEvaluacion = $data->codigoEvaluacion;
     $cantidad_por_pagina = 6;
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
-    
-    $query = "SELECT * FROM `edd-resultado-evaluacion-analistas-automatizadores` WHERE ID != 0 AND codigoEvaluacion = '$codigoEvaluacion' order by ID ASC LIMIT $inicio,$cantidad_por_pagina";
+
+    $query = "SELECT * FROM `edd-resultados-evaluacion-analistas-automatizadores` WHERE ID != 0 AND codigoEvaluacion = '$codigoEvaluacion' order by ID ASC LIMIT $inicio,$cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -34,10 +34,10 @@ if (isset($_GET['pagina'])) {
     echo $jsonstring;
 } else {
     $data = json_decode(file_get_contents("php://input"));
-    $codigoEvaluacion = $data->codigoEvaluacion; 
+    $codigoEvaluacion = $data->codigoEvaluacion;
     $cantidad_por_pagina = 6;
-    
-    $query = "SELECT * FROM `edd-resultado-evaluacion-analistas-automatizadores` WHERE ID != 0 AND codigoEvaluacion = '$codigoEvaluacion' order by ID ASC LIMIT $cantidad_por_pagina";
+
+    $query = "SELECT * FROM `edd-resultados-evaluacion-analistas-automatizadores` WHERE ID != 0 AND codigoEvaluacion = '$codigoEvaluacion' order by ID ASC LIMIT $cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
