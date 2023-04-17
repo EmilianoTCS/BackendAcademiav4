@@ -142,6 +142,39 @@ function pageCounter()
         }
     }
 
+    // CONTADOR PARA PROYECTOS---------------------------
+    $queryCounter13 = "SELECT COUNT(ID) as total_proyectos FROM `proyectos` WHERE isActive = true";
+    $resultCounter13 = mysqli_query($conection, $queryCounter13);
+    if (!$resultCounter13) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter13 = mysqli_fetch_array($resultCounter13)) {
+            $totalRegistros_proyectos = $rowCounter13['total_proyectos'];
+            $cantidad_paginas_proyectos = ceil($totalRegistros_proyectos / $Cantidad_por_pagina);
+        }
+    }
+    // CONTADOR PARA EQUIPOS---------------------------
+    $queryCounter14 = "SELECT COUNT(ID) as total_equipos FROM `equipos` WHERE isActive = true";
+    $resultCounter14 = mysqli_query($conection, $queryCounter14);
+    if (!$resultCounter14) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter14 = mysqli_fetch_array($resultCounter14)) {
+            $totalRegistros_equipos = $rowCounter14['total_equipos'];
+            $cantidad_paginas_equipos = ceil($totalRegistros_equipos / $Cantidad_por_pagina);
+        }
+    }
+    // CONTADOR PARA EMPLEADOS---------------------------
+    $queryCounter15 = "SELECT COUNT(ID) as total_empleados FROM `empleados` WHERE isActive = true";
+    $resultCounter15 = mysqli_query($conection, $queryCounter15);
+    if (!$resultCounter15) {
+        die('Query Failed' . mysqli_error($conection));
+    } else {
+        while ($rowCounter15 = mysqli_fetch_array($resultCounter15)) {
+            $totalRegistros_empleados = $rowCounter15['total_empleados'];
+            $cantidad_paginas_empleados = ceil($totalRegistros_empleados / $Cantidad_por_pagina);
+        }
+    }
 
 
     return [
@@ -157,6 +190,9 @@ function pageCounter()
         'cantidad_paginas_evaluaciones' => $cantidad_paginas_evaluaciones,
         'cantidad_paginas_EDDReferentes' => $cantidad_paginas_EDDReferentes,
         'cantidad_paginas_EDDAnalistas' => $cantidad_paginas_EDDAnalistas,
+        'cantidad_paginas_proyectos' => $cantidad_paginas_proyectos,
+        'cantidad_paginas_equipos' => $cantidad_paginas_equipos,
+        'cantidad_paginas_empleados' => $cantidad_paginas_empleados,
 
     ];
 }
