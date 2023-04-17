@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT equ.*, proy.nombreProyecto, proy.ID as idProyecto, emp.nombreApellido, emp.ID  as idEmpleado, ar.nombreArea,ar.ID as idArea FROM equipos equ INNER JOIN proyectos proy, area ar , empleados emp WHERE proy.ID = equ.proyecto AND equ.idEmpleado = emp.ID AND ar.ID = equ.idArea AND equ.ID = '$ID'";
+    $query = "SELECT * FROM proyectos WHERE ID = '$ID'";
 
     $result = mysqli_query($conection, $query);
 
@@ -23,14 +23,10 @@ if (isset($_GET['ID'])) {
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
             'ID' => $row['ID'],
-            'nombreEquipo' => $row['nombreEquipo'],
-            'cliente' => $row['cliente'],
             'nombreProyecto' => $row['nombreProyecto'],
-            'idProyecto' => $row['idProyecto'],
-            'nombreApellido' => $row['nombreApellido'],
-            'idEmpleado' => $row['idEmpleado'],
-            'nombreArea' => $row['nombreArea'],
-            'idArea' => $row['idArea']
+            'cliente' => $row['cliente'],
+            'cuentaJP' => $row['cuentaJP'],
+            'servicio' => $row['servicio']
         );
     }
     $jsonstring = json_encode($json);

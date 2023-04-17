@@ -9,25 +9,24 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include('../model/conexion.php');
 include("../security/logBuilder.php");
 
-if (isset($_GET['editEquipos'])) {
+if (isset($_GET['editProyectos'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $nombreEquipo = $data->nombreEquipo;
-    $cliente = $data->cliente;
     $nombreProyecto = $data->nombreProyecto;
-    $nombreApellido = $data->nombreApellido;
-    $nombreArea = $data->nombreArea;
+    $cliente = $data->cliente;
+    $cuentaJP = $data->cuentaJP;
+    $servicio = $data->servicio;
 
 
     if (!empty($ID)) {
 
-        $query = "UPDATE equipos SET nombreEquipo = '$nombreEquipo', cliente = '$cliente', proyecto = '$nombreProyecto',idEmpleado = '$nombreApellido', idArea = '$nombreArea' WHERE ID = '$ID' ";
+        $query = "UPDATE proyectos SET nombreProyecto = '$nombreProyecto', cliente = '$cliente', cuentaJP = '$cuentaJP',servicio = '$servicio' WHERE ID = '$ID' ";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
         }
-        $querySelect = "SELECT equip.*, proy.nombreProyecto, emp.nombreApellido, ar.nombreArea from equipos equip INNER JOIN empleados emp, area ar, proyectos proy WHERE equip.proyecto = proy.ID AND equip.idEmpleado = emp.ID AND equip.idArea = ar.ID AND equip.ID = '$ID'";
+        $querySelect = "SELECT * FROM proyectos WHERE ID = '$ID'";
         $resultSelect = mysqli_query($conection, $querySelect);
         if (!$resultSelect) {
             die('Query Failed' . mysqli_error($conection));
@@ -36,11 +35,10 @@ if (isset($_GET['editEquipos'])) {
             while ($row = mysqli_fetch_array($resultSelect)) {
                 $json[] = array(
                     'ID' => $row['ID'],
-                    'nombreEquipo' => $row['nombreEquipo'],
-                    'cliente' => $row['cliente'],
                     'nombreProyecto' => $row['nombreProyecto'],
-                    'nombreApellido' => $row['nombreApellido'],
-                    'nombreArea' => $row['nombreArea'],
+                    'cliente' => $row['cliente'],
+                    'cuentaJP' => $row['cuentaJP'],
+                    'servicio' => $row['servicio'],
                     'successEdited' => 'successEdited'
                 );
             }
