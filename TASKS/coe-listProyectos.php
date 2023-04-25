@@ -13,7 +13,7 @@ if (isset($_GET['pagina'])) {
     $cantidad_por_pagina = 6;
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
 
-    $query = "SELECT * FROM proyectos WHERE isActive = true LIMIT $inicio, $cantidad_por_pagina";
+    $query = "CALL coe_listProyectos('$inicio', '$cantidad_por_pagina')";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -35,7 +35,7 @@ if (isset($_GET['pagina'])) {
     $cantidad_por_pagina = 6;
     $inicio = 0;
 
-    $query = "SELECT * FROM proyectos WHERE isActive = true LIMIT $inicio, $cantidad_por_pagina";
+    $query = "CALL coe_listProyectos('$inicio', '$cantidad_por_pagina')";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['relator'])) {
 
-    $query = "SELECT ID, nombre, isActive, fechaActualizacion ,ultimoUsuario from relator WHERE ID != 0 ORDER BY ID ASC";
+    $query = "CALL coe_adminRelator()";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT * FROM personas WHERE ID = '$ID'";
+    $query = "CALL coe_selectColaborador($ID)";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {

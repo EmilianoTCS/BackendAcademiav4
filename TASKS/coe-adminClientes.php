@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['clientes'])) {
 
-    $query = "SELECT ID, tipo_cliente, nombreCliente, correoReferente, telefonoReferente, isActive, fechaActualizacion,ultimoUsuario from clientes WHERE ID != 0 ORDER BY ID ASC";
+    $query = "CALL coe_adminClientes()";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

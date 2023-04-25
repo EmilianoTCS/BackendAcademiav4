@@ -6,86 +6,101 @@ header("Access-Control-Allow-Methods: GET,POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// TOTAL CURSOS
-$query_total_cursos = mysqli_query($conection, "SELECT count(distinct(ID)) FROM cursos");
-$result = mysqli_num_rows($query_total_cursos);
-if ($result > 0) {
-    while ($data = mysqli_fetch_array($query_total_cursos)) {
-        $totalCursos = $data['count(distinct(ID))'];
-    }
-}
-// TOTAL COLABORADORES
-$query_total_colaboradores = mysqli_query($conection, "SELECT count(distinct(ID)) FROM personas");
-$result = mysqli_num_rows($query_total_colaboradores);
-if ($result > 0) {
-    while ($data = mysqli_fetch_array($query_total_colaboradores)) {
-        $totalColaboradores = $data['count(distinct(ID))'];
-    }
-}
-// TOTAL APROBADOS
+$cantidadFinalizado = 0;
+$cantidadEnCurso = 0;
+$cantidadPendientes = 0;
 $totalAprobados = 0;
-$query_total_aprobados = mysqli_query($conection, "SELECT if(porcentaje_aprobacion > 85, 'Aprobado','Reprobado') as estado FROM aprobacion");
-$result = mysqli_num_rows($query_total_aprobados);
-if ($result > 0) {
-    while ($data = mysqli_fetch_array($query_total_aprobados)) {
-        $estado = $data['estado'];
-        if ($estado == 'Aprobado') {
-            $totalAprobados++;
-        }
+$totalCursos = 0;
+$totalColaboradores = 0;
+$totalAprobados = 0;
+
+
+
+// // TOTAL CURSOS
+// $query_total_cursos = mysqli_query($conection, "SELECT count(DISTINCT(codigoCurso)) FROM cursos");
+// $result = mysqli_num_rows($query_total_cursos);
+// if ($result > 0) {
+//     while ($data = mysqli_fetch_array($query_total_cursos)) {
+//         $totalCursos = $data['count(DISTINCT(codigoCurso))'];
+//     }
+// }
+// // TOTAL COLABORADORES
+// $query_total_colaboradores = mysqli_query($conection, "SELECT count(ID) FROM personas");
+// $result = mysqli_num_rows($query_total_colaboradores);
+// if ($result > 0) {
+//     while ($data = mysqli_fetch_array($query_total_colaboradores)) {
+//         $totalColaboradores = $data['count(ID)'];
+//     }
+// }
+// // TOTAL APROBADOS
+// $query_total_aprobados = mysqli_query($conection, "SELECT if(porcentaje_aprobacion >= 85, 'Aprobado','Reprobado') as estado FROM aprobacion group by usuario");
+// $result = mysqli_num_rows($query_total_aprobados);
+// if ($result > 0) {
+//     while ($data = mysqli_fetch_array($query_total_aprobados)) {
+//         $estado = $data['estado'];
+//         if ($estado == 'Aprobado') {
+//             $totalAprobados++;
+//         }
+//     }
+// }
+// CURSOS TERMINADOS, FINALIZADOS Y PENDIENTES
+
+$queryEstado1 =  "CALL SP_AUX_countEstadoCurso()";
+$result1 = mysqli_query($conection, $queryEstado1);
+if (!$result1) {
+    die('Query Failed' . mysqli_error($conection));
+}
+while ($data = mysqli_fetch_array($result1)) {
+    $estado = $data['estado'];
+    switch ($estado) {
+        case 'Finalizado':
+            $cantidadFinalizado++;
+            break;
+        case 'En curso':
+            $cantidadEnCurso++;
+            break;
+        case 'Pendiente':
+            $cantidadPendientes++;
+            break;
     }
+    mysqli_next_result($conection);
 }
 
-//CURSOS TERMINADOS
-$cantidadFinalizado = 0;
-$queryEstado1 = mysqli_query($conection, "SELECT IF(fin < date(CURRENT_DATE), 'Finalizado', '') as estado from cursos");
-$result1 = mysqli_num_rows($queryEstado1);
-if ($result1 > 0) {
-    while ($data = mysqli_fetch_array($queryEstado1)) {
-        $estado = $data['estado'];
-        if ($estado == 'Finalizado') {
-            $cantidadFinalizado++;
-        }
+
+
+
+$queryTotales = "CALL SP_AUX_countTotales(@p,@p1,@p2)";
+$result = mysqli_query($conection, $queryTotales);
+if (!$result) {
+    die('Query Failed' . mysqli_error($conection));
+} else {
+    while ($row = mysqli_fetch_array($result)) {
+        $totalCursos = $row['OUT_totalCursos'];
+        $totalColaboradores = $row['OUT_totalColaboradores'];
+        $totalAprobados = $row['OUT_totalAprobados'];
     }
+    mysqli_next_result($conection);
 }
-//CURSOS EN CURSO
-$cantidadEnCurso = 0;
-$queryEstado2 = mysqli_query($conection, "SELECT IF(inicio < date(CURRENT_DATE) and CURRENT_DATE < fin, 'En curso', '') as estado from cursos");
-$result2 = mysqli_num_rows($queryEstado2);
-if ($result2 > 0) {
-    while ($data = mysqli_fetch_array($queryEstado2)) {
-        $estado = $data['estado'];
-        if ($estado == 'En curso') {
-            $cantidadEnCurso++;
-        }
-    }
-}
-//CURSOS PENDIENTES
-$cantidadPendientes = 0;
-$queryEstado3 = mysqli_query($conection, "SELECT IF(CURRENT_DATE < inicio, 'Pendiente', '') as estado from cursos");
-$result3 = mysqli_num_rows($queryEstado3);
-if ($result3 > 0) {
-    while ($data = mysqli_fetch_array($queryEstado3)) {
-        $estado = $data['estado'];
-        if ($estado == 'Pendiente') {
-            $cantidadPendientes++;
-        }
-    }
-}
+
+
+
+
+
+
 
 // PORCENTAJE DE CURSOS
-$porcentajeCursosTerminados = round((($cantidadFinalizado * 100) / $totalCursos),2);
+$porcentajeCursosTerminados = round((($cantidadFinalizado * 100) / $totalCursos), 2);
 // PORCENTAJE DE APROBADOS
-$porcentajeAprobados = ($totalAprobados * 100) / $totalColaboradores;
-
+$porcentajeAprobados = round((($totalAprobados * 100) / $totalColaboradores), 2);
 
 
 $json[] = array(
     'totalCursos' => $totalCursos,
     'totalColaboradores' => $totalColaboradores,
-    'totalAprobados' => $totalAprobados,
+    'totalAprobados' => $porcentajeAprobados,
     'totalFinalizados' => $cantidadFinalizado,
     'totalActivos' => $cantidadEnCurso,
-	'porcentajeFinalizados' => $porcentajeCursosTerminados,
+    'porcentajeFinalizados' => $porcentajeCursosTerminados,
     'totalPendientes' => $cantidadPendientes
 );
 

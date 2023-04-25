@@ -1,5 +1,6 @@
 <?php
 
+
 function pageCounter()
 {
     $Cantidad_por_pagina = 6;
@@ -72,7 +73,7 @@ function pageCounter()
     }
 
     // CONTADOR PARA INFO RELATOR
-    $queryCounter7 = "SELECT COUNT(nombreRamo) as total_nombreRamo from ramos";
+    $queryCounter7 = "SELECT COUNT(nombreRamo) as total_nombreRamo from ramos WHERE isActive = true ";
     $resultCounter7 = mysqli_query($conection, $queryCounter7);
     if (!$resultCounter7) {
         die('Query Failed' . mysqli_error($conection));
@@ -83,7 +84,7 @@ function pageCounter()
         }
     }
     // CONTADOR PARA CLIENTES
-    $queryCounter8 = "SELECT COUNT(ID) as total_clientes from CLIENTES WHERE isActive = true";
+    $queryCounter8 = "SELECT COUNT(ID) as total_clientes from CLIENTES";
     $resultCounter8 = mysqli_query($conection, $queryCounter8);
     if (!$resultCounter8) {
         die('Query Failed' . mysqli_error($conection));
@@ -119,7 +120,7 @@ function pageCounter()
     }
 
     // CONTADOR PARA EDD REFERENTES---------------------------
-    $queryCounter11 = "SELECT COUNT(ID) as total_EDDReferentes FROM `edd-evaluacion-referentes-servicio` WHERE isActive = true";
+    $queryCounter11 = "SELECT COUNT(ID) as total_EDDReferentes FROM `edd-evaluacion-referentes-servicio` WHERE isActive = true AND ID != 0";
     $resultCounter11 = mysqli_query($conection, $queryCounter11);
     if (!$resultCounter11) {
         die('Query Failed' . mysqli_error($conection));
@@ -131,7 +132,7 @@ function pageCounter()
     }
 
     // CONTADOR PARA EDD ANALISTAS---------------------------
-    $queryCounter12 = "SELECT COUNT(ID) as total_EDDAnalistas FROM `edd-evaluacion-analistas-automatizadores` WHERE isActive = true";
+    $queryCounter12 = "SELECT COUNT(ID) as total_EDDAnalistas FROM `edd-evaluacion-analistas-automatizadores` WHERE isActive = true AND ID != 0";
     $resultCounter12 = mysqli_query($conection, $queryCounter12);
     if (!$resultCounter12) {
         die('Query Failed' . mysqli_error($conection));
@@ -143,7 +144,7 @@ function pageCounter()
     }
 
     // CONTADOR PARA PROYECTOS---------------------------
-    $queryCounter13 = "SELECT COUNT(ID) as total_proyectos FROM `proyectos` WHERE isActive = true";
+    $queryCounter13 = "SELECT COUNT(ID) as total_proyectos FROM `proyectos` WHERE isActive = true AND ID != 0";
     $resultCounter13 = mysqli_query($conection, $queryCounter13);
     if (!$resultCounter13) {
         die('Query Failed' . mysqli_error($conection));
@@ -154,7 +155,7 @@ function pageCounter()
         }
     }
     // CONTADOR PARA EQUIPOS---------------------------
-    $queryCounter14 = "SELECT COUNT(ID) as total_equipos FROM `equipos` WHERE isActive = true";
+    $queryCounter14 = "SELECT COUNT(ID) as total_equipos FROM `equipos` WHERE isActive = true AND ID != 0";
     $resultCounter14 = mysqli_query($conection, $queryCounter14);
     if (!$resultCounter14) {
         die('Query Failed' . mysqli_error($conection));
@@ -165,7 +166,7 @@ function pageCounter()
         }
     }
     // CONTADOR PARA EMPLEADOS---------------------------
-    $queryCounter15 = "SELECT COUNT(ID) as total_empleados FROM `empleados` WHERE isActive = true";
+    $queryCounter15 = "SELECT COUNT(ID) as total_empleados FROM `empleados` WHERE isActive = true AND ID != 0";
     $resultCounter15 = mysqli_query($conection, $queryCounter15);
     if (!$resultCounter15) {
         die('Query Failed' . mysqli_error($conection));

@@ -15,20 +15,14 @@ if (isset($_GET['updateStatePrerequisito'])) {
 
   date_default_timezone_set("America/Argentina/Buenos_Aires");
   $date = date('Y-m-d H:i:s');
-  $query = "UPDATE requisitos_curso SET isActive = !isActive, fechaActualizacion = '$date' WHERE ID = '$ID'";
+  $query = "CALL coe_updateStatePrerrequisito($ID, '$IDCurso')";
   $result = mysqli_query($conection, $query);
 
   if (!$result) {
     die(json_encode('Query Failed.'));
   }
-
-  $query2 = "SELECT req.*, ram.codigoRamo, ram.nombreRamo FROM requisitos_curso req INNER JOIN ramos ram WHERE req.ID = '$ID' AND req.idCurso = '$IDCurso' AND req.pre_requisito = ram.ID";
-  $result2 = mysqli_query($conection, $query2);
-  if (!$result2) {
-    die('Query Failed' . mysqli_error($conection));
-  }
   $json = array();
-  while ($row = mysqli_fetch_array($result2)) {
+  while ($row = mysqli_fetch_array($result)) {
 
     $json[] = array(
       'ID' => $row['ID'],

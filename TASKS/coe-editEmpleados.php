@@ -17,34 +17,29 @@ if (isset($_GET['editEmpleados'])) {
 
     if (!empty($ID)) {
 
-        $query = "UPDATE empleados SET nombreApellido = '$nombreApellido', cargo = '$cargo' WHERE ID = '$ID' ";
+        $query = "CALL coe_editEmpleados('$ID','$nombreApellido','$cargo')";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
         }
-        $querySelect = "SELECT * from empleados WHERE ID = '$ID'";
-        $resultSelect = mysqli_query($conection, $querySelect);
-        if (!$resultSelect) {
-            die('Query Failed' . mysqli_error($conection));
-        } else {
-            $json = array();
-            while ($row = mysqli_fetch_array($resultSelect)) {
-                $json[] = array(
-                    'ID' => $row['ID'],
-                    'nombreApellido' => $row['nombreApellido'],
-                    'cargo' => $row['cargo'],
-                    'successEdited' => 'successEdited'
-                );
-            }
-            $jsonstring = json_encode($json);
-            echo $jsonstring;
+        $json = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $json[] = array(
+                'ID' => $row['ID'],
+                'nombreApellido' => $row['nombreApellido'],
+                'cargo' => $row['cargo'],
+                'successEdited' => 'successEdited'
+            );
         }
-        // $usuario = $_SESSION['idCuenta'];
-        // $log = new Log("../security/reports/log.txt");
-        // $log->writeLine("I", "[usuario] ha editado los datos: []");
-        // $log->close();
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
     }
+    // $usuario = $_SESSION['idCuenta'];
+    // $log = new Log("../security/reports/log.txt");
+    // $log->writeLine("I", "[usuario] ha editado los datos: []");
+    // $log->close();
+
 } else {
     echo json_encode("Error");
 }

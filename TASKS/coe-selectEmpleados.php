@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT * FROM empleados WHERE ID = '$ID'";
+    $query = "CALL coe_selectEmpleados($ID)";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {
@@ -26,7 +26,7 @@ if (isset($_GET['ID'])) {
             'cargo' => $row['cargo'],
             'correo' => $row['correo'],
             'usuario' => $row['usuario'],
-            );
+        );
     }
     $jsonstring = json_encode($json);
     echo $jsonstring;

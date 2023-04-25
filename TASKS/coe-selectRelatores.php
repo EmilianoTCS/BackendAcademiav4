@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT rel.*, area.* FROM relator rel INNER JOIN area area WHERE rel.ID = '$ID' AND rel.idArea = area.ID";
+    $query = "CALL coe_selectRelatores($ID)";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {

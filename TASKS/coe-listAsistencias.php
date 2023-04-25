@@ -15,8 +15,7 @@ if (isset($_GET['ID'])) {
     $fecha = $data->fecha;
 
 
-    $query = "SELECT asist.ID, asist.usuario, asist.valor, asist.ultimoUsuario from asistencias asist INNER JOIN cursos cur, ramos ram WHERE 
-    asist.codigoCurso = cur.codigoCurso AND ram.ID = '$ID' AND asist.atributo = '$fecha' AND usuario != 'null' group by usuario";
+    $query = "CALL coe_listAsistencias($ID,'$fecha')";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {

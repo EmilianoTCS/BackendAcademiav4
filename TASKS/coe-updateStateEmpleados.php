@@ -15,19 +15,15 @@
 
     date_default_timezone_set("America/Argentina/Buenos_Aires");
     $date = date('Y-m-d H:i:s');
-    $query = "UPDATE empleados SET isActive = !isActive, fechaActualizacion = '$date', ultimoUsuario = '$usuario' WHERE ID = '$ID'";
+    $query = "CALL coe_updateStateEmpleados($ID, '$usuario')";
     $result = mysqli_query($conection, $query);
 
     if (!$result) {
       die(json_encode('Query Failed.'));
     }
-    $query2 = "SELECT * FROM empleados WHERE ID = '$ID'";
-    $result2 = mysqli_query($conection, $query2);
-    if (!$result2) {
-      die('Query Failed' . mysqli_error($conection));
-    }
+    
     $json = array();
-    while ($row = mysqli_fetch_array($result2)) {
+    while ($row = mysqli_fetch_array($result)) {
 
       $json[] = array(
         'ID' => $row['ID'],

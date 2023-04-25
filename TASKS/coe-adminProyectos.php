@@ -11,7 +11,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['proyectos'])) {
 
-    $query = "SELECT * from proyectos WHERE ID != 0 ORDER BY ID ASC";
+    $query = "CALL coe_adminProyectos()";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -23,7 +23,7 @@ if (isset($_GET['proyectos'])) {
             'ID' => $row['ID'],
             'nombreProyecto' => $row['nombreProyecto'],
             'cliente' => $row['cliente'],
-            'cuentaJP' => $row['cuentaJP'], 
+            'cuentaJP' => $row['cuentaJP'],
             'servicio' => $row['servicio'],
             'date' => $row['fechaActualizacion'],
             'usuario' => $row['ultimoUsuario'],

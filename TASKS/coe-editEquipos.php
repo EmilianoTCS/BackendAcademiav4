@@ -21,37 +21,33 @@ if (isset($_GET['editEquipos'])) {
 
     if (!empty($ID)) {
 
-        $query = "UPDATE equipos SET nombreEquipo = '$nombreEquipo', cliente = '$cliente', proyecto = '$nombreProyecto',idEmpleado = '$nombreApellido', idArea = '$nombreArea' WHERE ID = '$ID' ";
+        $query = "CALL coe_editEquipos($ID, '$nombreEquipo', '$cliente', '$nombreProyecto','$nombreApellido','$nombreArea')";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
         }
-        $querySelect = "SELECT equip.*, proy.nombreProyecto, emp.nombreApellido, ar.nombreArea from equipos equip INNER JOIN empleados emp, area ar, proyectos proy WHERE equip.proyecto = proy.ID AND equip.idEmpleado = emp.ID AND equip.idArea = ar.ID AND equip.ID = '$ID'";
-        $resultSelect = mysqli_query($conection, $querySelect);
-        if (!$resultSelect) {
-            die('Query Failed' . mysqli_error($conection));
-        } else {
-            $json = array();
-            while ($row = mysqli_fetch_array($resultSelect)) {
-                $json[] = array(
-                    'ID' => $row['ID'],
-                    'nombreEquipo' => $row['nombreEquipo'],
-                    'cliente' => $row['cliente'],
-                    'nombreProyecto' => $row['nombreProyecto'],
-                    'nombreApellido' => $row['nombreApellido'],
-                    'nombreArea' => $row['nombreArea'],
-                    'successEdited' => 'successEdited'
-                );
-            }
-            $jsonstring = json_encode($json);
-            echo $jsonstring;
+
+        $json = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $json[] = array(
+                'ID' => $row['ID'],
+                'nombreEquipo' => $row['nombreEquipo'],
+                'cliente' => $row['cliente'],
+                'nombreProyecto' => $row['nombreProyecto'],
+                'nombreApellido' => $row['nombreApellido'],
+                'nombreArea' => $row['nombreArea'],
+                'successEdited' => 'successEdited'
+            );
         }
-        // $usuario = $_SESSION['idCuenta'];
-        // $log = new Log("../security/reports/log.txt");
-        // $log->writeLine("I", "[usuario] ha editado los datos: []");
-        // $log->close();
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
     }
+    // $usuario = $_SESSION['idCuenta'];
+    // $log = new Log("../security/reports/log.txt");
+    // $log->writeLine("I", "[usuario] ha editado los datos: []");
+    // $log->close();
+
 } else {
     echo json_encode("Error");
 }

@@ -15,42 +15,35 @@ if (isset($_GET['insertarProyecto'])) {
     $cliente = $data->cliente;
     $cuentaJP = $data->cuentaJP;
     $servicio = $data->servicio;
-    $isActive = true;
 
 
     if (!empty($nombreProyecto) && !empty($cliente)) {
 
-        $query = "INSERT INTO proyectos (nombreProyecto, cliente, cuentaJP, servicio, isActive, fechaActualizacion) VALUES ('$nombreProyecto','$cliente','$cuentaJP','$servicio','$isActive', current_timestamp());";
+        $query = "CALL coe_insertarProyecto('$nombreProyecto','$cliente','$cuentaJP','$servicio')";
         $result = mysqli_query($conection, $query);
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
-        } else {
-
-            $querySelect = "SELECT * from proyectos WHERE ID = (SELECT MAX(ID) from proyectos) AND isActive = true";
-            $resultSelect = mysqli_query($conection, $querySelect);
-            if (!$resultSelect) {
-                die('Query Failed' . mysqli_error($conection));
-            } else {
-                $json = array();
-                while ($rowSelect = mysqli_fetch_array($resultSelect)) {
-                    $json[] = array(
-                        'ID' => $rowSelect['ID'],
-                        'nombreProyecto' => $rowSelect['nombreProyecto'],
-                        'cliente' => $rowSelect['cliente'],
-                        'cuentaJP' => $rowSelect['cuentaJP'],
-                        'servicio' => $rowSelect['servicio'],
-                        'successCreated' => 'successCreated'
-                    );
-                }
-                $jsonstring = json_encode($json);
-                echo $jsonstring;
-            }
-            // $usuario = $_SESSION['codigoCuenta'];
-            // $log = new Log("../security/reports/log.txt");
-            // $log->writeLine("I", "[usuario] ha agregado un colaborador con los datos [$tipo_cliente, $nombreCliente, $referente, $correoReferente, $telefonoReferente, $cargoReferente]");
-            // $log->close();
         }
+        $json = array();
+        while ($rowSelect = mysqli_fetch_array($result)) {
+            $json[] = array(
+                'ID' => $rowSelect['ID'],
+                'nombreProyecto' => $rowSelect['nombreProyecto'],
+                'cliente' => $rowSelect['cliente'],
+                'cuentaJP' => $rowSelect['cuentaJP'],
+                'servicio' => $rowSelect['servicio'],
+                'successCreated' => 'successCreated'
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
     }
+    // $usuario = $_SESSION['codigoCuenta'];
+    // $log = new Log("../security/reports/log.txt");
+    // $log->writeLine("I", "[usuario] ha agregado un colaborador con los datos [$tipo_cliente, $nombreCliente, $referente, $correoReferente, $telefonoReferente, $cargoReferente]");
+    // $log->close();
+
+
 } else {
     echo json_encode("Error");
 }

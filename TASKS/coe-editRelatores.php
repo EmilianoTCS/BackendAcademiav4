@@ -15,7 +15,7 @@ if (isset($_GET['editarRelatores'])) {
     $idArea = $data->idArea;
 
     if (!empty($nombre) && !empty($ID)) {
-        $query = "update relator set nombre = '$nombre', idArea = '$idArea' WHERE ID = '$ID'";
+        $query = "CALL coe_editRelatores('$ID','$nombre','$idArea')";
         $result = mysqli_query($conection, $query);
         if (!$result) {
             die('query failed' . mysqli_error($conection));

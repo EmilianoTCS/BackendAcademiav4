@@ -12,7 +12,7 @@ if (isset($_GET['pagina'])) {
   $cantidad_por_pagina = 6;
   $inicio = ($num_boton - 1) * $cantidad_por_pagina;
 
-  $query = "SELECT ram.*, rel.nombre, rel.idArea, ar.nombreArea, cuen.codigoCuenta from ramos ram INNER JOIN relator rel, area ar, relator_ramo rel_ram, cuentas cuen WHERE ram.idCuenta = cuen.ID AND ram.ID = rel_ram.idRamo AND rel.idArea = ar.ID AND rel.ID = rel_ram.idRelator AND ram.isActive = true order by ram.ID ASC LIMIT $inicio, $cantidad_por_pagina";
+  $query = "CALL coe_listRamos('$inicio', '$cantidad_por_pagina')";
   $result = mysqli_query($conection, $query);
   if (!$result) {
     die('Query Failed' . mysqli_error($conection));
@@ -36,7 +36,7 @@ if (isset($_GET['pagina'])) {
 } else {
   $cantidad_por_pagina = 6;
   $inicio = 0;
-  $query = "SELECT ram.*, rel.nombre, rel.idArea, ar.nombreArea, cuen.codigoCuenta from ramos ram INNER JOIN relator rel, area ar, relator_ramo rel_ram, cuentas cuen WHERE ram.idCuenta = cuen.ID AND ram.ID = rel_ram.idRamo AND rel.idArea = ar.ID AND rel.ID = rel_ram.idRelator AND ram.isActive = true order by ram.codigoRamo ASC LIMIT $inicio, $cantidad_por_pagina";
+  $query = "CALL coe_listRamos('$inicio', '$cantidad_por_pagina')";
   $result = mysqli_query($conection, $query);
   if (!$result) {
     die('Query Failed' . mysqli_error($conection));

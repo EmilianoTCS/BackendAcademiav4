@@ -21,8 +21,7 @@ if (isset($_GET['editarColaborador'])) {
 
     if (!empty($usuario) && !empty($nombre_completo)) {
 
-        $query = "UPDATE personas SET idCuenta = '$idCuenta', usuario = '$usuario', nombre_completo = '$nombre_completo', area = '$area', subgerencia = '$subgerencia', correo = '$correo'
-              WHERE ID = '$ID' ";
+        $query = "CALL coe_editColaborador('$ID','$usuario','$idCuenta','$nombre_completo','$area','$subgerencia','$correo')";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {

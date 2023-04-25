@@ -10,7 +10,11 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 if (isset($_GET['ID'])) {
     $data = json_decode(file_get_contents("php://input"));
     $ID = $data->ID;
-    $query = "SELECT ram.*, rel.nombre, rel.ID as idRelator FROM ramos ram INNER JOIN relator rel, relator_ramo rel_ram WHERE ram.ID = '$ID' AND rel.ID = rel_ram.idRelator AND ram.ID = rel_ram.idRamo ";
+    
+    // $query = "SELECT ram.*, rel.nombre, rel.ID as idRelator FROM ramos ram INNER JOIN relator rel, relator_ramo rel_ram WHERE ram.ID = '$ID' AND rel.ID = rel_ram.idRelator AND ram.ID = rel_ram.idRamo ";
+
+    $query = "CALL coe_selectRamos($ID)";
+
     $result = mysqli_query($conection, $query);
 
     if (!$result) {

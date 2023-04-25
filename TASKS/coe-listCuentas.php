@@ -15,7 +15,7 @@ if (isset($_GET['pagina'])) {
     $cantidad_por_pagina = 6;
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
 
-    $query = "SELECT ram.nombreRamo, cur.*, cuen.codigoCuenta, IF(cur.fin < date(CURRENT_DATE), 'Finalizado', IF(cur.inicio <= date(CURRENT_DATE) and CURRENT_DATE <= cur.fin, 'En curso', IF(CURRENT_DATE < cur.inicio, 'Pendiente', ''))) as estado FROM cursos cur INNER JOIN ramos ram, cuentas cuen WHERE cur.idCuenta = cuen.ID AND cur.idRamo = ram.ID AND cur.isActive = true order by cur.ID ASC LIMIT $inicio , $cantidad_por_pagina ";
+    $query = "CALL coe_listCursos('$inicio', '$cantidad_por_pagina')";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -38,10 +38,7 @@ if (isset($_GET['pagina'])) {
     echo $jsonstring;
 } else {
     $cantidad_por_pagina = 6;
-    $query = "SELECT ram.nombreRamo, cur.*, cuen.codigoCuenta,
-            IF(cur.fin < date(CURRENT_DATE), 'Finalizado', IF(cur.inicio < date(CURRENT_DATE) and CURRENT_DATE < cur.fin, 'En curso', IF(CURRENT_DATE < cur.inicio, 'Pendiente', ''))) as estado
-            FROM cursos cur INNER JOIN ramos ram, cuentas cuen
-            WHERE cur.idCuenta = cuen.idRamo AND cur.ID = ram.ID AND cur.isActive = true order by cur.ID ASC LIMIT $cantidad_por_pagina ";
+    $query = "CALL coe_listCursos('$inicio', '$cantidad_por_pagina')";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

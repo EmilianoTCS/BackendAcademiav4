@@ -13,13 +13,14 @@ if (isset($_GET['insertarEDDReferentes'])) {
     $fechaFinTemporal = date_create($data->fechaFin);
     $proyecto = $data->proyecto;
     $nombreCliente = $data->nombreCliente;
+    $rest = strtoupper(substr($nombreCliente, 0, 3));
 
     $fechaInicio = date_format($fechaInicioTemporal, 'Y-m-d');
     $fechaFin = date_format($fechaFinTemporal, 'Y-m-d');
 
 
     $fechaInicio_mod = preg_replace('/-/', '', $fechaInicio);
-    $codigoEvaluacion = "EDDREF" . $fechaInicio_mod;
+    $codigoEvaluacion = "EDDREF" . $fechaInicio_mod . $rest;
 
 
     if (!empty($proyecto) && !empty($fechaInicio) && !empty($data->fechaInicio) && !empty($data->fechaFin)) {

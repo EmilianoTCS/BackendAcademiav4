@@ -19,7 +19,7 @@ if (isset($_GET['insertarColaborador'])) {
 
     if (!empty($nombre_completo) && !empty($usuario)) {
 
-        $query = "INSERT INTO personas (idCuenta, nombre_completo, usuario, area, subgerencia, correo, isActive, fechaActualizacion) VALUES ('$idCuenta','$nombre_completo','$usuario','$area','$subgerencia','$correo', true, current_timestamp());";
+        $query = "CALL coe_insertarColaborador($idCuenta, '$nombre_completo', '$usuario', '$area', '$subgerencia', '$correo');";
         $result = mysqli_query($conection, $query);
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));

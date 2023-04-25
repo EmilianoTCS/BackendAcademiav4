@@ -20,7 +20,6 @@ if (isset($_GET['insertarPrerequisito'])) {
 
     if (!empty($idCurso) && !empty($prerequisito)) {
 
-
         $query2 = mysqli_query($conection, "SELECT * FROM requisitos_curso WHERE idCurso = '$idCurso' AND pre_requisito = '$prerequisito' ");
         $result2 = mysqli_num_rows($query2);
 

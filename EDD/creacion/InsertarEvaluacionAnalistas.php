@@ -14,13 +14,15 @@ if (isset($_GET['insertarEDDAnalistas'])) {
     $proyecto = $data->proyecto;
     $cliente = $data->cliente;
     $nombreEquipo = $data->nombreEquipo;
+    
+    $rest = strtoupper(substr($cliente, 0, 3));
 
     $fechaInicio = date_format($fechaInicioTemporal, 'Y-m-d');
     $fechaFin = date_format($fechaFinTemporal, 'Y-m-d');
 
 
     $fechaInicio_mod = preg_replace('/-/', '', $fechaInicio);
-    $codigoEvaluacion = "EDDAN" . $fechaInicio_mod;
+    $codigoEvaluacion = "EDDAN" . $fechaInicio_mod . $rest;
 
 
     if (!empty($proyecto) && !empty($fechaInicio) && !empty($data->fechaInicio) && !empty($data->fechaFin)) {

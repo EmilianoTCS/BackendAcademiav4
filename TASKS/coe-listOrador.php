@@ -12,7 +12,7 @@ if (isset($_GET['pagina'])) {
     $cantidad_por_pagina = 6;
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
 
-    $query = "SELECT rel.*, ar.nombreArea, ram.nombreRamo, ram.codigoRamo FROM relator rel INNER JOIN ramos ram, relator_ramo rel_ram , area ar WHERE rel.ID = rel_ram.idRelator AND rel.idArea = ar.ID AND rel_ram.idRamo = ram.ID AND rel.isActive = true LIMIT $inicio, $cantidad_por_pagina";
+    $query = "CALL coe_listRelator('$inicio', '$cantidad_por_pagina')";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
@@ -33,7 +33,7 @@ if (isset($_GET['pagina'])) {
 } else {
     $cantidad_por_pagina = 6;
     $inicio = 0;
-    $query = "SELECT rel.*, ar.nombreArea, ram.nombreRamo, ram.codigoRamo FROM relator rel INNER JOIN ramos ram, relator_ramo rel_ram , area ar WHERE rel.ID = rel_ram.idRelator AND rel.idArea = ar.ID AND rel_ram.idRamo = ram.ID AND rel.isActive = true LIMIT $inicio, $cantidad_por_pagina";
+    $query = "CALL coe_listRelator('$inicio', '$cantidad_por_pagina')";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

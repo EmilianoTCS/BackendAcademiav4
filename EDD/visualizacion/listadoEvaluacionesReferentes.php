@@ -13,7 +13,7 @@ if (isset($_GET['pagina'])) {
     $cantidad_por_pagina = 6;
     $inicio = ($num_boton - 1) * $cantidad_por_pagina;
 
-    $query = "SELECT * FROM `edd-evaluacion-referentes-servicio` WHERE isActive = true order by ID ASC LIMIT $inicio,$cantidad_por_pagina";
+    $query = "SELECT * FROM `edd-evaluacion-referentes-servicio` WHERE isActive = true AND ID != 0 order by ID ASC LIMIT $inicio,$cantidad_por_pagina";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));
