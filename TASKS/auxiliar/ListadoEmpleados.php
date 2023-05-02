@@ -9,7 +9,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 if(isset($_GET['listadoEmpleados'])) {
-    $query = "SELECT ID, nombreApellido from empleados WHERE isActive = true";
+    $query = "SP_AUX_listEmpleados()";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

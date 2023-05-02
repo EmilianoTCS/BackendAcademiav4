@@ -12,7 +12,7 @@ if (isset($_GET['listadoEmpleados'])) {
     $data = json_decode(file_get_contents("php://input"));
     $nombreEquipo = $data->nombreEquipo;
 
-    $query = "SELECT emp.* from empleados emp INNER JOIN equipos equip WHERE emp.ID = equip.idEmpleado AND equip.nombreEquipo = '$nombreEquipo' AND emp.isActive = true";
+    $query = "CALL SP_AUX_listEmpleadosEquipo('$nombreEquipo')";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

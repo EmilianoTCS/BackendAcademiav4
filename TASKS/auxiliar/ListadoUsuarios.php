@@ -9,7 +9,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 if(isset($_GET['listadoUsuarios'])) {
-    $query = "SELECT ID, usuario from personas WHERE isActive = true";
+    $query = "CALL SP_AUX_listUsuarios()";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

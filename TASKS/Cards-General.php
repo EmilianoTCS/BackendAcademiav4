@@ -16,36 +16,9 @@ $totalAprobados = 0;
 
 
 
-// // TOTAL CURSOS
-// $query_total_cursos = mysqli_query($conection, "SELECT count(DISTINCT(codigoCurso)) FROM cursos");
-// $result = mysqli_num_rows($query_total_cursos);
-// if ($result > 0) {
-//     while ($data = mysqli_fetch_array($query_total_cursos)) {
-//         $totalCursos = $data['count(DISTINCT(codigoCurso))'];
-//     }
-// }
-// // TOTAL COLABORADORES
-// $query_total_colaboradores = mysqli_query($conection, "SELECT count(ID) FROM personas");
-// $result = mysqli_num_rows($query_total_colaboradores);
-// if ($result > 0) {
-//     while ($data = mysqli_fetch_array($query_total_colaboradores)) {
-//         $totalColaboradores = $data['count(ID)'];
-//     }
-// }
-// // TOTAL APROBADOS
-// $query_total_aprobados = mysqli_query($conection, "SELECT if(porcentaje_aprobacion >= 85, 'Aprobado','Reprobado') as estado FROM aprobacion group by usuario");
-// $result = mysqli_num_rows($query_total_aprobados);
-// if ($result > 0) {
-//     while ($data = mysqli_fetch_array($query_total_aprobados)) {
-//         $estado = $data['estado'];
-//         if ($estado == 'Aprobado') {
-//             $totalAprobados++;
-//         }
-//     }
-// }
 // CURSOS TERMINADOS, FINALIZADOS Y PENDIENTES
 
-$queryEstado1 =  "CALL SP_AUX_countEstadoCurso()";
+$queryEstado1 =  "CALL SP_AUX_listEstadoCurso()";
 $result1 = mysqli_query($conection, $queryEstado1);
 if (!$result1) {
     die('Query Failed' . mysqli_error($conection));
@@ -74,18 +47,18 @@ $result = mysqli_query($conection, $queryTotales);
 if (!$result) {
     die('Query Failed' . mysqli_error($conection));
 } else {
-    while ($row = mysqli_fetch_array($result)) {
-        $totalCursos = $row['OUT_totalCursos'];
-        $totalColaboradores = $row['OUT_totalColaboradores'];
-        $totalAprobados = $row['OUT_totalAprobados'];
-    }
-    mysqli_next_result($conection);
+    $row = mysqli_fetch_array($result);
+    $totalCursos = $row['OUT_totalCursos'];
+    $totalColaboradores = $row['OUT_totalColaboradores'];
+    $totalAprobados = $row['OUT_totalAprobados'];
+
+    // mysqli_next_result($conection);
 }
 
 
 
 
-
+mysqli_close($conection);
 
 
 // PORCENTAJE DE CURSOS

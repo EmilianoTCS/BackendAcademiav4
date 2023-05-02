@@ -16,33 +16,28 @@ if (isset($_GET['actualizarEvaluacion'])) {
     if (!empty($ID)) {
 
 
-        $query = "UPDATE `edd-evaluacion-analistas-automatizadores` SET isActive = !isActive, fechaActualizacion = current_timestamp(), ultimoUsuario = '$usuario' WHERE ID = '$ID' ";
+        $query = "CALL SP_updateEstadoEvaluacionAnalistas($ID, '$usuario', @p0) ";
         $result = mysqli_query($conection, $query);
 
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
         } else {
-            $query2 = "SELECT * from `edd-evaluacion-analistas-automatizadores` WHERE ID = '$ID'";
-            $result2 = mysqli_query($conection, $query2);
-            if (!$result2) {
-                die('Query Failed' . mysqli_error($conection));
-            }
-            $json = array();
-            while ($row = mysqli_fetch_array($result2)) {
-                $json[] = array(
-                    'ID' => $row['ID'],
-                    'codigoEvaluacion' => $row['codigoEvaluacion'],
-                    'fechaInicio' => $row['fechaInicio'],
-                    'fechaFin' => $row['fechaFin'],
-                    'proyecto' => $row['proyecto'],
-                    'nombreCliente' => $row['nombreCliente'],
-                    'estado' => $row['estado'],
-                    'fechaActualizacion' => $row['fechaActualizacion'],
-                    'usuario' => $row['ultimoUsuario'],
-                    'isActive' => $row['isActive'],
-                    'successEdited' => "successEdited"
-                );
-            }
+            $row = mysqli_fetch_array($result);
+            $json[] = array(
+                'ID' => $row['ID'],
+                'codigoEvaluacion' => $row['codigoEvaluacion'],
+                'fechaInicio' => $row['fechaInicio'],
+                'fechaFin' => $row['fechaFin'],
+                'proyecto' => $row['proyecto'],
+                'nombreCliente' => $row['nombreCliente'],
+                'estado' => $row['estado'],
+                'fechaActualizacion' => $row['fechaActualizacion'],
+                'usuario' => $row['ultimoUsuario'],
+                'isActive' => $row['isActive'],
+                'successEdited' => "successEdited",
+                'successEnabled' => "successEnabled"
+            );
+
 
             $jsonstring = json_encode($json);
             echo $jsonstring;

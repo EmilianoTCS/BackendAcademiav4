@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 if (isset($_GET['Eventos'])) {
 
-    $query = "SELECT ID,titulo,descripcion,fecha_hora, TIMEDIFF(hora_fin, hora_inicio) as duracion FROM eventos WHERE isActive = true";
+    $query = "CALL SP_AUX_listEventosCalendario()";
     $result = mysqli_query($conection, $query);
     if (!$result) {
         die('Query Failed' . mysqli_error($conection));

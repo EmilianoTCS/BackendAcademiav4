@@ -13,7 +13,7 @@ if (isset($_GET['ID'])) {
     $ID = $data->ID;
 
     if (!empty($ID)) {
-        $query = "SELECT req.*, ram.codigoRamo, ram.nombreRamo FROM requisitos_curso req INNER JOIN ramos ram WHERE req.idCurso = '$ID'  AND req.pre_requisito = ram.ID";
+        $query = "CALL SP_AUX_listPrerrequisitos ($ID)";
         $result = mysqli_query($conection, $query);
         if (!$result) {
             die('Query Failed' . mysqli_error($conection));
